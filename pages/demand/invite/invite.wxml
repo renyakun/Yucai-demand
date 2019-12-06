@@ -1,0 +1,130 @@
+<!--pages/demand/invite/invite.wxml-->
+<cu-custom isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">邀约投递</view>
+</cu-custom>
+<!-- bindchange='checkflag' -->
+<scroll-view scroll-y class="scrollPage padding-bottom">
+  <view class="cu-bar bgwhite justify-between ">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-blue" style="color:#0081ff">推荐列表</text>
+      <text class="text-Abc text-blue" style="color:#0081ff">recommend</text>
+    </view>
+    <view class='action'>
+      <button class="cu-btn indigo shadow-blur" style="width:15vh;color:white" data-item="{{invitelist}}" bindtap="invite">一键邀请</button>
+    </view>
+  </view>
+
+  <view class="bgwhite" style="" wx:if="{{demandflag}}">
+    <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
+  </view>
+
+  <block wx:else>
+
+    <view class="margin-top " wx:if="{{loadflag}}">
+      <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{invitelist}}" wx:key data-item="{{item}}" data-target="showModal" bindtap="invitemodal">
+        <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
+          <view class="flex flex-wrap align-end">
+            <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
+            <view class="padding-left">{{item.realName}} | {{item.sex}} | {{item.age}}
+            </view>
+          </view>
+          <view class="flex flex-wrap margin-top">
+            <view class="padding-left">
+              <text class="text-bold">期望职位：</text>
+              <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
+            </view>
+            <view class="padding-left text-cut" style="width:90%;display:{{item.label!=''?'':'none'}}">
+              <text class="text-bold">个人标签：</text>
+              <text class="text-blue" style="color:#0081ff">{{item.label}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+    <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+      <image src="/images/nodata.jpg" mode="aspectFit"></image>
+    </view>
+
+  </block>
+
+</scroll-view>
+
+
+<view class="cu-modal bottom-modal {{modalName=='showModal'?'show':''}}">
+  <view class="cu-dialog">
+    <!--  wx:for="{{inviteitem}}" wx:key -->
+    <view class="padding-top-xs padding-left-xs padding-right-xs" bindtap="hideModal">
+      <view class="flex justify-center" style="background:#cce6ff">
+        <view style="width:100%">
+
+          <view class="padding-top-sm padding-bottom-sm">
+
+            <view class="flex justify-center align-center">
+              <view class="margin-top-xs" mode="cover">
+                <image src='{{inviteitem.avatar}}' mode='aspectFit' class="cu-avatar round solids xl"></image>
+              </view>
+              <view class="padding-top-xs margin-left">{{inviteitem.realName}} | {{inviteitem.sex}} | {{inviteitem.age}}</view>
+            </view>
+
+            <view class="padding-top-xs padding-bottom-xs flex justify-center">
+              <view class="margin-left">
+                <text class="text-bold text-blue" style="color:#0081ff">期望职位：</text>{{inviteitem.dreamPosition}}</view>
+            </view>
+
+            <view class="padding-top-xs padding-bottom-xs flex justify-center text-cut" style="display:{{inviteitem.label!=''?'':'none'}}">
+              <view>
+                <text class="text-bold text-blue" style="color:#0081ff">个人标签：</text>
+                <view style="width:98%" class="text-cut">{{inviteitem.label}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="margin-top " style="display: {{inviteitem.experience!=''?'':'none'}}">
+            <view class="cu-bar">
+              <view class="action">
+                <text class="text-xl text-bold text-blue" style="color:#0081ff">工作经历</text>
+              </view>
+            </view>
+            <view class="cu-bar justify-center margin-bottom-sm">
+              <view style="width:94%;text-align:justify;text-indent:2rem">{{inviteitem.experience}}</view>
+            </view>
+          </view>
+
+          <view class="margin-top " style="display: {{inviteitem.description!=''?'':'none'}}">
+            <view class="cu-bar">
+              <view class="action">
+                <text class="text-xl text-bold text-blue" style="color:#0081ff">自我描述</text>
+              </view>
+            </view>
+            <view class="cu-bar justify-center margin-bottom-sm">
+              <view class="" style="width:94%;text-align:justify;text-indent:2rem">{{inviteitem.description}}</view>
+            </view>
+          </view>
+
+        </view>
+
+      </view>
+    </view>
+    <view class="cu-bar tabbar cur shop bgwhite">
+      <button class="action margin-left bgwhite" bindtap="tapind" style="width:12vh">
+        <view class="cuIcon-home " style="color:#0081ff"></view>回首页
+      </button>
+      <button class="action margin-left bgwhite" style="width:10vh">
+        <view class="cuIcon-forward text-blue" style="color:#0081ff">
+        </view> 分享
+      </button>
+      <button class="action margin-left bgwhite" style="width:5vh">
+        <view class="">
+        </view>
+      </button>
+      <button class="action margin-left bgwhite" open-type="contact" style="width:5vh">
+        <view class="">
+        </view>
+      </button>
+      <button class="cu-btn indigo round shadow-blur" style="width:16vh;color:white" data-userid="{{inviteitem.userId}}" bindtap="tapjump">邀请投递</button>
+    </view>
+  </view>
+</view>

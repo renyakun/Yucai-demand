@@ -1,0 +1,190 @@
+<!--index.wxml-->
+<cu-custom isBack="{{false}}">
+  <view slot="content" class="margin-top-xs">发布职位</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <scroll-view scroll-x class="bgwhite nav text-center shadow-blur padding-bottom-xs fixed" style="top:10vh;">
+    <view class="cu-item {{item.id==TabCur?'text-balck cur':''}}" style="color:balck" wx:for="{{tablist}}" wx:key bindtap="tabSelect" data-id="{{item.id}}">
+      {{item.nav}}
+    </view>
+  </scroll-view>
+
+  <block wx:if="{{TabCur==1}}">
+
+    <view class="margin-top" style="margin-top:11vh;">
+
+      <form bindsubmit='formSubmit'>
+
+        <view class="bgwhite margin-xs  cu-card no-card  shadow">
+
+          <view class="cu-bar justify-start bgwhite">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">岗位描述</text>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">岗位名称</view>
+            <input value="" name="jobName" placeholder="如菜鸟电商物流"></input>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">岗位类型</view>
+            <input value="" disabled></input>
+            <view>
+              <picker bindchange="jobPicker" name="jobType" value="{{jobind}}" range="{{jobpicker}}" data-target="jobind">
+                <view class="picker">
+                  {{jobind?jobpicker[jobind]:'请选择岗位类型'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">本次招聘</view>
+            <input value="" name="jobNumber" placeholder="请填写招聘人数"></input>
+          </view>
+
+          <view class="cu-form-group align-start margin-xs bg-gray cu-card no-card" style="position: relative">
+            <view class="title">岗位要求</view>
+            <!-- auto-height bg-white-->
+            <view class="flex align-end margin-bottom-xs " style="width:76%;">
+              <textarea class="" auto-height maxlength="500" name="jobRequire" bindinput="textareaBInput" placeholder="请输入岗位要求"></textarea>
+              <view class="margin-top-xs" style="position: absolute;right:25rpx">
+                <text>{{txtput}}</text>/500</view>
+            </view>
+          </view>
+          <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%">
+            <view class="title">添加标签</view>
+            <view class="padding-xs" wx:for="{{jobtag}}" wx:key wx:if="{{item.color!='white'}}">
+              <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-bottom-sm margin-left-xs bg-gray cu-card no-card">
+            <input value="" name="salary" placeholder="请输入薪资"></input>
+          </view>
+
+          <view class=" cu-form-group  margin-bottom-sm margin-left-xs  bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
+            <view class="title">例:</view>
+            <view class="padding-xs" wx:for="{{taglist}}" wx:key wx:if="{{item.color!='white'}}">
+              <view class="cu-tag" style="background:{{item.color}};color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="bgwhite margin-xs  cu-card no-card  shadow">
+
+          <view class="cu-bar justify-start bgwhite">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">薪资设置</text>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">薪资</view>
+            <input value="" name="salary" placeholder="请输入薪资"></input>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title  margin-left-xs">年龄要求</view>
+            <input disabled></input>
+            <view>
+              <picker bindchange="agePicker" name="ageRequire" value="{{ageind}}" range="{{agepicker}}">
+                <view class="picker">
+                  {{ageind?agepicker[ageind]:'请选择年龄要求'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">截止日期</view>
+            <input disabled></input>
+            <view>
+              <picker mode="date" value="{{deadind}}" name="deadline" start="2015-09-01" end="2020-09-01" bindchange="deadPicker">
+                <view class="picker">
+                  {{deadind?deadind:'请选择招人截止日期'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="cu-form-group  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">工作地点</view>
+            <input disabled></input>
+            <view>
+              <picker mode="region" name="city" bindchange="cityPicker" value="{{citypicker}}" custom-item="{{customItem}}">
+                <view class="picker">
+                  {{citypicker[0]}}，{{citypicker[1]}}，{{citypicker[2]}}
+                </view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="cu-form-group margin-bottom margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">具体地址</view>
+            <input value="" name="address" placeholder="请输入具体地址"></input>
+          </view>
+
+        </view>
+
+        <view class="bgwhite margin-xs margin-top  cu-card no-card  shadow">
+
+          <view class="cu-bar justify-start bgwhite">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">发布认证</text>
+            </view>
+          </view>
+
+          <view class="cu-form-group margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">手机号</view>
+            <input name="mobile" type="number" maxlength="11" value="{{mobile}}" placeholder="信息保护中，请 放心填写"></input>
+          </view>
+
+          <view class="cu-form-group margin-bottom  margin-xs bg-gray cu-card no-card">
+            <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+            <view class="title margin-left-xs">发布方</view>
+            <input disabled></input>
+            <view>
+              <radio-group class="block" name="releaseType" bindchange="relradio">
+                <label>
+                  <radio class="blue radio" value="个人" checked="{{check}}" />
+                  <text class="margin-left-xs">个人</text>
+                </label>
+                <label>
+                  <radio class="blue radio margin-left-sm" checked="{{!check}}" value="企业" />
+                  <text class="margin-left-xs">企业</text>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+        </view>
+
+        <view class="padding margin-bottom flex justify-center">
+          <button class="cu-btn indigo shadow-blur margin-right" formType="submit" style="width:20vh;color:white">点击发布</button>
+          <button class="cu-btn indigo shadow-blur " formType="reset" bindtap="reset" style="width:20vh;color:white">重置</button>
+        </view>
+
+      </form>
+
+    </view>
+  </block>
+
+  <block wx:if="{{TabCur==2}}" class=" ">
+
+  </block>
+</scroll-view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-divider": "../../../colorui/dist/divider/index",
+    "i-load-more": "../../../colorui/dist/load-more/index"
+  }
+}

@@ -1,0 +1,58 @@
+<!--pages/user/lauched/lauched.wxml-->
+<cu-custom  isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">已发布职位</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage padding-bottom">
+  <view class="cu-bar bgwhite justify-start ">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-blue" style="color:#0081ff">职位列表</text>
+      <text class="text-Abc text-blue" style="color:#0081ff">describe</text>
+    </view>
+  </view>
+
+  <view class="bgwhite" style="" wx:if="{{demandflag}}">
+    <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
+  </view>
+
+  <block wx:else>
+    <view class="cu-list menu-avatar" wx:if="{{loadflag}}">
+      <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-xs padding-top-xl padding-bottom-xl bgwhite" style="height:15vh"  wx:for="{{cardlist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd"
+        data-target="move-box-{{index}}">
+        <view class="content" style="margin-left:-9.5vh;width:45vh">
+          <view class="text-black text-sm text-bold">
+            <text class="text-cut" style="width:90%">{{item.jobName}}</text>
+          </view>
+          <view class="text-grey text-sm text-cut" style="width:100%">
+            <text class="cuIcon-locationfill text-blue text-df margin-right-xs" style="color:#0081ff"></text>{{item.city}}</view>
+          <view class="text-grey text-sm">
+            <text class="cuIcon-timefill text-blue text-df margin-right-xs" style="color:#0081ff"></text>{{item.createTime}}</view>
+        </view>
+        <view class="action">
+          <view class="text-black text-sm">{{item.jobType}}</view>
+        </view>
+        <!-- padding-left padding-right bindtap="demanditem"-->
+        <view class="move bgwhite">
+
+          <view class="padding-xs">
+            <view class="cu-tag indigo round shadow shadow-lg padding-right-xs padding-left-xs" style="color:white" data-id="{{item.demandId}}" bindtap="demanditem">查看详情</view>
+          </view>
+          <view class="padding-xs">
+            <view class="cu-tag indigo round shadow shadow-lg padding-right-xs padding-left-xs" style="color:white" data-name="{{item.jobName}}" data-demandid="{{item.demandId}}" bindtap="deliver">邀请投递</view>
+          </view>
+          <view class="padding-xs">
+            <view class="cu-tag bggrey round" style="color:white;width:8vh" data-item="{{item}}" bindtap="deldemand">关闭</view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+    <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+      <image src="/images/nodata.jpg" mode="aspectFit"></image>
+    </view>
+
+  </block>
+
+</scroll-view>

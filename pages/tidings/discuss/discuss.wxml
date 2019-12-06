@@ -1,0 +1,102 @@
+<!--pages/tidings/discuss/discuss.wxml-->
+<cu-custom  isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">评价</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <scroll-view scroll-x class="bgwhite nav text-center shadow-blur padding-bottom-xs fixed" style="top:10vh;">
+    <view class="cu-item {{item.id==TabCur?'text-black cur':''}}" style="color:black" wx:for="{{tablist}}" wx:key bindtap="tabSelect" data-id="{{item.id}}">
+      {{item.nav}}{{item.num==0?'':'('+item.num+')'}}
+    </view>
+  </scroll-view>
+
+
+  <block wx:if="{{TabCur==1}}" class="">
+    <view class="bgwhite cu-card no-card  shadow" style="margin-top:8.5vh">
+      <view class="cu-form-group align-center margin-xs cu-card no-card flex justify-between" style="position: relative">
+        <view class="title " style="width:15vh">总体评价</view>
+        <view class=" align-end  margin-bottom-xs flex justify-start" style="width:80%;">
+          <i-rate disabled="{{true}}" value="{{star}}" size="32">
+          </i-rate>
+          <view class="title">{{star}}分</view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="cu-card dynamic no-card margin-top-sm bgwhite" wx:if="{{loadflag}}" >
+      <view class="cu-item shadow">
+        <view class="cu-list menu-avatar comment solids-top">
+          <view class="cu-item" wx:for="{{cusslist}}" wx:key  data-target="{{item.id}}" bindtap="tapcal">
+            <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
+            <view class="content">
+              <view class="text-grey">{{item.evaluationName}}</view>
+              <view class="text-grey flex align-end">
+                <i-rate disabled="{{true}}" value="{{item.star}}" size="20">
+                </i-rate>
+                {{item.createTime}}
+              </view>
+              <view class="text-gray text-content text-df margin-top-xs">{{item.message}}</view>
+              <view class="bg-grey light padding-xs radius margin-top-sm  text-sm" style=" display: {{item.replyMessage!=null?'':'none'}}">
+                <view class="flex">
+                  <view>{{item.acceptName}}：</view>
+                  <view class="flex-sub">{{item.replyMessage}}</view>
+                </view>
+              </view>
+              <view class="margin-top-sm flex justify-between">
+                <view class="text-black text-xs text-bold">投递需求：
+                  <text class="text-blue" style="color:#0081ff" >{{item.jobName}}</text>
+                </view>
+                <view class="text-sm">
+                  <!-- <text class="cuIcon-appreciatefill"></text>点赞({{12}}) -->
+                  <text class="cuIcon-messagefill margin-left-xl"></text>回复
+                </view>
+
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+      <image src="/images/nodata.jpg" mode="aspectFit"></image>
+    </view>
+
+    <!-- <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx" bindtap="scale"></view> -->
+
+  </block>
+
+  <block wx:if="{{TabCur==2}}" class="">
+    <view class="cu-card dynamic {{isCard?'no-card':''}}" style="margin-top:10vh">
+      <view class="cu-item shadow">
+        <view class="cu-list menu-avatar">
+          <view class="cu-item">
+            <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+            <view class="content flex-sub">
+              <view>凯尔</view>
+              <view class="text-gray text-sm flex justify-between">
+                2019年12月3日
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="text-content">
+          折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
+        </view>
+        <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
+          <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?6:1}}" wx:key="{{index}}" bindtap="tapimg">
+          </view>
+        </view>
+        <view class="text-gray text-sm text-right padding">
+          <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
+          <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+          <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+        </view>
+
+      </view>
+    </view>
+
+  </block>
+
+</scroll-view>

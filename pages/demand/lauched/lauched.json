@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "i-card": "../../../colorui/dist/card/index"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/user/user/user",
+    "pages/index/index",
+    "pages/tidings/tidings/tidings",
+    "pages/tidings/discuss/discuss",
+    "pages/tidings/reply/reply",
+    "pages/demand/lauched/lauched",
+    "pages/demand/details/details",
+    "pages/demand/invite/invite",
+    "pages/classify/certification/certification",
+    "pages/classify/authentication/authentication",
+    "pages/classify/about/about",
+    "pages/manage/manage/manage",
+    "pages/classify/RealName/RealName",
+    "pages/manage/carddetails/carddetails",
+    "pages/logs/logs"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "御材智能劳务",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50,
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "color": "#2c2c2c",
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/send.png",
+        "selectedIconPath": "images/tabbar/send_cur.png",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/tidings/tidings/tidings",
+        "iconPath": "images/tabbar/tidings.png",
+        "selectedIconPath": "images/tabbar/tidings_cur.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/user/user/user",
+        "iconPath": "images/tabbar/user.png",
+        "selectedIconPath": "images/tabbar/user_cur.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "debug": true,
+  "navigateToMiniProgramAppIdList": [
+    "wxbe95cfd0acd54a9d"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

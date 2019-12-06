@@ -1,0 +1,38 @@
+<!--pages/tidings/tidings/tidings.wxml-->
+<cu-custom  isBack="{{false}}">
+  <view slot="content" class="margin-top-xs">消息</view>
+</cu-custom>
+<view>
+  <view class="cu-list menu-avatar margin-top-lg">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+      <view class="cu-avatar round ">
+        <image mode="aspectFit" src="{{item.img}}"></image>
+      </view>
+      <view class="content" style="width:60%">
+        <view class="text-black text-df text-bold">{{item.con}}</view>
+        <view class="text-gray text-sm" style=" display: {{item.badge==0?'':'none'}}">
+          <text class="cuIcon-{{item.icon}} text-red"></text>{{item.tit}}</view>
+        <view class="text-gray text-sm" style=" display: {{item.badge!=0?'':'none'}}">
+          <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
+            {{item.notice}}
+          </i-notice-bar>
+        </view>
+      </view>
+      <view class="action" style="width:11vh;display: {{item.badge!=0?'':'none'}}">
+        <view class="text-grey text-df">{{item.timer}}</view>
+        <view class="cu-tag round indigo sm shadow shadow-lg" style="color:white">{{item.badge}}</view>
+      </view>
+      <view class="move bg-white ">
+
+        <view class="padding-xs">
+          <view class="cu-tag indigo round shadow shadow-lg" style="color:white" bindtap="cussjump">查看</view>
+        </view>
+        <view class="padding-xs">
+          <view class="cu-tag bggrey round" style="color:white" bindtap="emptytap">清空消息</view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+</view>

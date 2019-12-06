@@ -1,0 +1,33 @@
+<!--pages/classify/RealName/RealName.wxml-->
+<cu-custom  isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">{{title}}</view>
+</cu-custom>
+
+<view class="scrollPage">
+  <view class="bgwhite margin-top-sm margin-xs cu-card no-card radius shadow">
+    <form bindsubmit='formSubmit'>
+      <!-- bindinput="username" -->
+      <view class="cu-form-group  ">
+        <view class="title">姓名</view>
+        <input value="" name="realName" maxlength="5" placeholder="请输入身份证(或户口本)上的姓名"></input>
+      </view>
+      <view class="cu-form-group ">
+        <view class="title">身份证</view>
+        <input name="idCard" type="number" maxlength="18" placeholder="请输入身份证号码"></input>
+      </view>
+      <view class="cu-form-group ">
+        <view class="title">手机号</view>
+        <input name="mobile" type="number" maxlength="11" placeholder="信息保护中，请放心填写"></input>
+      </view>
+      <!-- <view class="cu-form-group ">
+        <view class="title">验证码</view>
+        <input name="code" placeholder="输入验证码" type="number" maxlength="6"></input>
+        <button class="cu-btn bg-gradual-blue radius shadow">获取验证码</button>
+      </view> -->
+      <view class="padding flex flex-direction">
+        <button class="cu-btn indigo margin-tb-sm lg" formType="submit" style="color:white">点击提交</button>
+      </view>
+    </form>
+  </view>
+</view>

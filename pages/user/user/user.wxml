@@ -1,0 +1,83 @@
+<!--pages/user/user.wxml-->
+<cu-custom  isBack="{{false}}">
+  <view slot="content" class="margin-top-xs">我的中心</view>
+</cu-custom>
+<scroll-view scroll-y class="scrollPage ">
+
+  <view class=" padding-top-xl padding-bottom-sm  indigo" style="position:relative">
+
+    <view class="flex justify-center margin-bottom-sm">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
+      <block wx:else>
+        <view class='text-center'>
+          <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})" mode="cover"></view>
+          <view class="padding">{{userInfo.nickName}}</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
+  <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
+    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+  </i-notice-bar>
+
+  <view class="margin-top-sm margin-left-xs margin-right-xs flex bgwhite padding">
+    <view class=" flex-sub">
+      <text class="text-black text-bold">我的认证</text>
+    </view>
+    <view class="flex-sub" wx:for="{{atteslist}}" wx:key>
+      <view bindtap="attesjump" data-target="{{item}}">
+        <text class="cuIcon-{{item.icon}} text-{{item.color}}" style="color:{{item.color}}"></text> {{item.title}}
+      </view>
+    </view>
+  </view>
+
+  <view class="bgwhite margin-top margin-left-xs margin-right-xs">
+    <view class="cu-list menu sm-border card-menu">
+      <view class="cu-item arrow" bindtap="demandjump">
+        <view class="content">
+          <text class="cuIcon-goodsnewfill text-grey" style="color:#8799a3"></text>
+          <text class="text-grey" style="color:#8799a3">已发布需求</text>
+        </view>
+      </view>
+      <view class="cu-item arrow" bindtap="managejump">
+        <view class="content">
+          <text class="cuIcon-newsfill text-grey" style="color:#8799a3"></text>
+          <text class="text-grey" style="color:#8799a3">名片管理</text>
+        </view>
+      </view>
+      <view class="cu-item arrow" bindtap="serjump">
+        <view class="content">
+          <text class="cuIcon-service text-grey" style="color:#8799a3"></text>
+          <text class="text-grey" style="color:#8799a3">官方客服</text>
+        </view>
+      </view>
+      <view class="cu-item arrow" bindtap="editjump">
+        <view class="content">
+          <text class="cuIcon-edit text-grey" style="color:#8799a3"></text>
+          <text class="text-grey" style="color:#8799a3">建议留言</text>
+        </view>
+      </view>
+      <view class="cu-item arrow" bindtap="friendjump">
+        <view class="content">
+          <text class="cuIcon-friendfill text-grey" style="color:#8799a3"></text>
+          <text class="text-grey" style="color:#8799a3">关于我们</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="margin-xs margin-top flex bgwhite padding justify-center" bindtap="paegswitch">
+    <text class="text-black">切换至工作需求方</text>
+  </view>
+
+  <view class="padding-xs flex align-center">
+    <view class="flex-sub text-center">
+      <view class="solid-bottom text-xs padding">
+        <text class="text-gray" style="color:#8799a3">御材科技官方客服热线400-123-456</text>
+      </view>
+    </view>
+  </view>
+
+</scroll-view>

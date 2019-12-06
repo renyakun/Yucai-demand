@@ -1,0 +1,71 @@
+<!--pages/classify/authentication/authentication.wxml-->
+<cu-custom  isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">{{title}}</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage ">
+  <view class="cu-bar indigo justify-start ">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-white" style="color:white">资质认证</text>
+      <text class="text-Abc text-white" style="color:white">qualification</text>
+    </view>
+  </view>
+
+  <view class="bgwhite padding margin-top margin-bottom margin-sm cu-card no-card radius shadow-blur">
+    <text class="">审核工作时间：工作日8:00-21:30,周末8:30-20:30。预计10分钟完成审核</text>
+  </view>
+
+  <view class="bgwhite margin-xs cu-card no-card radius shadow">
+    <form bindsubmit='formSubmit'>
+      <view class="cu-form-group margin-top margin-xs bg-gray cu-card no-card">
+        <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+        <view class="title margin-left-xs">企业名称</view>
+        <input value="" name="companyNick"></input>
+      </view>
+      <view class="cu-form-group margin-top margin-xs bg-gray cu-card no-card">
+        <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+        <view class="title margin-left-xs">法人姓名</view>
+        <input value="" name="legalName"></input>
+      </view>
+      <view class="cu-form-group margin-top margin-xs bg-gray cu-card no-card">
+        <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
+        <view class="title margin-left-xs" >证件号码</view>
+        <input value="" name="idNumber" type="number" maxlength="18"></input>
+      </view>
+      <view class="cu-form-group margin-top margin-xs bg-gray cu-card no-card">
+        <view class="title">手机号</view>
+        <input name="mobile" type="number" maxlength="11" value="{{mobile}}"></input>
+      </view>
+      <!-- <view class=" padding margin-top margin-bottom margin-sm cu-card no-card radius shadow flex flex-wrap">
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+      </view>
+      <view class="cu-form-group margin-top margin-xs bg-gray cu-card no-card ">
+        <text class="bg-orange padding-left-xs padding-right-xs radius shadow text-xs ">必填</text>
+        <view class="title margin-left-xs ">资质证件</view>
+        <input value=""></input>
+        <button class="cu-btn bg-blue radius shadow cuIcon-upload ">上传</button>
+      </view>
+      <view class="cu-form-group margin-xs cu-card no-card flex flex-wrap">
+        <view class="title margin-left-xs">当前证件</view>
+        <view class="basis-sm">
+          <image src="../../../images/close.png"></image>
+        </view>
+      </view> 
+
+      <view class=" padding margin-top margin-bottom margin-sm cu-card no-card radius shadow flex flex-wrap">
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+        <text class="cuIcon-locationfill basis-xl">请查看待上传的资质证件，填写其号码</text>
+      </view>-->
+
+      <view class="padding flex justify-end">
+        <button class="cu-btn indigo margin-tb-sm " formType="submit" style="width:20vh;color:white">提交</button>
+        <button class="cu-btn indigo margin-tb-sm margin-left" formType="reset" style="width:20vh;color:white">重置</button>
+      </view>
+    </form>
+  </view>
+</scroll-view>

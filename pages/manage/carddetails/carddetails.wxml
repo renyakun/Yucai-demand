@@ -1,0 +1,156 @@
+<!--pages/manage/carddetails/carddetails.wxml-->
+<cu-custom isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">名片详情</view>
+</cu-custom>
+
+
+<view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
+  <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
+</view>
+<block wx:else>
+
+  <scroll-view scroll-y class="padding-xs bgwhite scrollPage" style="height:1000rpx">
+
+    <view class="flex justify-center" style="background:#cce6ff">
+      <view style="width:100%">
+
+        <view class="padding-top-sm padding-bottom-sm">
+
+          <view class="flex justify-center align-center">
+            <view class="margin-top-xs" mode="cover">
+              <image src='{{avatar}}' mode='aspectFit' class="cu-avatar round solids xl"></image>
+            </view>
+            <view class="padding-top-xs margin-left">{{realName}}</view>
+          </view>
+
+          <view class="padding-top-xs padding-bottom-xs flex justify-center">{{sex}} | {{age}} | {{email}}
+            <text class="margin-left">期望职位：{{dreamPosition}}</text>
+          </view>
+        </view>
+
+        <view class="margin-top " style="display: {{profession==''&&education==''&&graduationTime==''&&school==''?'none':''}}">
+          <view class="cu-bar">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">院校信息</text>
+            </view>
+          </view>
+
+          <view class="padding-bottom-sm justify-start">
+            <view class="flex">
+              <view style="display: {{professio!==''?'':'none'}}">
+                <text class="text-df text-bold text-black margin-left">专业</text>
+                <text class=" margin-left-sm">{{profession}}</text>
+              </view>
+              <view class="{{profession==''?'':'margin-left-xl'}}" style="display: {{education!=''?'':'none'}}">
+                <text class="text-df text-bold text-black margin-left">学历</text>
+                <text class=" margin-left-sm">{{education}}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="padding-bottom-sm justify-start">
+            <view class="flex">
+              <view style="display: {{graduationTime!=''?'':'none'}}">
+                <text class="text-df text-bold text-black margin-left">毕业时间</text>
+                <text class=" margin-left-sm">{{graduationTime}}</text>
+              </view>
+              <view class="{{graduationTime==''?'':'margin-left-xl'}}" style="display: {{school!=''?'':'none'}}">
+                <text class="text-df text-bold text-black margin-left">毕业院校</text>
+                <text class=" margin-left-sm">{{school}}</text>
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+        <view class="margin-top " style="display: {{experience!=''?'':'none'}}">
+          <view class="cu-bar">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">工作经历</text>
+            </view>
+          </view>
+          <view class="cu-bar justify-center margin-bottom-sm">
+            <view class="" style="width:94%;text-align:justify;text-indent:2rem">{{experience}}</view>
+          </view>
+        </view>
+
+        <view class="margin-top " style="display: {{description!=''?'':'none'}}">
+          <view class="cu-bar">
+            <view class="action">
+              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+              <text class="text-xl text-bold">自我描述</text>
+            </view>
+          </view>
+          <view class="cu-bar justify-center margin-bottom-sm">
+            <view class="" style="width:94%;text-align:justify;text-indent:2rem">{{description}}</view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+
+
+    <view class="cu-bar tabbar cur shop bgwhite" style="bottom:{{InputBottom}}px">
+      <button class="action margin-left bgwhite" bindtap="tapind" style="width:12vh">
+        <view class="cuIcon-home " style="color:#0081ff"></view>回首页
+      </button>
+      <button class="action margin-left bgwhite" style="width:10vh">
+        <view class="cuIcon-forward text-blue" style="color:#0081ff">
+        </view> 分享
+      </button>
+      <button class="action margin-left bgwhite" bindtap="taptel" data-target="{{demanditem.mobile}}" style="width:10vh">
+        <view class="cuIcon-phone text-blue" style="color:#0081ff">
+        </view> 电话
+      </button>
+      <button class="action margin-left bgwhite" open-type="contact" style="width:5vh" >
+        <view class="">
+        </view>
+      </button>
+      <button class="cu-btn indigo round shadow-blur" style="width:16vh;color:white" bindtap="tapjump">邀请面试</button>
+    </view>
+
+    <view class="cu-modal {{modalName=='showModal'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bgwhite justify-end">
+          <view class="content">设置邀请面试时间</view>
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close text-red"></text>
+          </view>
+        </view>
+        <view class="padding-xl">
+          <view>
+            <view class="margin-bottom-sm">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view>
+            <picker-view indicator-style="height: 5vh;" style="width: 100%; height: 30vh;" value="{{timerval}}" bindchange="bindChange">
+              <picker-view-column>
+                <view wx:for="{{years}}" wx:key style="line-height: 8vh;">{{item}}年</view>
+              </picker-view-column>
+              <picker-view-column>
+                <view wx:for="{{months}}" wx:key style="line-height: 8vh;">{{item}}月</view>
+              </picker-view-column>
+              <picker-view-column>
+                <view wx:for="{{days}}" wx:key style="line-height: 8vh;">{{item}}日</view>
+              </picker-view-column>
+              <picker-view-column>
+                <view wx:for="{{hours}}" wx:key style="line-height: 8vh;">{{item}}时</view>
+              </picker-view-column>
+              <picker-view-column>
+                <view wx:for="{{minutes}}" wx:key style="line-height: 8vh;">{{item}}分</view>
+              </picker-view-column>
+            </picker-view>
+          </view>
+        </view>
+        <view class="cu-bar bgwhite justify-around">
+          <view class="action">
+            <button class="cu-btn indigo" bindtap="interjump" style="width:16vh;color:white" data-id="{{id}}" data-demandid="{{demandId}}">确认邀请</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+
+</block>
