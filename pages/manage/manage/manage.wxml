@@ -4,9 +4,9 @@
   <view slot="content" class="margin-top-xs">名片管理</view>
 </cu-custom>
 <scroll-view scroll-y class="scrollPage" scrollTop="{{scrollTop}}">
-  <view class="cu-bar search bgwhite  fixed shadow-blur" style="height:7vh;top:10vh;">
+  <view class="cu-bar  bgwhite  fixed shadow-blur" style="height:7vh;top:10vh;">
     <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="cu-item {{item.id==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key>
+      <view class="cu-item " style="border-bottom:{{item.id==TabCur?'5rpx solid #000':''}};" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key>
         <text class="text-center" style="color:black">{{item.flag}}</text>
       </view>
     </scroll-view>
@@ -93,33 +93,33 @@
 
           <block wx:elif="{{item.id== 3}}">
 
-            <view class="margin-top " wx:if="{{sendflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{sendlist}}" wx:key data-id="{{item.id}}" data-demandid='{{item.demandHistroy.demandId}}'>
-                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap align-end">
-                    <view class="padding-left text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.demandHistroy.realName}}
-                      <text class="margin-left text-bold text-blue" style="color:#0081ff">面试时间：</text>
-                      <text class="text-cut">{{item.invitationTime}}</text>
+            <view class="bgwhite radius shadow-blur margin-top-xs margin-sm" wx:if="{{sendflag}}">
+              <view class="cu-timeline " wx:for="{{sendlist}}" wx:key>
+                <view class="cu-time" style="width:20vh;"><text style="padding-bottom:0.2vh;border-bottom:5rpx solid #0081ff;color:#000;">{{item.invitationTime}}</text></view>
+                <view class="cu-item text-blue" style="color:#0081ff">
+                  <view class="content">
+                    <view class="flex flex-wrap align-end">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.demandHistroy.realName}}
+                      </view>
                     </view>
-                  </view>
-                  <view class="flex flex-wrap align-end margin-top-sm">
-                    <view class="padding-left text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">投递需求：</text>{{item.demandHistroy.jobName}}
+                    <view class="flex flex-wrap align-end">
+                      <view class=" text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">投递需求：</text>{{item.demandHistroy.jobName}}
+                      </view>
                     </view>
-                  </view>
-                  <view class="flex flex-wrap align-end margin-top-sm">
-                    <view class="padding-left text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
+                    <view class="flex flex-wrap align-end">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
+                      </view>
                     </view>
-                  </view>
-                  <view class="flex flex-wrap align-end margin-top-sm" style="display: {{item.flag==0?'':'none'}}">
-                    <view class="padding-left text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}
+                    <view class="flex flex-wrap align-end" style="display: {{item.flag==0?'':'none'}}">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}
+                      </view>
                     </view>
                   </view>
                 </view>
-
               </view>
             </view>
 

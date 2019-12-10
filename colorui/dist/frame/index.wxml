@@ -1,0 +1,7 @@
+<!--colorui/dist/frame/index.wxml-->
+<view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center">
+  <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
+    <slot name="backText"></slot>
+  </view>
+
+</view>

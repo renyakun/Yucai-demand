@@ -1,20 +1,13 @@
 // pages/demand/invite/invite.js
+const app = getApp();
 const {
   url
 } = require('../../../utils/url.js');
 import {
   showToast,
   showLoading,
+  seluser
 } from '../../../utils/WeChatfction';
-
-function select(item) {
-  let userIds = [];
-  for (let i in item) {
-    //console.log(item[i].userId);
-    userIds.push(item[i].userId);
-  }
-  return userIds;
-};
 
 Page({
   data: {
@@ -39,9 +32,9 @@ Page({
       },
       success: res => {
         if (res.data.success) {
-          showToast(res.data.data, 'success', 3000)
+          showToast(res.data.data, 'success', 1000)
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -53,7 +46,7 @@ Page({
     let token = wx.getStorageSync('accessToken') || [];
     let itemlist = e.currentTarget.dataset.item;
     //console.log(demandId, itemlist);
-    let userIds = select(itemlist);
+    let userIds = seluser(itemlist);
     this.invitation(userIds);
   },
 
@@ -86,13 +79,7 @@ Page({
 
   onLoad: function(options) {
     //console.log(options.name)
-
     let token = wx.getStorageSync('accessToken') || [];
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 3000)
     setTimeout(() => {
       wx.request({
         url: url + '/technology/recommendBusinessCards',
@@ -107,19 +94,21 @@ Page({
               this.setData({
                 invitelist: res.data.data,
                 loadflag: true,
-                demandId: options.demandId
+                demandId: options.demandId,
+                demandflag: false,
               })
             } else {
               this.setData({
-                loadflag: false
+                loadflag: false,
+                demandflag: false,
               })
             }
           } else {
-            showToast(res.data.msg, 'none', 3000)
+            showToast(res.data.msg, 'none', 1000)
           }
         }
       })
-    }, 3100)
+    }, 1100)
   },
 
 

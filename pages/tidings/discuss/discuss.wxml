@@ -1,8 +1,13 @@
 <!--pages/tidings/discuss/discuss.wxml-->
-<cu-custom  isBack="{{true}}">
+<cu-custom isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content" class="margin-top-xs">评价</view>
 </cu-custom>
+
+<view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
+  <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
+</view>
+<block wx:else>
 
 <scroll-view scroll-y class="scrollPage">
   <scroll-view scroll-x class="bgwhite nav text-center shadow-blur padding-bottom-xs fixed" style="top:10vh;">
@@ -23,11 +28,11 @@
         </view>
       </view>
     </view>
-    
-    <view class="cu-card dynamic no-card margin-top-sm bgwhite" wx:if="{{loadflag}}" >
-      <view class="cu-item shadow">
-        <view class="cu-list menu-avatar comment solids-top">
-          <view class="cu-item" wx:for="{{cusslist}}" wx:key  data-target="{{item.id}}" bindtap="tapcal">
+    <!-- data-target="showModal"  -->
+    <view class="cu-card dynamic no-card margin-top-xs " wx:if="{{loadflag}}">
+      <view class="cu-item solids-top solid-bottom">
+        <view class="cu-list menu-avatar comment ">
+          <view class="cu-item  bgwhite" wx:for="{{cusslist}}" wx:key  data-target="{{item}}" bindtap="tapcal">
             <view class="cu-avatar round" style="background-image:url({{item.avatar}});"></view>
             <view class="content">
               <view class="text-grey">{{item.evaluationName}}</view>
@@ -36,16 +41,16 @@
                 </i-rate>
                 {{item.createTime}}
               </view>
-              <view class="text-gray text-content text-df margin-top-xs">{{item.message}}</view>
-              <view class="bg-grey light padding-xs radius margin-top-sm  text-sm" style=" display: {{item.replyMessage!=null?'':'none'}}">
+              <view class=" text-content text-df margin-top-xs" style="color:black">{{item.message}}</view>
+              <view class="bggrey light padding-xs radius margin-top-sm  text-sm" style=" display: {{item.replyMessage!=null?'':'none'}};color:#8799a3;background:rgba(0,0,0,.1);">
                 <view class="flex">
-                  <view>{{item.acceptName}}：</view>
+                  <view style="color:#000">{{item.acceptName}}：</view>
                   <view class="flex-sub">{{item.replyMessage}}</view>
                 </view>
               </view>
               <view class="margin-top-sm flex justify-between">
                 <view class="text-black text-xs text-bold">投递需求：
-                  <text class="text-blue" style="color:#0081ff" >{{item.jobName}}</text>
+                  <text class="text-blue" style="color:#0081ff;font-weight:normal">{{item.jobName}}</text>
                 </view>
                 <view class="text-sm">
                   <!-- <text class="cuIcon-appreciatefill"></text>点赞({{12}}) -->
@@ -63,7 +68,38 @@
       <image src="/images/nodata.jpg" mode="aspectFit"></image>
     </view>
 
-    <!-- <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx" bindtap="scale"></view> -->
+    <!-- <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx" bindtap="scale"></view> bindtap="hideModal"-->
+
+    <!-- <view class="cu-modal bottom-modal {{modalName=='showModal'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="padding-top-xs padding-left-xs padding-right-xs" >
+          <form bindsubmit='formSubmit'>
+            <view class="cu-bar bgwhite">
+              <view class="action">
+                <view class="title">回复:{{name}}</view>
+              </view>
+            </view>
+            <view class="bg-white cu-card no-card  shadow">
+              <view class="cu-form-group align-start margin-xs bg-gray cu-card no-card" style=" height:45vh;">
+                <view class="flex align-end  margin-bottom-xs " style="width:100%;height:45vh;">
+                  <textarea class="" maxlength="500" name="replyMessage" bindinput="textareaBInput" placeholder="请输入回复内容" style="height:40vh;"></textarea>
+                  <view class="" style="position: absolute;right:25rpx">
+                    <text>{{txtput}}</text>/500</view>
+                </view>
+              </view>
+            </view>
+
+            <view class="padding margin-bottom flex justify-center">
+              <button class="cu-btn indigo shadow-blur margin-right" formType="submit" style="width:20vh;color:white">回复</button>
+              <button class="cu-btn indigo shadow-blur " formType="reset" style="width:20vh;color:white">重置</button>
+            </view>
+
+          </form>
+        </view>
+
+      </view>
+    </view> -->
+
 
   </block>
 
@@ -100,3 +136,5 @@
   </block>
 
 </scroll-view>
+
+</block>

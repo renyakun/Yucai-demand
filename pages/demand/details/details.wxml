@@ -1,5 +1,5 @@
 <!--pages/demand/details/details.wxml-->
-<cu-custom isBack="{{true}}">
+<cu-custom isCustom="{{true}}" isBack="{{false}}">
   <view slot="backText">返回</view>
   <view slot="content" class="margin-top-xs">职位详情</view>
 </cu-custom>
@@ -46,7 +46,7 @@
           <view class="cu-bar justify-start bgwhite">
             <view class="action">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">岗位发布者</text>
+              <text class="text-xl text-bold">岗位描述</text>
             </view>
           </view>
 
@@ -71,7 +71,7 @@
           <view class="cu-item  ">
             <view class="content padding-top padding-bottom">
               <text class="text-black text-bold">岗位要求:</text>
-              <view class="margin-left-xl text-cut" style="width:45vh">
+              <view class="margin-left-xs text-cut" style="width:40vh">
                 <text class="text-black">{{demandlist.jobRequire}}</text>
               </view>
             </view>
@@ -90,7 +90,7 @@
         </view>
 
         <view class="cu-list menu sm-border card-menu bgwhite">
-          <view class="cu-bar justify-start bg-white">
+          <view class="cu-bar justify-start bgwhite">
             <view class="action border-title">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
               <text class="text-xl text-bold">薪资设置</text>
@@ -132,7 +132,7 @@
   <block wx:if="{{TabCur==2}}" class="margin-top-xs margin-bootom-lg">
     <view class="margin-top-xs">
       <form bindsubmit='formSubmit' class="margin-top-xs">
-        <view class="bgwhite margin-xs  cu-card no-card  shadow">
+        <view class="bgwhite margin-xs  cu-card no-card  shadow-blur">
 
           <view class="cu-bar justify-start bgwhite">
             <view class="action border-title">
@@ -141,12 +141,12 @@
             </view>
           </view>
 
-          <view class="cu-form-group  margin-xs  cu-card no-card">
+          <view class="cu-form-group margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">岗位名称</view>
             <input value="{{demandlist.jobName}}" name="jobName"></input>
           </view>
 
-          <view class="cu-form-group  margin-xs  cu-card no-card">
+          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">岗位类型</view>
             <input value="" disabled></input>
             <view>
@@ -158,20 +158,27 @@
             </view>
           </view>
 
-          <view class="cu-form-group  margin-xs cu-card no-card">
+          <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">本次招聘</view>
             <input value="{{demandlist.jobNumber}}" name="jobNumber"></input>
           </view>
 
-          <view class="cu-form-group align-start margin-xs  cu-card no-card" style="position: relative">
+          <view class="cu-form-group align-start margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1);position: relative">
             <view class="title">岗位要求</view>
             <view class="flex align-end  margin-bottom-xs " style="width:76%;">
-              <textarea class="" maxlength="500" name="jobRequire" value="{{demandlist.jobRequire}}" bindinput="textareaBInput" placeholder="请输入岗位要求"></textarea>
-              <view class="" style="position: absolute;right:25rpx">
+              <textarea auto-height maxlength="500" name="jobRequire" value="{{demandlist.jobRequire}}" bindinput="textareaBInput" placeholder="请输入岗位要求"></textarea>
+              <view class="margin-top-xs" style="position: absolute;right:25rpx">
                 <text>{{txtput}}</text>/500</view>
             </view>
           </view>
 
+
+          <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start " style="background:rgba(0,0,0,.1);width:97.5%" >
+            <view class="title">添加标签</view>
+            <view class="padding-xs" wx:for="{{jobtag}}" wx:key wx:if="{{item.color!='white'}}">
+              <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
+            </view>
+          </view>
           <view class=" cu-form-group  margin-bottom-sm margin-left-xs   cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
             <view class="title">例:</view>
             <view class="padding-xs" wx:for="{{taglist}}" wx:key wx:if="{{item.color!='white'}}">
@@ -190,12 +197,12 @@
             </view>
           </view>
 
-          <view class="cu-form-group  margin-xs cu-card no-card">
+          <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">薪资</view>
             <input value="" name="salary" value="{{demandlist.salary}}"></input>
           </view>
 
-          <view class="cu-form-group  margin-xs  cu-card no-card">
+          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title  margin-left-xs">年龄要求</view>
             <input disabled></input>
             <view>
@@ -207,7 +214,7 @@
             </view>
           </view>
 
-          <view class="cu-form-group  margin-xs  cu-card no-card">
+          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">截止日期</view>
             <input disabled></input>
             <view>
@@ -219,7 +226,7 @@
             </view>
           </view>
 
-          <view class="cu-form-group margin-bottom margin-xs cu-card no-card">
+          <view class="cu-form-group margin-bottom margin-xs cu-card no-card" style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">工作地址</view>
             <input value="" name="city" value="{{demandlist.city}}"></input>
           </view>
@@ -227,16 +234,16 @@
         </view>
 
         <view class="bgwhite margin-xs  cu-card no-card  shadow">
-          <view class="cu-bar justify-start bg-white">
+          <view class="cu-bar justify-start ">
             <view class="action border-title">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
               <text class="text-xl text-bold">发布认证</text>
             </view>
           </view>
 
-          <view class="cu-form-group margin-bottom margin-xs  cu-card no-card">
+          <view class="cu-form-group margin-bottom margin-xs cu-card no-card" style="background:rgba(0,0,0,.1)">
             <view class="title margin-left-xs">手机号</view>
-            <input name="mobile" type="number" maxlength="11" value="{{demandlist.mobile}}"></input>
+            <input name="mobile" type="number" maxlength="11" value="{{demandlist.mobile}}" ></input>
           </view>
         </view>
 

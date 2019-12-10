@@ -20,8 +20,9 @@ Page({
   },
   // 判定输入为非空字符
   formSubmit(e) {
-    let accessToken = wx.getStorageSync('accessToken') || [];
-    console.log(accessToken);
+    let token = wx.getStorageSync('accessToken') || [];
+    let unionld = wx.getStorageSync('unionId') || {};
+    console.log(unionld);
     let realName = e.detail.value.realName;
     let mobile = e.detail.value.mobile;
     let idCard = e.detail.value.idCard;
@@ -30,8 +31,8 @@ Page({
       showToast('请输入完整信息！', 'loading', 3000)
     } else {
       //console.log(e.detail.value);
-      let tokendata = e.detail.value;
-      console.log(tokendata);
+      //let tokendata = e.detail.value;
+      //console.log(tokendata);
       wx.request({
         url: url+'/user/UserCertification/add',
         method: 'post',
@@ -39,8 +40,9 @@ Page({
           realName: realName,
           mobile: mobile,
           idCard: idCard,
-          //code: code,
-          accessToken: accessToken,
+          avatar: unionld.avatarUrl,
+          nickname: unionld.nickname,
+          accessToken: token,
         },
         header: {
           'content-type': 'application/json'
@@ -94,7 +96,6 @@ Page({
 
 
   onReady: function() {
-
   },
 
   /**

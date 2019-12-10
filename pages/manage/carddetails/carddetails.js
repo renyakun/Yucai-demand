@@ -96,9 +96,7 @@ Page({
 
   //回到首页
   tapind() {
-    setTimeout(() => {
-      switchTab('/pages/user/user/user')
-    }, 3000)
+    switchTab('/pages/user/user/user')
   },
 
   //拨打手机
@@ -109,11 +107,10 @@ Page({
 
   //事件列表
   tapjump() {
-      this.setData({
-        modalName: 'showModal',
-      })
+    this.setData({
+      modalName: 'showModal',
+    })
   },
-
 
   //邀请面试(btn)
   interjump(e) {
@@ -142,12 +139,12 @@ Page({
       },
       success: res => {
         if (res.data.success) {
-          showToast(res.data.data, 'success', 3000)
+          showToast(res.data.data, 'success', 500)
           setTimeout(() => {
             navigateTo('/pages/manage/manage/manage')
-          }, 3500)
+          }, 1000)
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -195,10 +192,11 @@ Page({
             label: label,
             description: description,
             mobile: mobile,
-            id: id
+            id: id,
+            demandflag: false,
           })
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000);
         }
       }
     })
@@ -207,14 +205,12 @@ Page({
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
     this.accept(options.id, token)
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 3000)
   },
 
   onReady: function() {
+    // setTimeout(() => {
+    //   demandflag: false
+    // }, 1000)
   },
 
   onShow: function() {
@@ -231,7 +227,7 @@ Page({
   },
 
   onPullDownRefresh: function() {
-
+    //this.onLoad()
   },
 
   onReachBottom: function() {

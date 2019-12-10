@@ -46,7 +46,7 @@ function showLoading() {
   });
   setTimeout(() => {
     wx.hideLoading()
-  }, 2500);
+  }, 500);
 };
 
 //应用页面跳转
@@ -158,6 +158,28 @@ function makePhoneCall(mobile) {
   })
 };
 
+//星级处理
+function selstar(item) {
+  let star = [];
+  for (let i in item) {
+    star.push(item[i].star);
+  }
+  let stars = star.reduce((a, b) => {
+    return a + b
+  })
+  return stars;
+};
+
+
+//userids处理
+function seluser(item) {
+  let userIds = [];
+  for (let i in item) {
+    userIds.push(item[i].userId);
+  }
+  return userIds;
+};
+
 
 export {
   showToast,
@@ -176,6 +198,8 @@ export {
   removeByValue,
   relstradd,
   makePhoneCall,
+  selstar,
+  seluser
 };
 
 

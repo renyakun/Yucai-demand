@@ -32,11 +32,11 @@ Page({
 
   onReady: function() {
     setTimeout(() => {
-      let accessToken = wx.getStorageSync('accessToken') || [];
+      let token = wx.getStorageSync('accessToken') || [];
       wx.request({
         url: url + '/user/UserCertification',
         data: {
-          accessToken: accessToken,
+          accessToken: token,
         },
         success: res => {
           wx.setStorageSync('token', res);
@@ -51,7 +51,7 @@ Page({
       wx.request({
         url: url + '/company/companyCertification',
         data: {
-          accessToken: accessToken,
+          accessToken: token,
         },
         success: res => {
           wx.setStorageSync('tokenmsg', res)

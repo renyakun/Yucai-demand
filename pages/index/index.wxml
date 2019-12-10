@@ -65,11 +65,6 @@
               <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
             </view>
           </view>
-
-          <view class="cu-form-group  margin-bottom-sm margin-left-xs bg-gray cu-card no-card">
-            <input value="" name="salary" placeholder="请输入薪资"></input>
-          </view>
-
           <view class=" cu-form-group  margin-bottom-sm margin-left-xs  bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
             <view class="title">例:</view>
             <view class="padding-xs" wx:for="{{taglist}}" wx:key wx:if="{{item.color!='white'}}">

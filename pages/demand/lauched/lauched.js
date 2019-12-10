@@ -5,6 +5,7 @@ const {
 import {
   showToast,
   showLoading,
+  navigateTo
 } from '../../../utils/WeChatfction';
 Page({
   data: {
@@ -25,7 +26,7 @@ Page({
       this.setData({
         cardlist: cardlist,
       })
-    }, 3000)
+    }, 1000)
     wx.request({
       url: url + '/demand/delMyDemand',
       data: {
@@ -35,9 +36,9 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.success) {
-          showToast(res.data.data, 'success', 3000)
+          showToast(res.data.data, 'success', 1000)
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -47,48 +48,33 @@ Page({
   demanditem(e) {
     let demandId = e.currentTarget.dataset.id;
     //console.log(demandId)
-    showLoading();
-    setTimeout(() => {
-      wx.navigateTo({
-        url: '/pages/demand/details/details?demandId=' + demandId,
-      })
-    }, 3000)
+    navigateTo('/pages/demand/details/details?demandId=' + demandId,)
   },
 
   //邀约投递
-  deliver(e){
+  deliver(e) {
     let name = e.currentTarget.dataset.name;
     let demandId = e.currentTarget.dataset.demandid;
-    console.log(name,demandId )
+    console.log(name, demandId)
     showLoading();
     setTimeout(() => {
       wx.navigateTo({
         url: '/pages/demand/invite/invite?name=' + name + '&demandId=' + demandId,
       })
-    }, 3000)
+    }, 1000)
   },
-
 
   //回到首页
   tapind() {
     setTimeout(() => {
       switchTab('/pages/user/user/user')
-    }, 3000)
+    }, 1000)
   },
-
-
-
-  
 
   onLoad: function(options) {},
 
   onReady: function() {
     let token = wx.getStorageSync('accessToken') || [];
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 3000)
     setTimeout(() => {
       wx.request({
         url: url + '/demand/getMyDemands',
@@ -101,7 +87,8 @@ Page({
             if (res.data.data.length != 0) {
               this.setData({
                 cardlist: res.data.data,
-                loadflag: true
+                loadflag: true,
+                demandflag: false
               })
             } else {
               this.setData({
@@ -115,7 +102,7 @@ Page({
 
         }
       })
-    }, 3100)
+    }, 500)
   },
 
   // ListTouch触摸开始

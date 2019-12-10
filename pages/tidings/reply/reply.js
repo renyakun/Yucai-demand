@@ -16,7 +16,7 @@ Page({
     let replyMessage = e.detail.value.replyMessage;
     let id = this.data.id;
     if (replyMessage == "") {
-      showToast('请输入完整信息！', 'none', 3000)
+      showToast('请输入完整信息！', 'none', 1000)
     } else {
       console.log(replyMessage);
       wx.request({
@@ -33,12 +33,12 @@ Page({
         success: res => {
           console.log(res)
           if (res.data.success) {
-            showToast(res.data.data, 'success', 3000);
+            showToast(res.data.data, 'success', 1000);
             setTimeout(() => {
               navigateTo('/pages/tidings/discuss/discuss?flag=true');
-            }, 3000)
+            }, 1000)
           } else {
-            showToast(res.data.msg, 'none', 3000)
+            showToast(res.data.msg, 'none', 1000)
           }
         }
       })
@@ -48,6 +48,7 @@ Page({
   onLoad: function(options) {
     this.setData({
       id: options.id,
+      name: options.name,
     })
 
   },

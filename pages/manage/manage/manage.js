@@ -55,6 +55,19 @@ Page({
     invitaflag: true,
     sendflag: true,
     plflag: false,
+    linelist: [{
+      years: '2019.03',
+      timer: '03:15',
+      contxt: '【喵星】 MX-12138 已揽收，准备发往银河系'
+    }, {
+      years: '2019.05',
+      timer: '15:30',
+      contxt: '【喵星】 MX-12138 已揽收，准备发往银河系'
+    }, {
+      years: '2019.09',
+      timer: '18:15',
+      contxt: '【喵星】 MX-12138 已揽收，准备发往银河系'
+    }]
   },
 
   //tab切换
@@ -69,12 +82,9 @@ Page({
   //详情跳转
   cardel(e) {
     let id = e.currentTarget.dataset.id;
-    showLoading();
-    setTimeout(() => {
-      wx.navigateTo({
-        url: '/pages/manage/carddetails/carddetails?id=' + id
-      })
-    }, 3500);
+    wx.navigateTo({
+      url: '/pages/manage/carddetails/carddetails?id=' + id
+    })
   },
 
   //获取待沟通列表
@@ -91,7 +101,8 @@ Page({
           if (acceptlist.length != 0) {
             this.setData({
               acceptlist: acceptlist,
-              accepflag: true
+              accepflag: true,
+              demandflag: false
             })
           } else {
             this.setData({
@@ -99,7 +110,7 @@ Page({
             })
           }
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -119,7 +130,8 @@ Page({
           if (invitalist.length != 0) {
             this.setData({
               invitalist: invitalist,
-              invitaflag: true
+              invitaflag: true,
+              demandflag: false
             })
           } else {
             this.setData({
@@ -127,7 +139,7 @@ Page({
             })
           }
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -142,12 +154,13 @@ Page({
       },
       success: res => {
         let sendlist = res.data.data;
-        console.log(sendlist)
+        console.log('123',sendlist)
         if (res.data.success) {
           if (sendlist.length != 0) {
             this.setData({
               sendlist: sendlist,
-              sendflag: true
+              sendflag: true,
+              demandflag: false
             })
           } else {
             this.setData({
@@ -155,7 +168,7 @@ Page({
             })
           }
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
@@ -164,14 +177,10 @@ Page({
 
 
   onLoad(options) {
+
   },
 
   onReady: function() {
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 3000)
     let token = wx.getStorageSync('accessToken') || [];
     this.acceptlist(token);
     this.invitalist(token);

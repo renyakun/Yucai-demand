@@ -4,8 +4,8 @@
       <text class="cuIcon-back" ></text>
       <slot name="backText" ></slot>
     </view>
-    <view class="action border-custom margin-top"  wx:if="{{isCustom}}" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)">
-      <text class="cuIcon-back" bindtap="BackPage"></text>
+    <view class="action border-custom margin-top"  wx:if="{{isCustom}}" style="width:15vh;height:5vh;margin-left:calc(750rpx - {{Custom.right}}px)">
+      <text class="cuIcon-back" bindtap="BackPage1"></text>
       <text class="cuIcon-homefill" bindtap="toHome"></text>
     </view>
     <view class="content " style="top:{{StatusBar}}px;">

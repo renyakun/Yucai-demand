@@ -13,38 +13,38 @@ Page({
       img: '../../../images/icon/notice.png',
       con: '评价消息通知',
       tit: '暂无消息',
-      notice: '2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;',
+      notice: '暂无消息',
       icon: 'infofill',
       timer: '',
-      badge: 6,
+      badge: 0,
 
     }, {
       id: 2,
       img: '../../../images/icon/see.png',
       con: '今日暂无查看',
       tit: '暂无劳务查看',
-      notice: '2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;',
-      icon: '',
+      notice: '暂无消息',
+      icon: 'infofill',
       timer: '',
-      badge: 7,
+      badge: 0,
     }, {
       id: 3,
       img: '../../../images/icon/subscribe.png',
       con: '订阅消息',
       tit: '暂无订阅消息',
-      notice: '2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;',
+      notice: '暂无消息',
       icon: 'infofill',
       timer: '',
-      badge: 8,
+      badge: 0,
     }, {
       id: 4,
       img: '../../../images/YuCai.jpg',
       con: '御材劳务官方助手',
       tit: '暂无消息',
-      notice: '2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;',
-      icon: '',
+      notice: '暂无消息',
+      icon: 'infofill',
       timer: '22:20',
-      badge: 9,
+      badge: 0,
     }]
   },
   // ListTouch触摸开始
@@ -77,9 +77,18 @@ Page({
     })
   },
 
-  cussjump() {
-    navigateTo('/pages/tidings/discuss/discuss')
+  //跳转评论详情
+  cussjump(e) {
+    let id = e.currentTarget.dataset.id;
+    console.log(id)
+    if (id == 1) {
+      navigateTo('/pages/tidings/discuss/discuss')
+    } else {
+      showToast('即将上线，敬请期待!', 'none', 3000)
+    }
   },
+
+  //清空消息
   emptytap() {
     let badge = 'newslist[0].badge';
     let notice = 'newslist[0].notice';
@@ -96,13 +105,14 @@ Page({
       success: res => {
         //console.log(res)
         if (res.data.success) {
-          showToast(res.data.data, 'success', 3000)
+          showToast(res.data.data, 'success', 1000)
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })
   },
+
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
     wx.request({
@@ -126,7 +136,7 @@ Page({
           }
           console.log(res.data.data)
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })

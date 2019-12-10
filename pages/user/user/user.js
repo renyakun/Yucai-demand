@@ -20,6 +20,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scrollTop: 0,
+    notice: '暂无消息',
     navList: [{
         id: 1,
         icon: 'cartfill',
@@ -138,42 +139,6 @@ Page({
     navigateTo('/pages/manage/manage/manage');
   },
 
-  //获取数量
-  number(website, num) {
-    let token = wx.getStorageSync('accessToken') || [];
-    wx.request({
-      url: url + website,
-      data: {
-        accessToken: token
-      },
-      success: res => {
-        //console.log(res.data.data)
-        if (res.data.success) {
-          wx.hideLoading()
-          if (num == "launNum") {
-            this.setData({
-              launNum: res.data.data.length,
-            })
-          } else if (num == "pushNum") {
-            this.setData({
-              pushNum: res.data.data.length,
-            })
-          } else if (num == "pushmeNum") {
-            this.setData({
-              pushmeNum: res.data.data.length,
-            })
-          } else if (num == "inviNum") {
-            this.setData({
-              inviNum: res.data.data.length,
-            })
-          } else {
-            showToast(res.data.msg, 'none', 3000)
-          }
-        }
-      }
-    })
-  },
-
   //获取状态值
   token(website, tokentxt) {
     wx.hideLoading();
@@ -229,13 +194,9 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       let accessToken = wx.getStorageSync('accessToken') || [];
-
       this.token('/user/UserCertification', 'token')
       this.token('/company/companyCertification', 'tokenmsg')
-      //this.number('/technology/mySendBusinessCard', 'pushNum')
-      //this.number('/demand/getMyDemands', 'launNum')
-      //this.number('/technology/acceptBusinessCards', 'pushmeNum')
-    }, 2000);
+    }, 1000);
 
   },
 
@@ -253,7 +214,7 @@ Page({
   },
 
   onShow: function() {
-    this.onLoad()
+    //this.onLoad()
   },
 
   //下拉刷新

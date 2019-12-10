@@ -1,6 +1,5 @@
 <!--pages/demand/invite/invite.wxml-->
-<cu-custom isBack="{{true}}">
-  <view slot="backText">返回</view>
+<cu-custom isCustom="{{true}}" isBack="{{false}}">
   <view slot="content" class="margin-top-xs">邀约投递</view>
 </cu-custom>
 <!-- bindchange='checkflag' -->

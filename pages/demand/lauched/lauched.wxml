@@ -1,5 +1,5 @@
 <!--pages/user/lauched/lauched.wxml-->
-<cu-custom  isBack="{{true}}">
+<cu-custom isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content" class="margin-top-xs">已发布职位</view>
 </cu-custom>
@@ -18,21 +18,24 @@
 
   <block wx:else>
     <view class="cu-list menu-avatar" wx:if="{{loadflag}}">
-      <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-xs padding-top-xl padding-bottom-xl bgwhite" style="height:15vh"  wx:for="{{cardlist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd"
+      <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-xs padding-top-xl padding-bottom-xl bgwhite" style="height:25vh" wx:for="{{cardlist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd"
         data-target="move-box-{{index}}">
-        <view class="content" style="margin-left:-9.5vh;width:45vh">
+        <view class="content" style="margin-left:-8vh;width:35vh" data-id="{{item.demandId}}" bindtap="demanditem">
           <view class="text-black text-sm text-bold">
             <text class="text-cut" style="width:90%">{{item.jobName}}</text>
           </view>
-          <view class="text-grey text-sm text-cut" style="width:100%">
-            <text class="cuIcon-locationfill text-blue text-df margin-right-xs" style="color:#0081ff"></text>{{item.city}}</view>
-          <view class="text-grey text-sm">
-            <text class="cuIcon-timefill text-blue text-df margin-right-xs" style="color:#0081ff"></text>{{item.createTime}}</view>
+          <view class="text-sm" style="color:#000">{{item.jobType}} | {{item.releaseType}}认证</view>
+          <view class="text-sm" style="color:#000">发布时间：{{item.createTime}}</view>
+          <view class="text-sm" style="color:#000">今日浏览数：{{item.todayBrowseNum}}</view>
+          <view class="text-sm" style="color:#000">当前投递数：{{item.sendCardNum}}</view>
+          <view class="text-sm" style="color:#000">待合作数：{{item.waitCooperationNum}}</view>
+          <view class="text-sm" style="color:#000">
+            <text class="cuIcon-timefill text-blue text-df margin-right-xs" style="color:#0081ff"></text>取消邀约数：{{item.cancelInvitationNum}}</view>
         </view>
-        <view class="action">
-          <view class="text-black text-sm">{{item.jobType}}</view>
+        <view class="action" style="color:#000">
+          <text class="cuIcon-pullleft" style="color:#000;font-size:5vh"></text>
         </view>
-        <!-- padding-left padding-right bindtap="demanditem"-->
+
         <view class="move bgwhite">
 
           <view class="padding-xs">

@@ -80,29 +80,11 @@ Page({
           switchflag: val,
           TabCur: 2,
         })
-      }, 3500)
-    }else{
+      }, 510)
+    } else {
       this.setData({
         switchflag: val,
         TabCur: 1,
-      })
-    }
-  },
-
-  //tab跳转
-  tabSelect(e) {
-    let TabCurs = e.currentTarget.dataset.id;
-    if (TabCurs == 2) {
-      showLoading();
-      setTimeout(() => {
-        this.setData({
-          title: '修改需求',
-          TabCur: TabCurs,
-        })
-      }, 3500)
-    } else {
-      this.setData({
-        TabCur: TabCurs,
       })
     }
   },
@@ -124,7 +106,7 @@ Page({
     let label = relstradd(jobtag);
     let id = this.data.id;
     if (jobName == "" || jobType == undefined || jobNumber == "" || salary == "" || ageRequire == undefined || city == undefined || deadline == undefined || mobile == "" || address == "") {
-      showToast('请输入完整信息！', 'none', 3000)
+      showToast('请输入完整信息！', 'none', 1000)
     } else {
       wx.showLoading({
         title: '加载中',
@@ -155,18 +137,18 @@ Page({
           success: res => {
             console.log(res)
             if (res.data.success) {
-              showToast(res.data.data, 'success', 3000)
+              showToast(res.data.data, 'success', 1000)
               setTimeout(() => {
                 this.setData({
                   TabCur: 1,
                   title: '需求详情'
                 })
-              }, 2000)
+              }, 500)
               setTimeout(() => {
                 this.onReady()
-              }, 3500)
+              }, 1500)
             } else {
-              showToast(res.data.msg, 'none', 3000)
+              showToast(res.data.msg, 'none', 1000)
             }
           }
         })
@@ -231,7 +213,7 @@ Page({
       txtput: len,
     })
     if (len > 499) {
-      showToast('输入值字数最大为500！', 'none', 3000)
+      showToast('输入值字数最大为500！', 'none', 1000)
     }
   },
 
@@ -242,17 +224,13 @@ Page({
   },
 
   onReady: function() {
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 3000)
-    let accessToken = wx.getStorageSync('accessToken') || [];
+
+    let token = wx.getStorageSync('accessToken') || [];
     let demandId = this.data.demandId;
     wx.request({
       url: url + '/demand/getDemandById',
       data: {
-        accessToken: accessToken,
+        accessToken: token,
         demandId: demandId
       },
       success: res => {
@@ -268,6 +246,7 @@ Page({
           label: label,
           txtput: len,
           id: id,
+          demandflag: false,
           //jobind: jobType
         })
       }

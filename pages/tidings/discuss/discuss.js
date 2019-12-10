@@ -6,14 +6,16 @@ const {
 import {
   showToast,
   navigateTo,
+  selstar,
 } from '../../../utils/WeChatfction';
+
 Page({
   data: {
     TabCur: 1,
     tablist: [{
       id: 1,
       nav: '评价',
-      num: 23
+      num: 0
     }, {
       id: 2,
       nav: '晒图',
@@ -24,9 +26,11 @@ Page({
     txtput: 0,
     isCard: true,
     animationData: {},
-    loadflag: true
+    loadflag: true,
+    demandflag: true,
   },
 
+  //tab切换
   tabSelect(e) {
     let TabCurs = e.currentTarget.dataset.id;
     this.setData({
@@ -34,6 +38,7 @@ Page({
     })
   },
 
+  //图片切换
   tapimg() {
     let isCard = this.data.isCard;
     this.setData({
@@ -41,14 +46,21 @@ Page({
     })
   },
 
+  //跳转回复
   tapcal(e) {
-    let id = e.currentTarget.dataset.target;
+    let id = e.currentTarget.dataset.target.id;
+    let name = e.currentTarget.dataset.target.evaluationName;
     console.log(e);
     wx.navigateTo({
-      url: '/pages/tidings/reply/reply?id=' + id,
+      url: '/pages/tidings/reply/reply?id=' + id + '&name=' + name,
     })
+    // let modalName = e.currentTarget.dataset.target;
+    // this.setData({
+    //   modalName: modalName
+    // })
   },
 
+  //动画
   scale() {
     var animation = wx.createAnimation({
       duration: 1000,
@@ -64,13 +76,38 @@ Page({
       this.setData({
         animationData: animation.export()
       })
-    }, 3000)
+    }, 1000)
   },
 
-  onLoad: function(options) {
+
+  //关闭详情
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
+
+  //字数管理
+  textareaBInput(e) {
+    console.log(e.detail.value);
+    let val = e.detail.value;
+    let len = val.length;
+    this.setData({
+      txtput: len,
+    })
+    if (len > 499) {
+      showToast('输入值字数最大为500！', 'none', 1000)
+    }
+  },
+
+  onLoad: function(options) {},
 
   onReady: function() {
+    setTimeout(() => {
+      this.setData({
+        demandflag: false,
+      })
+    }, 1000)
     let token = wx.getStorageSync('accessToken') || [];
     wx.request({
       url: url + '/invitation/myAcceptEvaluation',
@@ -78,16 +115,16 @@ Page({
         accessToken: token,
       },
       success: res => {
-        //console.log(res)
         if (res.data.success) {
           console.log(res.data.data)
           let data = res.data.data;
-          let num = 'tablist[0].num';
           if (data.length != 0) {
+            let stars = Math.round(selstar(data) / data.length);
+            console.log(stars)
             this.setData({
-              [num]: data.length,
               cusslist: data,
-              loadflag: true
+              loadflag: true,
+              star: stars
             })
           } else {
             this.setData({
@@ -95,7 +132,7 @@ Page({
             })
           }
         } else {
-          showToast(res.data.msg, 'none', 3000)
+          showToast(res.data.msg, 'none', 1000)
         }
       }
     })

@@ -1,5 +1,5 @@
 <!--pages/user/user.wxml-->
-<cu-custom  isBack="{{false}}">
+<cu-custom isBack="{{false}}">
   <view slot="content" class="margin-top-xs">我的中心</view>
 </cu-custom>
 <scroll-view scroll-y class="scrollPage ">
@@ -19,7 +19,7 @@
   </view>
 
   <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
-    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+    {{notice}}
   </i-notice-bar>
 
   <view class="margin-top-sm margin-left-xs margin-right-xs flex bgwhite padding">
@@ -35,34 +35,34 @@
 
   <view class="bgwhite margin-top margin-left-xs margin-right-xs">
     <view class="cu-list menu sm-border card-menu">
-      <view class="cu-item arrow" bindtap="demandjump">
-        <view class="content">
-          <text class="cuIcon-goodsnewfill text-grey" style="color:#8799a3"></text>
-          <text class="text-grey" style="color:#8799a3">已发布需求</text>
-        </view>
-      </view>
       <view class="cu-item arrow" bindtap="managejump">
         <view class="content">
-          <text class="cuIcon-newsfill text-grey" style="color:#8799a3"></text>
-          <text class="text-grey" style="color:#8799a3">名片管理</text>
+          <text class="cuIcon-newsfill " style="color:#000"></text>
+          <text style="color:#000">名片管理</text>
+        </view>
+      </view>
+      <view class="cu-item arrow" bindtap="demandjump">
+        <view class="content">
+          <text class="cuIcon-goodsnewfill" style="color:#000"></text>
+          <text style="color:#000">已发布需求</text>
         </view>
       </view>
       <view class="cu-item arrow" bindtap="serjump">
         <view class="content">
-          <text class="cuIcon-service text-grey" style="color:#8799a3"></text>
-          <text class="text-grey" style="color:#8799a3">官方客服</text>
+          <text class="cuIcon-service " style="color:#000"></text>
+          <text style="color:#000">官方客服</text>
         </view>
       </view>
       <view class="cu-item arrow" bindtap="editjump">
         <view class="content">
-          <text class="cuIcon-edit text-grey" style="color:#8799a3"></text>
-          <text class="text-grey" style="color:#8799a3">建议留言</text>
+          <text class="cuIcon-edit" style="color:#000"></text>
+          <text style="color:#000">建议留言</text>
         </view>
       </view>
       <view class="cu-item arrow" bindtap="friendjump">
         <view class="content">
-          <text class="cuIcon-friendfill text-grey" style="color:#8799a3"></text>
-          <text class="text-grey" style="color:#8799a3">关于我们</text>
+          <text class="cuIcon-friendfill " style="color:#000"></text>
+          <text style="color:#000">关于我们</text>
         </view>
       </view>
     </view>

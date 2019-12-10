@@ -1,14 +1,14 @@
 <!--pages/tidings/tidings/tidings.wxml-->
-<cu-custom  isBack="{{false}}">
+<cu-custom isBack="{{false}}">
   <view slot="content" class="margin-top-xs">消息</view>
 </cu-custom>
 <view>
-  <view class="cu-list menu-avatar margin-top-lg">
-    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+  <view class="cu-list menu-avatar">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
       <view class="cu-avatar round ">
         <image mode="aspectFit" src="{{item.img}}"></image>
       </view>
-      <view class="content" style="width:60%">
+      <view class="content padding-top-lg" style="width:60%" data-id="{{item.id}}"  bindtap="cussjump">
         <view class="text-black text-df text-bold">{{item.con}}</view>
         <view class="text-gray text-sm" style=" display: {{item.badge==0?'':'none'}}">
           <text class="cuIcon-{{item.icon}} text-red"></text>{{item.tit}}</view>

@@ -11,8 +11,8 @@
     "pages/classify/certification/certification",
     "pages/classify/authentication/authentication",
     "pages/classify/about/about",
-    "pages/manage/manage/manage",
     "pages/classify/RealName/RealName",
+    "pages/manage/manage/manage",
     "pages/manage/carddetails/carddetails",
     "pages/logs/logs"
   ],
@@ -60,7 +60,7 @@
   "style": "v2",
   "debug": true,
   "navigateToMiniProgramAppIdList": [
-    "wxbe95cfd0acd54a9d"
+    "wx884ebfcbccc0468b"
   ],
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {

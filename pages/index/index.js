@@ -8,6 +8,7 @@ import {
   showToast,
   showModal,
   pageScrollTo,
+  navigateTo,
   switchTab,
   relunique,
   relremovetag,
@@ -84,7 +85,7 @@ Page({
         TabCur: TabCurs,
       })
     } else {
-      showToast('即将上线，敬请期待!', 'none', 3000)
+      showToast('即将上线，敬请期待!', 'none', 1000)
     }
   },
 
@@ -160,7 +161,7 @@ Page({
       txtput: len,
     })
     if (len > 499) {
-      showToast('输入值字数最大为500！', 'none', 3000)
+      showToast('输入值字数最大为500！', 'none', 1000)
     }
   },
 
@@ -182,7 +183,7 @@ Page({
     let jobtag = this.data.jobtag;
     let label = relstradd(jobtag);
     if (jobName == "" || jobType == undefined || jobNumber == "" || salary == "" || ageRequire == undefined || city == undefined || deadline == undefined || mobile == "" || address == "") {
-      showToast('请输入完整信息！', 'none', 3000)
+      showToast('请输入完整信息！', 'none', 1000)
     } else {
       console.log(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city + address, mobile, releaseType);
       wx.request({
@@ -206,12 +207,12 @@ Page({
           'content-type': 'application/json'
         },
         success: res => {
-          console.log(res.data)
+          console.log(res.data.data)
           if (res.data.success) {
-            showToast(res.data.data, 'success', 3000);
+            showToast('发布成功', 'success', 1000);
             setTimeout(() => {
-              switchTab('/pages/user/user/user');
-            }, 3000)
+              navigateTo('/pages/demand/invite/invite?name=' + jobName + '&demandId=' + res.data.data)
+            }, 1000)
             this.reset();
           } else {
             showModal(res.data.msg, 'RealName', '实名认证')

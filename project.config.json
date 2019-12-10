@@ -40,13 +40,70 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "消息",
+					"pathName": "pages/tidings/tidings/tidings",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发布",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "邀约",
+					"pathName": "pages/demand/invite/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "职位列表",
+					"pathName": "pages/demand/lauched/lauched",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "已发布",
+					"pathName": "pages/demand/lauched/lauched",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "名片管理",
+					"pathName": "pages/manage/manage/manage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评论消息",
+					"pathName": "pages/tidings/discuss/discuss",
+					"scene": null
+				}
+			]
 		}
 	}
 }
