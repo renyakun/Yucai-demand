@@ -4,14 +4,14 @@
 </cu-custom>
 <view>
   <view class="cu-list menu-avatar">
-    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key="id" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
       <view class="cu-avatar round ">
         <image mode="aspectFit" src="{{item.img}}"></image>
       </view>
       <view class="content padding-top-lg" style="width:60%" data-id="{{item.id}}"  bindtap="cussjump">
         <view class="text-black text-df text-bold">{{item.con}}</view>
         <view class="text-gray text-sm" style=" display: {{item.badge==0?'':'none'}}">
-          <text class="cuIcon-{{item.icon}} text-red"></text>{{item.tit}}</view>
+          <text class="cuIcon-{{item.icon}} text-red margin-right-xs" style="color:#e54d42"></text>{{item.tit}}</view>
         <view class="text-gray text-sm" style=" display: {{item.badge!=0?'':'none'}}">
           <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
             {{item.notice}}
@@ -25,10 +25,10 @@
       <view class="move bg-white ">
 
         <view class="padding-xs">
-          <view class="cu-tag indigo round shadow shadow-lg" style="color:white" bindtap="cussjump">查看</view>
+          <view class="cu-tag indigo round shadow shadow-lg" style="color:white" data-id="{{item.id}}" bindtap="cussjump">查看</view>
         </view>
-        <view class="padding-xs">
-          <view class="cu-tag bggrey round" style="color:white" bindtap="emptytap">清空消息</view>
+        <view class="padding-xs" style="color:white;width:2vh">
+          <view class="cu-tag bggrey round" style="color:white"  bindtap="emptytap">清空消息</view>
         </view>
 
       </view>

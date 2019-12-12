@@ -1,5 +1,5 @@
 //app.js
-// "enablePullDownRefresh": true
+
 const {
   url
 } = require('utils/url.js');
@@ -103,6 +103,127 @@ App({
 
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    //招聘进度
+    tablist: [{
+      id: 1,
+      icon: 'edit',
+      color: '#0081ff',
+      flag: '已报名',
+      len: 0
+    }, {
+      id: 2,
+      icon: 'form',
+      color: '#0081ff',
+      flag: '待面试',
+      len: 0
+    }, {
+      id: 3,
+      icon: 'squarecheck',
+      color: '#0081ff',
+      flag: '已录取',
+      len: 0
+    }, {
+      id: 4,
+      icon: 'backdelete',
+      color: '#0081ff',
+      flag: '已取消',
+      len: 0
+    }],
+    navList: [{
+        id: 1,
+        icon: 'cartfill',
+        name: "已推送",
+        num: 25,
+      },
+      {
+        id: 2,
+        icon: 'upstagefill',
+        name: "店铺关注",
+        num: 75,
+      },
+      {
+        id: 3,
+        icon: 'clothesfill',
+        name: "足迹",
+        num: 12,
+      }
+    ],
+    atteslist: [{
+      icon: 'profilefill',
+      name: 'certification',
+      color: 'cyan',
+      badge: 0,
+      title: '认证信息',
+    }, {
+      icon: 'vipcard',
+      color: 'orange',
+      name: 'authentication',
+      badge: 0,
+      title: '企业认证'
+    }],
+    demandlist: [{
+      icon: 'repeal',
+      name: 'lauched',
+      color: 'blue',
+      badge: 0,
+      title: '已发布',
+    }],
+    taglist: [{
+      color: '#e54d42',
+      title: '五险一金'
+    }, {
+      color: '#1cbbb4',
+      title: '包底'
+    }, {
+      color: '#fbbd08',
+      title: '包吃'
+    }, {
+      color: '#39b54a',
+      title: '年底双薪'
+    }, {
+      color: '#9c26b0',
+      title: '加班补助'
+    }, {
+      color: '#0081ff',
+      title: '周末双休'
+    }],
+    newslist: [{
+      id: 1,
+      img: '../../../images/icon/notice.png',
+      con: '评价消息通知',
+      tit: '暂无消息',
+      notice: '暂无消息',
+      icon: 'infofill',
+      timer: '',
+      badge: 0,
+    }, {
+      id: 2,
+      img: '../../../images/icon/see.png',
+      con: '今日暂无查看',
+      tit: '暂无劳务查看',
+      notice: '暂无消息',
+      icon: 'infofill',
+      timer: '',
+      badge: 0,
+    }, {
+      id: 3,
+      img: '../../../images/icon/subscribe.png',
+      con: '订阅消息',
+      tit: '暂无订阅消息',
+      notice: '暂无消息',
+      icon: 'infofill',
+      timer: '',
+      badge: 0,
+    }, {
+      id: 4,
+      img: '../../../images/YuCai.jpg',
+      con: '御材劳务官方助手',
+      tit: '暂无消息',
+      notice: '暂无消息',
+      icon: 'infofill',
+      timer: '22:20',
+      badge: 0,
+    }]
   }
 })

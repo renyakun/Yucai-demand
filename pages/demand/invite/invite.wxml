@@ -21,7 +21,7 @@
   <block wx:else>
 
     <view class="margin-top " wx:if="{{loadflag}}">
-      <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{invitelist}}" wx:key data-item="{{item}}" data-target="showModal" bindtap="invitemodal">
+      <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{invitelist}}" wx:key="userId" data-item="{{item}}" data-target="showModal" bindtap="invitemodal">
         <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
           <view class="flex flex-wrap align-end">
             <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>

@@ -18,15 +18,15 @@
 
   </view>
 
-  <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
+  <!-- <i-notice-bar icon="systemprompt" loop class=" margin-bottom-lg">
     {{notice}}
-  </i-notice-bar>
+  </i-notice-bar> -->
 
-  <view class="margin-top-sm margin-left-xs margin-right-xs flex bgwhite padding">
+  <view class="flex bgwhite padding">
     <view class=" flex-sub">
       <text class="text-black text-bold">我的认证</text>
     </view>
-    <view class="flex-sub" wx:for="{{atteslist}}" wx:key>
+    <view class="flex-sub" wx:for="{{atteslist}}" wx:key="name">
       <view bindtap="attesjump" data-target="{{item}}">
         <text class="cuIcon-{{item.icon}} text-{{item.color}}" style="color:{{item.color}}"></text> {{item.title}}
       </view>
@@ -34,13 +34,24 @@
   </view>
 
   <view class="bgwhite margin-top margin-left-xs margin-right-xs">
-    <view class="cu-list menu sm-border card-menu">
+    <view class="cu-list menu border card-menu">
       <view class="cu-item arrow" bindtap="managejump">
         <view class="content">
-          <text class="cuIcon-newsfill " style="color:#000"></text>
-          <text style="color:#000">名片管理</text>
+          <text style="color:#000">招聘进度</text>
         </view>
       </view>
+      <view class="cu-bar tabbar margin-top margin-bottom-sm">
+        <view class="action" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key="id" bindtap="mangsjump">
+          <view class="cuIcon-{{item.icon}}" ></view> {{item.flag}}
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="bgwhite margin-top margin-left-xs margin-right-xs">
+    <view class="cu-list menu sm-border card-menu">
+
       <view class="cu-item arrow" bindtap="demandjump">
         <view class="content">
           <text class="cuIcon-goodsnewfill" style="color:#000"></text>

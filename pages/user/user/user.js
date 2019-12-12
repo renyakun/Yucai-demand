@@ -21,45 +21,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scrollTop: 0,
     notice: '暂无消息',
-    navList: [{
-        id: 1,
-        icon: 'cartfill',
-        name: "已推送",
-        num: 25,
-      },
-      {
-        id: 2,
-        icon: 'upstagefill',
-        name: "店铺关注",
-        num: 75,
-      },
-      {
-        id: 3,
-        icon: 'clothesfill',
-        name: "足迹",
-        num: 12,
-      },
-    ],
-    atteslist: [{
-      icon: 'profilefill',
-      name: 'certification',
-      color: 'cyan',
-      badge: 0,
-      title: '认证信息',
-    }, {
-      icon: 'vipcard',
-      color: 'orange',
-      name: 'authentication',
-      badge: 0,
-      title: '企业认证'
-    }],
-    demandlist: [{
-      icon: 'repeal',
-      name: 'lauched',
-      color: 'blue',
-      badge: 0,
-      title: '已发布',
-    }],
+    atteslist: app.globalData.atteslist,
+    tablist: app.globalData.tablist,
   },
 
   //认证跳转
@@ -155,6 +118,12 @@ Page({
         //wx.setStorageSync('mobile', res.data.data.mobile);
       }
     })
+  },
+
+  //招聘进度跳转
+  mangsjump(e){
+    let id = e.currentTarget.dataset.id;
+    navigateTo('/pages/manage/manage/manage?id='+id);
   },
 
   onLoad: function() {

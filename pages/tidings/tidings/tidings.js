@@ -1,4 +1,5 @@
 // pages/tidings/tidings/tidings.js
+const app = getApp();
 const {
   url
 } = require('../../../utils/url.js');
@@ -8,44 +9,7 @@ import {
 } from '../../../utils/WeChatfction';
 Page({
   data: {
-    newslist: [{
-      id: 1,
-      img: '../../../images/icon/notice.png',
-      con: '评价消息通知',
-      tit: '暂无消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-
-    }, {
-      id: 2,
-      img: '../../../images/icon/see.png',
-      con: '今日暂无查看',
-      tit: '暂无劳务查看',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-    }, {
-      id: 3,
-      img: '../../../images/icon/subscribe.png',
-      con: '订阅消息',
-      tit: '暂无订阅消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-    }, {
-      id: 4,
-      img: '../../../images/YuCai.jpg',
-      con: '御材劳务官方助手',
-      tit: '暂无消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '22:20',
-      badge: 0,
-    }]
+    newslist: app.globalData.newslist,
   },
   // ListTouch触摸开始
   ListTouchStart(e) {

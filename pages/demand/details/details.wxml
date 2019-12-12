@@ -43,10 +43,13 @@
     <block wx:else>
       <view class="">
         <view class="cu-list menu sm-border card-menu margin-top bgwhite">
-          <view class="cu-bar justify-start bgwhite">
+          <view class="cu-bar justify-between bgwhite">
             <view class="action">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
               <text class="text-xl text-bold">岗位描述</text>
+            </view>
+            <view class="action">
+              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-target="1" bindtap="jumpedit"></text>
             </view>
           </view>
 
@@ -80,7 +83,7 @@
             <view class="content padding-top padding-bottom">
               <text class="text-black text-bold">保障标签:</text>
               <view class=" flex flex-wrap">
-                <view class="padding-xs" wx:for="{{label}}" wx:key>
+                <view class="padding-xs" wx:for="{{label}}" wx:key="item">
                   <view class="cu-tag bg-blue round">{{item}}</view>
                 </view>
               </view>
@@ -90,10 +93,13 @@
         </view>
 
         <view class="cu-list menu sm-border card-menu bgwhite">
-          <view class="cu-bar justify-start bgwhite">
+          <view class="cu-bar justify-between bgwhite">
             <view class="action border-title">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
               <text class="text-xl text-bold">薪资设置</text>
+            </view>
+            <view class="action">
+              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-target="2" bindtap="jumpedit"></text>
             </view>
           </view>
 
@@ -175,13 +181,13 @@
 
           <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start " style="background:rgba(0,0,0,.1);width:97.5%" >
             <view class="title">添加标签</view>
-            <view class="padding-xs" wx:for="{{jobtag}}" wx:key wx:if="{{item.color!='white'}}">
+            <view class="padding-xs" wx:for="{{jobtag}}" wx:key="title" wx:if="{{item.color!='white'}}">
               <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
             </view>
           </view>
           <view class=" cu-form-group  margin-bottom-sm margin-left-xs   cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
             <view class="title">例:</view>
-            <view class="padding-xs" wx:for="{{taglist}}" wx:key wx:if="{{item.color!='white'}}">
+            <view class="padding-xs" wx:for="{{taglist}}" wx:key="title" wx:if="{{item.color!='white'}}">
               <view class="cu-tag" style="background:{{item.color}};color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
             </view>
           </view>

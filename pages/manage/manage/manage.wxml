@@ -1,31 +1,49 @@
 <!--pages/manage/manage/manage.wxml-->
 <cu-custom isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content" class="margin-top-xs">名片管理</view>
+  <view slot="content" class="margin-top-xs">招聘进度</view>
 </cu-custom>
-<scroll-view scroll-y class="scrollPage" scrollTop="{{scrollTop}}">
-  <view class="cu-bar  bgwhite  fixed shadow-blur" style="height:7vh;top:10vh;">
-    <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="cu-item " style="border-bottom:{{item.id==TabCur?'5rpx solid #000':''}};" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key>
-        <text class="text-center" style="color:black">{{item.flag}}</text>
+<!-- position: absolute; -->
+<button class="cu-btn indigo round shadow-blur" style="width:5.5vh;height:5vh;z-index:999; position: fixed;top:80%;left:80%" bindtap="btnspin">
+  <text class="cuIcon-loading1 {{spin?'iconfont-spin':''}}" style="color:white"></text>
+</button>
+
+<scroll-view scroll-y class="scrollPage" scrollTop="{{scrollTop}}" style="position: relative;">
+
+  <view class="cu-bar bgwhite fixed" style="height:7vh;top:10vh;">
+    <view class="action">
+      <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+      <text class="text-df" style="color:#000">选择已发布需求</text>
+    </view>
+    <view class="action" bindtap="tapjump">
+      <text class="text-bold margin-right" style="color:#0081ff">{{demand.jobName}}</text>
+      <text class="cuIcon-right" style="color:#000"></text>
+    </view>
+  </view>
+
+  <view class="cu-bar  bgwhite margin-top-xl margin-left-xs margin-right-xs" style="height:7vh;margin-top:8.5vh">
+    <scroll-view scroll-x class="nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="cu-item " style="border-bottom:{{item.id==TabCur?'5rpx solid #000':''}};" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key="id">
+        <text class="text-center" style="color:black">{{item.flag}}({{item.len}})</text>
       </view>
     </scroll-view>
   </view>
 
-  <view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
+  <view class="bgwhite margin-left-xs margin-right-xs" style="" wx:if="{{demandflag}}" style="height:100vh">
     <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
   </view>
 
   <block wx:else>
 
-    <view style="margin-top:8.5vh" class=" margin-left-xs margin-right-xs margin-bottom-xl round">
-      <block wx:if="{{TabCur==item.id}}" wx:for="{{tablist}}" wx:key class="">
+    <view style="" class=" margin-left-xs margin-right-xs margin-bottom-xl round">
+
+      <block wx:if="{{TabCur==item.id}}" wx:for="{{tablist}}" wx:key="id" class="">
         <scroll-view scroll-y class="bgwhite shadow scrollPage" style=" ">
 
           <block wx:if="{{item.id== 1}}">
 
             <view class="margin-top " wx:if="{{accepflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{acceptlist}}" wx:key data-id="{{item.id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{acceptlist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap align-end">
                     <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
@@ -36,12 +54,6 @@
                     <view class="padding-left">
                       <text class="text-bold">期望职位：</text>
                       <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
-                    </view>
-                  </view>
-                  <view class="flex flex-wrap margin-top">
-                    <view class="padding-left">
-                      <text class="text-bold">投递需求：</text>
-                      <text class="text-blue" style="color:#0081ff;">{{item.demandHistroy.jobName}}</text>
                     </view>
                   </view>
 
@@ -58,54 +70,16 @@
 
           <block wx:elif="{{item.id== 2}}">
 
-            <view class="margin-top " wx:if="{{invitaflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{invitalist}}" wx:key data-id="{{item.id}}" data-demandid='{{item.demandHistroy.demandId}}'>
-                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap align-end">
-                    <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
-                    <view class="padding-left text-cut">{{item.realName}}</view>
-                  </view>
-                  <view class="flex flex-wrap margin-top">
-                    <view class="padding-left">{{item.sex}} | {{item.age}} | {{item.email}}</view>
-                    <view class="padding-left">
-                      <text class="text-bold">期望职位：</text>
-                      <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
-                    </view>
-                  </view>
-                  <view class="flex flex-wrap margin-top">
-                    <view class="padding-left">
-                      <text class="text-bold">投递需求：</text>
-                      <text class="text-blue" style="color:#0081ff;">{{item.demandHistroy.jobName}}</text>
-                    </view>
-                  </view>
-
-                </view>
-
-              </view>
-            </view>
-
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
-
-          </block>
-
-
-          <block wx:elif="{{item.id== 3}}">
-
             <view class="bgwhite radius shadow-blur margin-top-xs margin-sm" wx:if="{{sendflag}}">
-              <view class="cu-timeline " wx:for="{{sendlist}}" wx:key>
-                <view class="cu-time" style="width:20vh;"><text style="padding-bottom:0.2vh;border-bottom:5rpx solid #0081ff;color:#000;">{{item.invitationTime}}</text></view>
+              <view class="cu-timeline " wx:for="{{sendlist}}" wx:key="id">
+                <view class="cu-time" style="width:20vh;">
+                  <text style="padding-bottom:0.5vh;border-bottom:0.203vh solid #0081ff;color:#000;border-bottom-right-radius: 0.5vh;border-bottom-left-radius: 0.5vh;">{{item.invitationTime}}</text>
+                </view>
                 <view class="cu-item text-blue" style="color:#0081ff">
                   <view class="content">
                     <view class="flex flex-wrap align-end">
                       <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.demandHistroy.realName}}
-                      </view>
-                    </view>
-                    <view class="flex flex-wrap align-end">
-                      <view class=" text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">投递需求：</text>{{item.demandHistroy.jobName}}
+                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}
                       </view>
                     </view>
                     <view class="flex flex-wrap align-end">
@@ -113,11 +87,6 @@
                         <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
                       </view>
                     </view>
-                    <view class="flex flex-wrap align-end" style="display: {{item.flag==0?'':'none'}}">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}
-                      </view>
-                    </view>
                   </view>
                 </view>
               </view>
@@ -129,8 +98,68 @@
 
           </block>
 
-          <block wx:else>
+          <block wx:elif="{{item.id== 3}}">
+
             <view wx:if="{{plflag}}"></view>
+
+            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+              <image src="/images/nodata.jpg" mode="aspectFit"></image>
+            </view>
+          </block>
+
+          <block wx:else>
+
+            <!-- <view class="bgwhite radius shadow-blur margin-top-xs margin-sm" wx:if="{{cancelflag}}">
+              <view class="cu-timeline " wx:for="{{cancellist}}" wx:key="id">
+                <view class="cu-time" style="width:20vh;">
+                  <text style="padding-bottom:0.5vh;border-bottom:0.203vh solid #0081ff;color:#000;border-bottom-right-radius: 0.5vh;border-bottom-left-radius: 0.5vh;">{{item.invitationTime}}</text>
+                </view>
+                <view class="cu-item text-blue" style="color:#0081ff">
+                  <view class="content">
+                    <view class="flex flex-wrap align-end">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}
+                      </view>
+                    </view>
+                    <view class="flex flex-wrap align-end">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
+                      </view>
+                    </view>
+                    <view class="flex flex-wrap align-end" style="display: {{item.reason!=null?'':'none'}}">
+                      <view class="text-cut">
+                        <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view> -->
+
+            <view class="margin-top " wx:if="{{cancelflag}}">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
+                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
+                  <view class="flex flex-wrap">
+                    <view class="padding-left">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}</view>
+                  </view>
+                  <view class="flex flex-wrap  margin-top-xs">
+                    <view class="padding-left text-cut" style="width:90%">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}</view>
+                  </view>
+                  <view class="flex flex-wrap  margin-top-xs">
+                    <view class="padding-left ">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}</view>
+                  </view>
+                  <view class="flex flex-wrap  margin-top-xs">
+                    <view class="padding-left">
+                      <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}</view>
+                  </view>
+
+                </view>
+
+              </view>
+            </view>
 
             <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
               <image src="/images/nodata.jpg" mode="aspectFit"></image>
@@ -145,3 +174,28 @@
   </block>
 
 </scroll-view>
+
+<view class="cu-modal {{modalName=='showModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bgwhite justify-end">
+      <view class="content">选择需求</view>
+      <view class="action" bindtap="cancel">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="">
+      <view>
+        <picker-view indicator-style="height: 6vh;" style="width: 100%; height: 20vh;" value="{{timerval}}" bindchange="pichange">
+          <picker-view-column>
+            <view wx:for="{{demandlist}}" wx:key="demandId" style="line-height: 6vh;">{{item.jobName}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
+    <view class="cu-bar bgwhite justify-around">
+      <view class="action">
+        <button class="cu-btn indigo" bindtap="confirm" style="width:16vh;color:white" data-demandid="{{demand.demandId}}">确认</button>
+      </view>
+    </view>
+  </view>
+</view>

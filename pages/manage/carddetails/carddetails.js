@@ -73,6 +73,14 @@ Page({
     minutes: minutes,
     minute: minute,
     timerval: [29, month, day - 1, hour - 1, minute - 1],
+    check: true
+  },
+
+  checkbox(e) {
+    console.log(e.currentTarget.dataset.target)
+    this.setData({
+      check: !e.currentTarget.dataset.target
+    })
   },
 
   //选择邀请时间
@@ -129,13 +137,21 @@ Page({
   tapbtn(id, timer) {
     this.hideModal();
     let token = wx.getStorageSync('accessToken') || [];
+    let check = this.data.check;
+    let sendStatus = 0;
+    if (check) {
+      sendStatus = 1
+    } else {
+      sendStatus = 0
+    }
     wx.request({
       url: url + '/invitation/sendInvitation',
       method: 'post',
       data: {
         accessToken: token,
         id: id,
-        invitationTime: timer
+        invitationTime: timer,
+        sendStatus: sendStatus
       },
       success: res => {
         if (res.data.success) {

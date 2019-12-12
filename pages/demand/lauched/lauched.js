@@ -48,7 +48,13 @@ Page({
   demanditem(e) {
     let demandId = e.currentTarget.dataset.id;
     //console.log(demandId)
-    navigateTo('/pages/demand/details/details?demandId=' + demandId,)
+    navigateTo('/pages/demand/details/details?demandId=' + demandId, )
+  },
+
+  //招聘进度
+  demandIdjump(e) {
+    let demandId = e.currentTarget.dataset.id;
+    navigateTo('/pages/manage/manage/manage?demandId=' + demandId)
   },
 
   //邀约投递

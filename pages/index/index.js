@@ -53,25 +53,7 @@ Page({
     citypicker: ['广东省', '广州市', '海珠区'],
     jobpicker: ['普工', '合同工', '暑假工', '学生工'],
     agepicker: ['18~30', '20~40', '18~40', '30~50'],
-    taglist: [{
-      color: '#e54d42',
-      title: '五险一金'
-    }, {
-      color: '#1cbbb4',
-      title: '包底'
-    }, {
-      color: '#fbbd08',
-      title: '包吃'
-    }, {
-      color: '#39b54a',
-      title: '年底双薪'
-    }, {
-      color: '#9c26b0',
-      title: '加班补助'
-    }, {
-      color: '#0081ff',
-      title: '周末双休'
-    }],
+    taglist: app.globalData.taglist,
     jobtag: [],
     tagflag: true,
     txtput: 0

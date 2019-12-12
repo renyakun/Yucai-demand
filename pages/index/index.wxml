@@ -5,7 +5,7 @@
 
 <scroll-view scroll-y class="scrollPage">
   <scroll-view scroll-x class="bgwhite nav text-center shadow-blur padding-bottom-xs fixed" style="top:10vh;">
-    <view class="cu-item {{item.id==TabCur?'text-balck cur':''}}" style="color:balck" wx:for="{{tablist}}" wx:key bindtap="tabSelect" data-id="{{item.id}}">
+    <view class="cu-item {{item.id==TabCur?'text-balck cur':''}}" style="color:balck" wx:for="{{tablist}}" wx:key="id" bindtap="tabSelect" data-id="{{item.id}}">
       {{item.nav}}
     </view>
   </scroll-view>
@@ -61,13 +61,13 @@
           </view>
           <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%">
             <view class="title">添加标签</view>
-            <view class="padding-xs" wx:for="{{jobtag}}" wx:key wx:if="{{item.color!='white'}}">
+            <view class="padding-xs" wx:for="{{jobtag}}" wx:key="title" wx:if="{{item.color!='white'}}">
               <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
             </view>
           </view>
           <view class=" cu-form-group  margin-bottom-sm margin-left-xs  bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
             <view class="title">例:</view>
-            <view class="padding-xs" wx:for="{{taglist}}" wx:key wx:if="{{item.color!='white'}}">
+            <view class="padding-xs" wx:for="{{taglist}}" wx:key="title" wx:if="{{item.color!='white'}}">
               <view class="cu-tag" style="background:{{item.color}};color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
             </view>
           </view>
