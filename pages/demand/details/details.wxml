@@ -11,12 +11,12 @@
       <view class='action'>
         <text class='cuIcon-titles text-blue' style="color:#0081ff"></text> 需求详情
       </view>
-      <view class='action'>
+      <!-- <view class='action'>
         <i-switch value="{{switchflag}}" size="large" bindchange="switchChange" slot="footer">
           <view slot="open"></view>
           <view slot="close">修改</view>
         </i-switch>
-      </view>
+      </view> -->
     </view>
   </block>
 
@@ -49,7 +49,7 @@
               <text class="text-xl text-bold">岗位描述</text>
             </view>
             <view class="action">
-              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-target="1" bindtap="jumpedit"></text>
+              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-cur="1" data-id="{{demandId}}" bindtap="jumpedit"></text>
             </view>
           </view>
 
@@ -99,7 +99,7 @@
               <text class="text-xl text-bold">薪资设置</text>
             </view>
             <view class="action">
-              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-target="2" bindtap="jumpedit"></text>
+              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-cur="2" data-id="{{demandId}}"  bindtap="jumpedit"></text>
             </view>
           </view>
 

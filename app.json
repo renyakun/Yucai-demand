@@ -9,6 +9,7 @@
     "pages/demand/details/details",
     "pages/demand/invite/invite",
     "pages/demand/modify/modify",
+    "pages/demand/jobtag/jobtag",
     "pages/classify/certification/certification",
     "pages/classify/authentication/authentication",
     "pages/classify/about/about",

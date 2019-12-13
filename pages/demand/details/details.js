@@ -201,9 +201,14 @@ Page({
 
   //修改跳转
   jumpedit(e) {
-    let cur = e.currentTarget.dataset.target;
-    console.log(cur)
-    navigateTo('/pages/demand/modify/modify?cur='+cur)
+    let cur = e.currentTarget.dataset.cur;
+    let demandId = e.currentTarget.dataset.id;
+    if (cur==1){
+      navigateTo('/pages/demand/modify/modify?cur=' + cur + '&&demandId=' + demandId)
+    }else{
+      showToast('即将上线，敬请期待！', 'none', 1000)
+    }
+    
   },
 
   onLoad: function(options) {

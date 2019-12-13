@@ -42,9 +42,7 @@ Page({
   //详情跳转
   cardel(e) {
     let id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '/pages/manage/carddetails/carddetails?id=' + id
-    })
+    navigateTo('/pages/manage/carddetails/carddetails?id=' + id)
   },
 
   //获取已报名列表
@@ -290,6 +288,7 @@ Page({
       })
     }, 500)
     if (options.id != undefined) {
+      console.log(options.id)
       this.setData({
         TabCur: options.id,
       })
@@ -297,23 +296,17 @@ Page({
       console.log(options.demandId)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
-        let demand = demandlist.filter(function(elem, index, arr) {
+        let demands = demandlist.filter(function(elem, index, arr) {
           return elem.demandId == options.demandId
         });
+        let demand = demands[0];
+        console.log(demand)
         this.setData({
           demand: demand
         })
-        console.log(demand);
-      }, 600)
-      setTimeout(() => {
-        let demandId = this.data.demand.demandId;
-        this.request(token, demandId);
-      }, 1500)
-    } else {
-      setTimeout(() => {
-        let demandId = this.data.demand.demandId;
-        this.request(token, demandId);
-      }, 1000)
+      }, 800)
+    } else if (options.demandId == undefined && options.id == undefined) {
+      this.onReady()
     }
   },
 

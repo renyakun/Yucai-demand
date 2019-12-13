@@ -101,6 +101,14 @@
 					"id": -1,
 					"name": "评论消息",
 					"pathName": "pages/tidings/discuss/discuss",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "职位标签",
+					"pathName": "pages/demand/jobtag/jobtag",
+					"query": "",
 					"scene": null
 				}
 			]

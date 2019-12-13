@@ -1,0 +1,71 @@
+<!--pages/demand/jobtag/jobtag.wxml-->
+<cu-custom isCustom="{{true}}" isBack="{{false}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">职位标签</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+
+  <view class="cu-card no-card  shadow-blur">
+
+    <view class="padding-top cu-bar justify-start bgwhite">
+      <view class="padding-left">
+        <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+        <text class="text-xl text-bold">职位标签(<text style="color:#0081ff">{{tagnum}}</text>/5)</text>
+      </view>
+    </view>
+    <view class="bgwhite padding-left-lg padding-right" style="color:#8799a3">
+      选择符合职位的相关标签，提升自身亮点，吸引更多人才关注~~~
+    </view>
+
+    <view class="bgwhite padding flex flex-wrap justify-start align-center">
+      <view class="title">例:</view>
+      <view class="padding-xs" wx:for="{{taglist}}" wx:key="title">
+        <view class="cu-tag round" style="background:#0081ff;color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
+      </view>
+    </view>
+
+    <view class="bgwhite padding-left padding-bottom" style="color:#8799a3">
+      <view class="cu-capsule radius" data-target="bottomModal" bindtap="custom">
+        <view class="cu-tag" style="background:rbga(0,0,0,0.5);width:4vh;height:3vh">
+          <text class="cuIcon-add" style="color:black"></text>
+        </view>
+        <view class="cu-tag line-grey" style="width:8vh;height:3vh">
+          自定义
+        </view>
+      </view>
+    </view>
+
+    <view class="bgwhite padding-left padding-bottom flex flex-wrap justify-start">
+      <view class="padding-xs" wx:for="{{jobtag}}" wx:key="title" wx:if="{{item.color!='white'}}" data-target="{{item}}" bindtap="tagdel">
+        <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
+      </view>
+    </view>
+
+
+    <view class="cu-bar foot tabbar" style="bottom:{{InputBottom}}px;">
+      <button class="flex justify-center align-center" style="width:100%;height:100%;background: #0081ff;color:white" bindtap="btnadd">保存</button>
+    </view>
+
+    <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white">
+          <view class="action text-green" bindtap="hideModal">取消</view>
+          <view class="action text-bold" style="color:black">自定义标签</view>
+          <view class="action text-blue" bindtap="addtag">添加</view>
+        </view>
+        <view class="" style="height:45vh">
+          <view class="cu-form-group margin-left margin-right" style="border-bottom:0.3vh solid #0081ff;">
+            <input class="" value="{{val}}" style="height:6vh;" maxlength="20" placeholder="请输入职位标签" bindinput="textareaBInput"></input>
+          </view>
+          <view class="margin-top-xs" style="margin-left:47vh">
+            {{txtput}}/20
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+
+</scroll-view>

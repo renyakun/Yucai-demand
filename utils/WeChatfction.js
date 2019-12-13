@@ -89,18 +89,50 @@ function pageScrollTosel(cls, time) {
 };
 
 
-//数组去重
+//数组tag去重
 function relunique(ary) {
   let newAry = [];
   for (var i = 0; i < ary.length; i++) {
     var flag = true;
     for (var j = 0; j < newAry.length; j++) {
-      if (ary[i].color == newAry[j].color) {
+      if (ary[i].title == newAry[j].title) {
         flag = false;
       };
     };
     if (flag) {
       newAry.push(ary[i]);
+    };
+  };
+  return newAry;
+};
+
+//随机生成颜色
+function randomColor() {
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+  return "rgb(" + r + "," + g + "," + b + ")";
+}
+
+//数组tag添加去重
+function tagunique(ary) {
+  let newAry = [];
+  for (var i = 0; i < ary.length; i++) {
+    var flag = true;
+    for (var j = 0; j < newAry.length; j++) {
+      if (ary[i].title == newAry[j].title) {
+        flag = false;
+      };
+    };
+    if (flag) {
+      newAry.push(ary[i]);
+    } else {
+      console.log('已经添加过了')
+      wx.showToast({
+        title: '已经添加过了',
+        icon: 'none',
+        duration: 3000
+      })
     };
   };
   return newAry;
@@ -199,7 +231,9 @@ export {
   relstradd,
   makePhoneCall,
   selstar,
-  seluser
+  seluser,
+  randomColor,
+  tagunique
 };
 
 

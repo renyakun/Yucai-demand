@@ -141,7 +141,7 @@
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap">
                     <view class="padding-left">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}</view>
+                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}</view>
                   </view>
                   <view class="flex flex-wrap  margin-top-xs">
                     <view class="padding-left text-cut" style="width:90%">
