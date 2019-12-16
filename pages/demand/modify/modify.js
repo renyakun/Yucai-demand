@@ -5,12 +5,8 @@ const {
 } = require('../../../utils/url.js');
 import {
   showToast,
-  pageScrollTosel,
-  switchTab,
   navigateTo,
   showLoading,
-  relunique,
-  relremovetag,
   relstradd,
 } from '../../../utils/WeChatfction';
 Page({
@@ -21,7 +17,6 @@ Page({
     interval: 5000,
     duration: 1000,
     proList: null,
-    TabCur: 1,
     jobName: '',
     jobType: '',
     jobNumber: '',
@@ -30,10 +25,7 @@ Page({
     salary: '',
     ageRequire: '',
     city: '',
-    address: '',
     deadline: '',
-    releaseType: '',
-    mobile: '',
     check: true,
     ind: null,
     jobind: null,
@@ -92,118 +84,122 @@ Page({
     navigateTo('/pages/demand/jobtag/jobtag?cur=' + cur + '&&demandId=' + demandId)
   },
 
+  //修改
+  request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+      console.log('薪资设置:', salary, ageRequire, deadline, city);
+      console.log('必需字段:', mobile, id);
+      wx.request({
+        url: url + '/demand/updateMyDemand',
+        method: 'post',
+        data: {
+          jobName: jobName,
+          jobType: jobType,
+          jobNumber: jobNumber,
+          jobRequire: jobRequire,
+          label: label,
+          salary: salary,
+          ageRequire: ageRequire,
+          deadline: deadline,
+          city: city,
+          mobile: mobile,
+          id: id,
+          accessToken: token,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: res => {
+          console.log(res)
+          if (res.data.success) {
+            showToast(res.data.data, 'success', 500)
+            setTimeout(() => {
+              let demandId = this.data.demandId;
+              navigateTo('/pages/demand/details/details?demandId=' + demandId);
+            }, 800)
+          } else {
+            showToast(res.data.msg, 'none', 1000)
+          }
+        }
+      })
+    }, 1000)
+  },
 
   formSubmit(e) {
     let token = wx.getStorageSync('accessToken') || [];
     let demandlist = this.data.demandlist;
     let cur = this.data.cur;
-    //if (cur == 1) {
-    let jobName = e.detail.value.jobName;
-    let jobType = this.data.jobpicker[e.detail.value.jobType];
-    let jobNumber = e.detail.value.jobNumber;
-    let jobRequire = e.detail.value.jobRequire;
+    console.log(cur);
+    let jobName = demandlist.jobName;
+    let jobType = demandlist.jobType;
+    let jobNumber = demandlist.jobNumber;
+    let jobRequire = demandlist.jobRequire;
+    let label = demandlist.label;
     let salary = demandlist.salary;
     let ageRequire = demandlist.ageRequire;
-    let city = demandlist.city;
-    let address = e.detail.value.address;
     let deadline = demandlist.deadline;
+    let city = demandlist.city;
     let mobile = demandlist.mobile;
-    let jobtag = this.data.jobtag;
-    let label = relstradd(jobtag);
-    let id = this.data.id;
-    //} 
-    // else if (cur == 2) {
-    //   let jobName = demandlist.jobName;
-    //   let jobType = demandlist.jobType;
-    //   let jobNumber = demandlist.jobNumber;
-    //   let jobRequire = demandlist.jobRequire;
-    //   let salary = e.detail.value.salary;
-    //   let ageRequire = this.data.agepicker[e.detail.value.ageRequire];
-    //   let city = demandlist.city;
-    //   let address = e.detail.value.address;
-    //   let deadline = e.detail.value.deadline;
-    //   let mobile = demandlist.mobile;
-    //   let label = demandlist.label;
-    //   let id = this.data.id;
-    // }
-
-    console.log(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, mobile);
-    if (jobName == "" || jobType == undefined || jobNumber == "" || salary == "" || ageRequire == undefined || city == undefined || deadline == undefined || mobile == "" || address == "") {
-      showToast('请输入完整信息！', 'none', 1000)
-    } else {
-      wx.showLoading({
-        title: '加载中',
-      })
-      setTimeout(() => {
-        wx.hideLoading()
-        console.log(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, mobile, );
-        wx.request({
-          url: url + '/demand/updateMyDemand',
-          method: 'post',
-          data: {
-            jobName: jobName,
-            jobType: jobType,
-            jobNumber: jobNumber,
-            jobRequire: jobRequire,
-            label: label,
-            salary: salary,
-            ageRequire: ageRequire,
-            city: city,
-            deadline: deadline,
-            mobile: mobile,
-            id: id,
-            accessToken: token,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: res => {
-            console.log(res)
-            if (res.data.success) {
-              showToast(res.data.data, 'success', 1000)
-              setTimeout(() => {
-                // this.setData({
-                //   TabCur: 1,
-                //   title: '需求详情'
-                // })
-                let demandId = this.data.demandId;
-                navigateTo('/pages/demand/details/details?demandId=' + demandId);
-              }, 500)
-              // setTimeout(() => {
-              //   this.onReady()
-              // }, 1000)
-            } else {
-              showToast(res.data.msg, 'none', 1000)
-            }
-          }
-        })
-      }, 1000)
-
-
+    let id = demandlist.id;
+    if (cur == 1) {
+      let jobName = e.detail.value.jobName;
+      let jobType = this.data.jobpicker[e.detail.value.jobType];
+      let jobNumber = e.detail.value.jobNumber;
+      let jobRequire = e.detail.value.jobRequire;
+      let label = relstradd(this.data.jobtag);
+      console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+      console.log('薪资设置:', salary, ageRequire, deadline, city);
+      console.log('必需字段:', mobile, id);
+      if (jobName == "" || jobType == undefined || jobNumber == "" || label == undefined) {
+        showToast('请输入完整信息！', 'none', 1000)
+      } else {
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
+      }
+    } else if (cur == 2) {
+      let salary = e.detail.value.salary;
+      let ageRequire = this.data.agepicker[e.detail.value.ageRequire];
+      let deadline = e.detail.value.deadline;
+      let city = e.detail.value.city;
+      console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+      console.log('薪资设置:', salary, ageRequire, deadline, city);
+      console.log('必需字段:', mobile, id);
+      if (salary == "" || ageRequire == undefined || deadline == undefined || city == "") {
+        showToast('请输入完整信息！', 'none', 1000)
+      } else {
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
+      }
     }
   },
 
-
-
   onLoad: function(options) {
-    //console.log(options)
+    this.setData({
+      jobtag: []
+    })
+    console.log(this.data.jobtag)
     this.setData({
       cur: options.cur,
       demandId: options.demandId
     })
-    let jobtag = wx.getStorageSync('jobtag') || [];
-    let tagflag = this.data.tagflag;
-    console.log(jobtag, tagflag)
-    if (jobtag != []) {
-      this.setData({
-        jobtag: jobtag,
-        tagflag: true
-      })
-    } else {
-      this.setData({
-        tagflag: false
-      })
-    }
+    setTimeout(() => {
+      let jobtag = wx.getStorageSync('jobtag') || [];
+      let tagflag = this.data.tagflag;
+      console.log(jobtag, tagflag)
+      if (jobtag.length != 0) {
+        this.setData({
+          jobtag: jobtag,
+          tagflag: true
+        })
+      } else {
+        this.setData({
+          tagflag: false
+        })
+      }
+    }, 500)
   },
 
   onReady: function() {
@@ -225,23 +221,15 @@ Page({
           demandId: demandId
         },
         success: res => {
-          //console.log(res.data.data)
-          let label = res.data.data.label.split(",");
-          let address = res.data.data.city;
-          let jobType = res.data.data.jobType;
-          let ageRequire = res.data.data.ageRequire;
-          let deadline = res.data.data.deadline;
+          console.log(res.data.data)
+          //let label = res.data.data.label.split(",");
           let len = res.data.data.jobRequire.length;
           let id = res.data.data.id;
           wx.hideLoading();
           this.setData({
             demandlist: res.data.data,
-            label: label,
             txtput: len,
             id: id,
-            jobType: jobType,
-            ageRequire: ageRequire,
-            deadline: deadline
           })
         }
       })

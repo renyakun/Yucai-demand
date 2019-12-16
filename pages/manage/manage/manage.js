@@ -5,9 +5,6 @@ const {
 import {
   showToast,
   navigateTo,
-  switchTab,
-  makePhoneCall,
-  showLoading,
   pageScrollTo
 } from '../../../utils/WeChatfction';
 

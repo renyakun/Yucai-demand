@@ -134,6 +134,10 @@ Page({
     })
   },
 
+  tagjump() {
+    navigateTo('/pages/demand/jobtag/jobtag')
+  },
+
   //字数管理
   textareaBInput(e) {
     console.log(e.detail.value);
@@ -146,7 +150,6 @@ Page({
       showToast('输入值字数最大为500！', 'none', 1000)
     }
   },
-
 
   // 判定输入为非空字符
   formSubmit(e) {
@@ -229,6 +232,26 @@ Page({
   onLoad: function(options) {
     // let mobile = wx.getStorageSync('mobile') || {};
     // console.log(mobile);
+    console.log(this.data.jobtag);
+    this.setData({
+      jobtag: []
+    })
+    console.log(this.data.jobtag)
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading();
+      let jobtag = wx.getStorageSync('jobtag') || [];
+      console.log(jobtag)
+      this.setData({
+        jobtag: jobtag
+      })
+    }, 500)
+    setTimeout(() => {
+      let jobtag = [];
+      wx.setStorageSync('jobtag', jobtag)
+    }, 500)
   },
 
   onReady: function() {
@@ -236,7 +259,7 @@ Page({
   },
 
   onShow: function() {
-
+    this.onLoad()
   },
 
   onHide: function() {

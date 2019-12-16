@@ -5,18 +5,13 @@ const {
 } = require('../../../utils/url.js');
 import {
   showToast,
-  pageScrollTosel,
-  switchTab,
   navigateTo,
-  showLoading,
+  switchTab,
   relunique,
   relremovetag,
-  relstradd,
   randomColor,
   tagunique
 } from '../../../utils/WeChatfction';
-
-
 
 Page({
   data: {
@@ -115,11 +110,15 @@ Page({
   //保存
   btnadd() {
     let jobtag = this.data.jobtag;
+    wx.setStorageSync('jobtag', jobtag);
     let cur = this.data.cur;
     let demandId = this.data.demandId;
-    wx.setStorageSync('jobtag', jobtag)
-    navigateTo('/pages/demand/modify/modify?demandId=' + demandId + '&&cur=' + cur);
-
+    console.log(cur, demandId);
+    if (cur != undefined && demandId != undefined) {
+      navigateTo('/pages/demand/modify/modify?demandId=' + demandId + '&&cur=' + cur)
+    } else {
+      switchTab('/pages/index/index')
+    }
   },
 
 

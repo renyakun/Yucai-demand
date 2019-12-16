@@ -5,8 +5,8 @@ const {
 } = require('../../../utils/url.js');
 import {
   showToast,
-  showLoading,
-  seluser
+  seluser,
+  navigateTo
 } from '../../../utils/WeChatfction';
 
 Page({
@@ -33,6 +33,9 @@ Page({
       success: res => {
         if (res.data.success) {
           showToast(res.data.data, 'success', 1000)
+          setTimeout(()=>{
+            navigateTo('/pages/demand/lauched/lauched')
+          },1000)
         } else {
           showToast(res.data.msg, 'none', 1000)
         }
@@ -108,7 +111,7 @@ Page({
           }
         }
       })
-    }, 1100)
+    }, 500)
   },
 
 

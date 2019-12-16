@@ -10,13 +10,13 @@
 
 <scroll-view scroll-y class="scrollPage" scrollTop="{{scrollTop}}" style="position: relative;">
 
-  <view class="cu-bar bgwhite fixed" style="height:7vh;top:10vh;">
+  <view class="cu-bar bgwhite fixed flex justify-between" style="height:7vh;top:10vh;">
     <view class="action">
       <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
       <text class="text-df" style="color:#000">选择已发布需求</text>
     </view>
     <view class="action" bindtap="tapjump">
-      <text class="text-bold margin-right" style="color:#0081ff">{{demand.jobName}}</text>
+      <text class="text-bold text-cut" style="color:#0081ff;width:20vh">{{demand.jobName}}</text>
       <text class="cuIcon-right" style="color:#000"></text>
     </view>
   </view>

@@ -21,7 +21,7 @@
     <view class="bgwhite padding flex flex-wrap justify-start align-center">
       <view class="title">例:</view>
       <view class="padding-xs" wx:for="{{taglist}}" wx:key="title">
-        <view class="cu-tag round" style="background:#0081ff;color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
+        <view class="cu-tag round bgwhite" style="border:#0081ff solid 0.2vh;" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
       </view>
     </view>
 

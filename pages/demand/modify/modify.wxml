@@ -29,7 +29,7 @@
           <view>
             <picker bindchange="jobPicker" style="color:#8799a3" name="jobType" value="{{jobind}}" range="{{jobpicker}}" data-target="jobind">
               <view class="picker">
-                {{jobind?jobpicker[jobind]:jobType}}
+                {{jobind?jobpicker[jobind]:demandlist.jobType}}
               </view>
             </picker>
           </view>
@@ -49,16 +49,16 @@
           </view>
         </view>
 
-<!-- display:{{tagflag?'':'none'}} display:{{tagflag?'none':''}}-->
-        <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-between" style="background:rgba(0,0,0,.1);width:97.5%;">
+        <!-- display:{{tagflag?'':'none'}} display:{{tagflag?'none':''}} {{tagflag?'':'margin-bottom-sm'}}-->
+        <view class="cu-form-group margin-top-xs  margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-between" style="background:rgba(0,0,0,.1);width:97.5%;">
           <view class="title">添加标签</view>
           <view class="" bindtap="tagjump">
             <text class="margin-right" style="color:#8799a3">请选择适合的职位标签</text>
             <text class="cuIcon-right" style="color:#8799a3"></text>
           </view>
         </view>
-        <view class=" cu-form-group  margin-bottom-sm margin-left-xs   cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;background:rgba(0,0,0,.1);display:{{tagflag?none:''}}">
-          <view class="title">标签</view>
+        <view class=" cu-form-group  margin-bottom-sm margin-left-xs cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;background:rgba(0,0,0,.1);">
+          <view class="title">标签:</view>
           <view class="padding-xs" wx:for="{{jobtag}}" wx:key="title" wx:if="{{item.color!='white'}}">
             <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
           </view>
@@ -88,7 +88,7 @@
           <view>
             <picker bindchange="agePicker" name="ageRequire" value="{{ageind}}" range="{{agepicker}}">
               <view class="picker">
-                {{ageind?agepicker[ageind]:ageRequire}}
+                {{ageind?agepicker[ageind]:demandlist.ageRequire}}
               </view>
             </picker>
           </view>
@@ -100,7 +100,7 @@
           <view>
             <picker mode="date" value="{{deadind}}" name="deadline" start="2015-09-01" end="2020-09-01" bindchange="deadPicker">
               <view class="picker">
-                {{deadind?deadind:deadline}}
+                {{deadind?deadind:demandlist.deadline}}
               </view>
             </picker>
           </view>

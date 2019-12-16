@@ -6,35 +6,7 @@
 
 <scroll-view scroll-y class="scrollPage padding-bottom " style="">
 
-  <block wx:if="{{TabCur==1}}" class="">
-    <view class="cu-bar bgwhite solid-bottom">
-      <view class='action'>
-        <text class='cuIcon-titles text-blue' style="color:#0081ff"></text> 需求详情
-      </view>
-      <!-- <view class='action'>
-        <i-switch value="{{switchflag}}" size="large" bindchange="switchChange" slot="footer">
-          <view slot="open"></view>
-          <view slot="close">修改</view>
-        </i-switch>
-      </view> -->
-    </view>
-  </block>
-
-  <block wx:if="{{TabCur==2}}" class="">
-    <view class="cu-bar bgwhite solid-bottom">
-      <view class='action'>
-        <text class='cuIcon-titles text-blue ' style="color:#0081ff"></text> 修改详情
-      </view>
-      <view class='action'>
-        <i-switch value="{{switchflag}}" size="large" bindchange="switchChange" slot="footer">
-          <view slot="open"></view>
-          <view slot="close">修改</view>
-        </i-switch>
-      </view>
-    </view>
-  </block>
-
-  <block wx:if="{{TabCur==1}}" class=" margin-top-xs margin-bootom-lg">
+  <view class=" margin-top-xs margin-bootom-lg">
 
     <view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
       <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
@@ -84,7 +56,7 @@
               <text class="text-black text-bold">保障标签:</text>
               <view class=" flex flex-wrap">
                 <view class="padding-xs" wx:for="{{label}}" wx:key="item">
-                  <view class="cu-tag bg-blue round">{{item}}</view>
+                  <view class="cu-tag round bgwhite" style="border:#0081ff solid 0.2vh;">{{item}}</view>
                 </view>
               </view>
             </view>
@@ -99,7 +71,7 @@
               <text class="text-xl text-bold">薪资设置</text>
             </view>
             <view class="action">
-              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-cur="2" data-id="{{demandId}}"  bindtap="jumpedit"></text>
+              <text class="cuIcon-edit text-blue" style="color:#0081ff" data-cur="2" data-id="{{demandId}}" bindtap="jumpedit"></text>
             </view>
           </view>
 
@@ -133,135 +105,6 @@
 
     </block>
 
-  </block>
-
-  <block wx:if="{{TabCur==2}}" class="margin-top-xs margin-bootom-lg">
-    <view class="margin-top-xs">
-      <form bindsubmit='formSubmit' class="margin-top-xs">
-        <view class="bgwhite margin-xs  cu-card no-card  shadow-blur">
-
-          <view class="cu-bar justify-start bgwhite">
-            <view class="action border-title">
-              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">岗位描述</text>
-            </view>
-          </view>
-
-          <view class="cu-form-group margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">岗位名称</view>
-            <input value="{{demandlist.jobName}}" name="jobName"></input>
-          </view>
-
-          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">岗位类型</view>
-            <input value="" disabled></input>
-            <view>
-              <picker bindchange="jobPicker" name="jobType" value="{{jobind}}" range="{{jobpicker}}" data-target="jobind">
-                <view class="picker">
-                  {{jobind?jobpicker[jobind]:'请选择岗位类型'}}
-                </view>
-              </picker>
-            </view>
-          </view>
-
-          <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">本次招聘</view>
-            <input value="{{demandlist.jobNumber}}" name="jobNumber"></input>
-          </view>
-
-          <view class="cu-form-group align-start margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1);position: relative">
-            <view class="title">岗位要求</view>
-            <view class="flex align-end  margin-bottom-xs " style="width:76%;">
-              <textarea auto-height maxlength="500" name="jobRequire" value="{{demandlist.jobRequire}}" bindinput="textareaBInput" placeholder="请输入岗位要求"></textarea>
-              <view class="margin-top-xs" style="position: absolute;right:25rpx">
-                <text>{{txtput}}</text>/500</view>
-            </view>
-          </view>
-
-
-          <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}} margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-start " style="background:rgba(0,0,0,.1);width:97.5%" >
-            <view class="title">添加标签</view>
-            <view class="padding-xs" wx:for="{{jobtag}}" wx:key="title" wx:if="{{item.color!='white'}}">
-              <view class="cu-tag " style="background:{{item.color}};color:white">{{item.title}}</view>
-            </view>
-          </view>
-          <view class=" cu-form-group  margin-bottom-sm margin-left-xs   cu-card no-card padding-sm flex flex-wrap  justify-start" style="width:97.5%;display:{{tagflag?'':'none'}}">
-            <view class="title">例:</view>
-            <view class="padding-xs" wx:for="{{taglist}}" wx:key="title" wx:if="{{item.color!='white'}}">
-              <view class="cu-tag" style="background:{{item.color}};color:white" data-target="{{item}}" bindtap="jobtab">{{item.title}}</view>
-            </view>
-          </view>
-
-        </view>
-
-        <view class="bgwhite margin-xs  cu-card no-card  shadow">
-
-          <view class="cu-bar justify-start bgwhite">
-            <view class="action border-title">
-              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">薪资设置</text>
-            </view>
-          </view>
-
-          <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">薪资</view>
-            <input value="" name="salary" value="{{demandlist.salary}}"></input>
-          </view>
-
-          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title  margin-left-xs">年龄要求</view>
-            <input disabled></input>
-            <view>
-              <picker bindchange="agePicker" name="ageRequire" value="{{ageind}}" range="{{agepicker}}">
-                <view class="picker">
-                  {{ageind?agepicker[ageind]:'请选择年龄要求'}}
-                </view>
-              </picker>
-            </view>
-          </view>
-
-          <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">截止日期</view>
-            <input disabled></input>
-            <view>
-              <picker mode="date" value="{{deadind}}" name="deadline" start="2015-09-01" end="2020-09-01" bindchange="deadPicker">
-                <view class="picker">
-                  {{deadind?deadind:'请选择招人截止日期'}}
-                </view>
-              </picker>
-            </view>
-          </view>
-
-          <view class="cu-form-group margin-bottom margin-xs cu-card no-card" style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">工作地址</view>
-            <input value="" name="city" value="{{demandlist.city}}"></input>
-          </view>
-
-        </view>
-
-        <view class="bgwhite margin-xs  cu-card no-card  shadow">
-          <view class="cu-bar justify-start ">
-            <view class="action border-title">
-              <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">发布认证</text>
-            </view>
-          </view>
-
-          <view class="cu-form-group margin-bottom margin-xs cu-card no-card" style="background:rgba(0,0,0,.1)">
-            <view class="title margin-left-xs">手机号</view>
-            <input name="mobile" type="number" maxlength="11" value="{{demandlist.mobile}}" ></input>
-          </view>
-        </view>
-
-        <view class="padding margin-bottom-xl flex justify-end">
-          <button class="cu-btn indigo shadow-blur margin-right" formType="submit" style="width:20vh;color:white">修改并发布</button>
-          <button class="cu-btn indigo shadow-blur " bindtap="reset" style="width:20vh;color:white">取消</button>
-        </view>
-
-      </form>
-
-    </view>
-
-  </block>
+  </view>
 
 </scroll-view>
