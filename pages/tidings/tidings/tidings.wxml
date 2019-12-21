@@ -2,7 +2,7 @@
 <cu-custom isBack="{{false}}">
   <view slot="content" class="margin-top-xs">消息</view>
 </cu-custom>
-<view>
+ <!--<view>
   <view class="cu-list menu-avatar">
     <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} " wx:for="{{newslist}}" wx:key="id" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
       <view class="cu-avatar round ">
@@ -33,6 +33,19 @@
 
       </view>
     </view>
-  </view>
+  </view> 
 
+</view>-->
+
+<view> 
+  <view class="bgwhite margin-top margin-left-xs margin-right-xs" wx:for="{{newslist}}" wx:key="id" data-target="move-box-{{index}}" catchtap="cussjump" data-id="{{item.id}}">
+    <view class="cu-list menu sm-border card-menu">
+      <view class="cu-item arrow">
+        <view class="content">
+          <text class="cuIcon-message text-black" ></text>
+          <text class="text-black">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

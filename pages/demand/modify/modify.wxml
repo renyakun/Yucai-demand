@@ -4,7 +4,7 @@
   <view slot="content" class="margin-top-xs">修改详情</view>
 </cu-custom>
 
-<scroll-view scroll-y class="scrollPage bgwhite">
+<scroll-view scroll-y class="scrollPage bgwhite" style="margin-bottom:10vh">
 
   <form bindsubmit='formSubmit' class="margin-top-xs">
 
@@ -130,14 +130,9 @@
       </view>
     </block>
 
-
-    <!-- <view class="padding margin-bottom-xl flex justify-end">
-      <button class="cu-btn indigo shadow-blur" formType="submit" style="width:100%;color:white">保存</button>
-    </view> cu-bar foot tabbar cur shop -->
-
-    <view class="cu-bar foot tabbar" style="bottom:{{InputBottom}}px;">
-      <button class="flex justify-center align-center" style="width:100%;height:100%;background: #0081ff;color:white" formType="submit">保存</button>
-    </view>
+    <view class="cu-bar foot tabbar cur shop  flex justify-center align-center indigo" style="bottom:{{InputBottom}}px;color:white">
+        <button class="cu-btn bgwhite" formType="submit" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
+      </view>
 
   </form>
 

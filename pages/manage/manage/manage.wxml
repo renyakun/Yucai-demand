@@ -43,7 +43,7 @@
           <block wx:if="{{item.id== 1}}">
 
             <view class="margin-top " wx:if="{{accepflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{acceptlist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{acceptlist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap align-end">
                     <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
@@ -70,7 +70,7 @@
 
           <block wx:elif="{{item.id== 2}}">
 
-            <view class="bgwhite radius shadow-blur margin-top-xs margin-sm" wx:if="{{sendflag}}">
+            <view class="bgwhite radius shadow-blur margin-top-sm margin-sm" wx:if="{{sendflag}}">
               <view class="cu-timeline " wx:for="{{sendlist}}" wx:key="id">
                 <view class="cu-time" style="width:20vh;">
                   <text style="padding-bottom:0.5vh;border-bottom:0.203vh solid #0081ff;color:#000;border-bottom-right-radius: 0.5vh;border-bottom-left-radius: 0.5vh;">{{item.invitationTime}}</text>
@@ -79,7 +79,7 @@
                   <view class="content">
                     <view class="flex flex-wrap align-end">
                       <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}
+                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}
                       </view>
                     </view>
                     <view class="flex flex-wrap align-end">
@@ -107,37 +107,10 @@
             </view>
           </block>
 
-          <block wx:else>
-
-            <!-- <view class="bgwhite radius shadow-blur margin-top-xs margin-sm" wx:if="{{cancelflag}}">
-              <view class="cu-timeline " wx:for="{{cancellist}}" wx:key="id">
-                <view class="cu-time" style="width:20vh;">
-                  <text style="padding-bottom:0.5vh;border-bottom:0.203vh solid #0081ff;color:#000;border-bottom-right-radius: 0.5vh;border-bottom-left-radius: 0.5vh;">{{item.invitationTime}}</text>
-                </view>
-                <view class="cu-item text-blue" style="color:#0081ff">
-                  <view class="content">
-                    <view class="flex flex-wrap align-end">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}
-                      </view>
-                    </view>
-                    <view class="flex flex-wrap align-end">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
-                      </view>
-                    </view>
-                    <view class="flex flex-wrap align-end" style="display: {{item.reason!=null?'':'none'}}">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}
-                      </view>
-                    </view>
-                  </view>
-                </view>
-              </view>
-            </view> -->
+          <block wx:else>      
 
             <view class="margin-top " wx:if="{{cancelflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap">
                     <view class="padding-left">

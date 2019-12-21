@@ -55,6 +55,12 @@ Page({
     }
   },
 
+  //公司主页
+  companyjump() {
+    //showToast('即将上线，敬请期待!', 'none', 3000);
+    let token = wx.getStorageSync('accessToken') || [];
+    this.homepage(token)
+  },
 
   //官方客服
   serjump() {
@@ -67,7 +73,7 @@ Page({
   },
 
   //关于我们
-  friendjump() {
+  aboutjump() {
     //navigateTo('/pages/classify/about/about')
     showToast('即将上线，敬请期待!', 'none', 3000)
   },
@@ -75,44 +81,38 @@ Page({
   //需求方跳转
   paegswitch() {
     pageScrollTo(0, 500)
-    wx.navigateToMiniProgram({
-      appId: 'wx884ebfcbccc0468b',
-      path: 'pages/user/user/user',
-      envVersion: 'trial',
-      success(res) {
-        // 打开成功
-        console.log(res, '打开成功')
-      },
-      fail(res) {
-        console.log(res, '打开失败')
-      }
-    })
+    showToast('即将上线，敬请期待!', 'none', 3000)
+    // wx.navigateToMiniProgram({
+    //   appId: 'wx884ebfcbccc0468b',
+    //   path: 'pages/user/user/user',
+    //   envVersion: 'trial',
+    //   success(res) {
+    //     // 打开成功
+    //     console.log(res, '打开成功')
+    //   },
+    //   fail(res) {
+    //     console.log(res, '打开失败')
+    //   }
+    // })
   },
 
   demandjump(e) {
     navigateTo('/pages/demand/lauched/lauched');
   },
-  phmejump(e) {
-    navigateTo('/pages/technology/phmecard/phmecard');
-  },
+
   cordjump() {
     navigateTo('/pages/record/record/record');
   },
-  managejump() {
-    navigateTo('/pages/manage/manage/manage');
-  },
+
 
   //获取状态值
-  token(website, tokentxt) {
-    wx.hideLoading();
-    let accessToken = wx.getStorageSync('accessToken') || [];
+  token(website, tokentxt, token) {
     wx.request({
       url: url + website,
       data: {
-        accessToken: accessToken,
+        accessToken: token,
       },
       success: res => {
-        wx.hideLoading()
         //console.log(res)
         wx.setStorageSync(tokentxt, res);
         //wx.setStorageSync('mobile', res.data.data.mobile);
@@ -120,13 +120,41 @@ Page({
     })
   },
 
+  //获取公司主页
+  homepage(token) {
+    wx.request({
+      url: url + '/company/getCompanyHomepage',
+      data: {
+        accessToken: token,
+      },
+      success: res => {
+        //console.log(res)
+        if (res.data.success) {
+          if (res.data.data.length != 0) {
+            navigateTo('/pages/company/details/details?cur=2');
+          }
+        } else {
+          showToast(res.data.msg, 'none', 800);
+          setTimeout(() => {
+            navigateTo('/pages/company/details/details?cur=1');
+          }, 1000)
+        }
+      }
+    })
+  },
+
   //招聘进度跳转
-  mangsjump(e){
+  mangsjump(e) {
     let id = e.currentTarget.dataset.id;
-    navigateTo('/pages/manage/manage/manage?id='+id);
+    navigateTo('/pages/manage/manage/manage?id=' + id);
+  },
+
+  managejump(){
+    navigateTo('/pages/manage/manage/manage');
   },
 
   onLoad: function() {
+
     wx.showLoading({
       title: '加载中',
     });
@@ -162,10 +190,10 @@ Page({
     //获取名片状态值
     setTimeout(() => {
       wx.hideLoading();
-      let accessToken = wx.getStorageSync('accessToken') || [];
-      this.token('/user/UserCertification', 'token')
-      this.token('/company/companyCertification', 'tokenmsg')
-    }, 1000);
+      let token = wx.getStorageSync('accessToken') || [];
+      this.token('/user/UserCertification', 'token', token);
+      this.token('/company/companyCertification', 'tokenmsg', token);
+    }, 500);
 
   },
 

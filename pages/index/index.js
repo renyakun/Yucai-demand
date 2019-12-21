@@ -231,19 +231,14 @@ Page({
 
   onLoad: function(options) {
     // let mobile = wx.getStorageSync('mobile') || {};
-    // console.log(mobile);
-    console.log(this.data.jobtag);
     this.setData({
       jobtag: []
     })
-    console.log(this.data.jobtag)
-    wx.showLoading({
-      title: '加载中',
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     setTimeout(() => {
-      wx.hideLoading();
       let jobtag = wx.getStorageSync('jobtag') || [];
-      console.log(jobtag)
       this.setData({
         jobtag: jobtag
       })

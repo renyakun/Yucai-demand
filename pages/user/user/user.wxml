@@ -58,6 +58,12 @@
           <text style="color:#000">已发布需求</text>
         </view>
       </view>
+      <view class="cu-item arrow" bindtap="companyjump">
+        <view class="content">
+          <text class="cuIcon-service " style="color:#000"></text>
+          <text style="color:#000">公司主页</text>
+        </view>
+      </view>
       <view class="cu-item arrow" bindtap="serjump">
         <view class="content">
           <text class="cuIcon-service " style="color:#000"></text>
@@ -70,7 +76,7 @@
           <text style="color:#000">建议留言</text>
         </view>
       </view>
-      <view class="cu-item arrow" bindtap="friendjump">
+      <view class="cu-item arrow" bindtap="aboutjump">
         <view class="content">
           <text class="cuIcon-friendfill " style="color:#000"></text>
           <text style="color:#000">关于我们</text>

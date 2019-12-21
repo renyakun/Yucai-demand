@@ -42,10 +42,11 @@
       </view>
     </view>
 
+    <view class="cu-bar foot tabbar cur shop indigo flex justify-center align-center" style="bottom:{{InputBottom}}px;color:white" bindtap="btnadd">保存</view>
 
-    <view class="cu-bar foot tabbar" style="bottom:{{InputBottom}}px;">
-      <button class="flex justify-center align-center" style="width:100%;height:100%;background: #0081ff;color:white" bindtap="btnadd">保存</button>
-    </view>
+  </view>
+
+</scroll-view>
 
     <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
       <view class="cu-dialog">
@@ -64,8 +65,3 @@
         </view>
       </view>
     </view>
-
-
-  </view>
-
-</scroll-view>

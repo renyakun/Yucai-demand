@@ -16,6 +16,7 @@
     "pages/classify/RealName/RealName",
     "pages/manage/manage/manage",
     "pages/manage/carddetails/carddetails",
+    "pages/company/details/details",
     "pages/logs/logs"
   ],
   "permission": {

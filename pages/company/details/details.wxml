@@ -1,0 +1,158 @@
+<!--pages/company/details/details.wxml-->
+<cu-custom isCustom="{{true}}" isBack="{{false}}">
+  <view slot="backText">返回</view>
+  <view slot="content" class="margin-top-xs">公司主页</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage padding-bottom " style="">
+
+  <block wx:if="{{cur== 1}}">
+
+    <form bindsubmit='formSubmit'>
+
+      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:10vh">
+
+        <view class="cu-bar justify-start bgwhite">
+          <view class="action">
+            <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+            <text class="text-xl text-bold">企业信息</text>
+          </view>
+        </view>
+
+        <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
+          <view class="title">企业昵称</view>
+          <input value="" name="companyNick" placeholder="请输入企业昵称" placeholder-style="color:#8799a3"></input>
+        </view>
+
+        <view class="cu-bar margin-top-xs margin-left-xs margin-right-xs" style="background:rgba(0,0,0,.1);">
+          <view class="action">
+            图片上传
+          </view>
+          <view class="action">
+            {{imgList.length}}/5
+          </view>
+        </view>
+        <view class="cu-form-group margin-left-xs margin-right-xs padding-bottom-lg" style="background:rgba(0,0,0,.1);">
+          <view class="grid col-5 grid-square flex-sub">
+            <view class="bg-img" wx:for="{{imgList}}" wx:key="index" data-target="imgList" bindtap="ViewImage" data-url="{{imgList[index]}}">
+              <image src='{{imgList[index]}}' mode='aspectFill'></image>
+              <view class="cu-tag bg-red" data-target="imgList" catchtap="DelImg" data-index="{{index}}">
+                <text class="cuIcon-close"></text>
+              </view>
+            </view>
+            <view class="solids" data-target="imgList" bindtap="ChooseImage" wx:if="{{imgList.length<5}}">
+              <text class="cuIcon-cameraadd"></text>
+            </view>
+          </view>
+        </view>
+
+        <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
+          <view class="title">企业地址</view>
+          <input value="" name="address" placeholder="请输入企业地址" placeholder-style="color:#8799a3"></input>
+        </view>
+
+        <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
+          <view class="title">企业简介</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea class="" auto-height maxlength="500" name="introduction" bindinput="intput" placeholder="请输入企业简介" placeholder-style="color:#8799a3"></textarea>
+            <view class=" margin-bottom-xs" style="position: absolute;right:25rpx">
+              <text class="">{{intput}}</text>/500</view>
+          </view>
+        </view>
+
+        <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
+          <view class="title">企业文化</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea class="" auto-height maxlength="500" name="culture" bindinput="culput" placeholder="请输入企业文化" placeholder-style="color:#8799a3"></textarea>
+            <view class=" margin-bottom-xs" style="position: absolute;right:25rpx">
+              <text class="">{{culput}}</text>/500</view>
+          </view>
+        </view>
+
+      </view>
+
+
+      <view class="cu-bar foot tabbar cur shop indigo flex justify-center align-center" style="bottom:{{InputBottom}}px;color:white">
+        <button class="cu-btn" formType="submit" data-target="/company/addHomepage" style="background:none;font-weight: normal;color:white;width:100%;height:100%;">保存</button>
+      </view>
+    </form>
+
+  </block>
+
+  <block wx:if="{{cur== 2}}">
+
+    <form bindsubmit='formSubmit'>
+
+      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:10vh">
+
+        <view class="cu-bar justify-start bgwhite">
+          <view class="action">
+            <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
+            <text class="text-xl text-bold">企业信息</text>
+          </view>
+        </view>
+
+        <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
+          <view class="title">企业昵称</view>
+          <input value="{{details.companyNick}}" name="companyNick" placeholder="请输入企业昵称" placeholder-style="color:#8799a3"></input>
+        </view>
+
+        <view class="cu-bar margin-top-xs margin-left-xs margin-right-xs" style="background:rgba(0,0,0,.1);">
+          <view class="action">
+            图片上传
+          </view>
+          <view class="action">
+            {{listimg.length}}/5
+          </view>
+        </view>
+        <view class="cu-form-group margin-left-xs margin-right-xs padding-bottom-lg" style="background:rgba(0,0,0,.1);">
+          <view class="grid col-5 grid-square flex-sub">
+            <view class="bg-img" wx:for="{{listimg}}" wx:key="index" data-target="listimg" bindtap="ViewImage" data-url="{{listimg[index]}}">
+              <image src='{{listimg[index]}}' mode='aspectFill'></image>
+              <view class="cu-tag bg-red" data-target="listimg" catchtap="DelImg" data-index="{{index}}">
+                <text class="cuIcon-close"></text>
+              </view>
+            </view>
+            <view class="solids" data-target="listimg" bindtap="ChooseImage" wx:if="{{listimg.length<5}}">
+              <text class="cuIcon-cameraadd"></text>
+            </view>
+          </view>
+        </view>
+
+        <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
+          <view class="title">企业地址</view>
+          <input value="{{details.address}}" name="address" placeholder="请输入企业地址" placeholder-style="color:#8799a3"></input>
+        </view>
+
+        <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
+          <view class="title">企业简介</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea class="" auto-height maxlength="500" name="introduction" bindinput="intput" placeholder="请输入企业简介" placeholder-style="color:#8799a3" value="{{details.introduction}}"></textarea>
+            <view class=" margin-bottom-xs" style="position: absolute;right:25rpx">
+              <text class="">{{intxt}}</text>/500</view>
+          </view>
+        </view>
+
+        <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
+          <view class="title">企业文化</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea class="" auto-height maxlength="500" name="culture" bindinput="culput" placeholder="请输入企业文化" placeholder-style="color:#8799a3" value="{{details.culture}}"></textarea>
+            <view class=" margin-bottom-xs" style="position: absolute;right:25rpx">
+              <text class="">{{cultxt}}</text>/500</view>
+          </view>
+        </view>
+
+      </view>
+
+      <!--  -->
+      <view class="cu-bar foot tabbar cur shop  flex justify-center align-center indigo" style="bottom:{{InputBottom}}px;color:white">
+        <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
+      </view>
+
+    </form>
+
+  </block>
+
+
+
+</scroll-view>

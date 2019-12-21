@@ -32,8 +32,8 @@ App({
         if (res.code) {
           //console.log('获取用户登录凭证：' + res.code);
           //发起网络请求
-          let appid = 'wxb4a016efe2b335d6';
-          let secret = '14d47f4f35113bf5ed5f00da5b2e9861';
+          let appid = 'wxef80070bd7008e35';
+          let secret = '5798f7522788d663b49c7da765bcb371';
           wx.request({
             url: url + '/user/wx/login',
             method: 'POST',
@@ -190,40 +190,18 @@ App({
     }],
     newslist: [{
       id: 1,
-      img: '../../../images/icon/notice.png',
-      con: '评价消息通知',
-      tit: '暂无消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-    }, {
-      id: 2,
-      img: '../../../images/icon/see.png',
-      con: '今日暂无查看',
-      tit: '暂无劳务查看',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-    }, {
-      id: 3,
-      img: '../../../images/icon/subscribe.png',
-      con: '订阅消息',
-      tit: '暂无订阅消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '',
-      badge: 0,
-    }, {
-      id: 4,
-      img: '../../../images/YuCai.jpg',
-      con: '御材劳务官方助手',
-      tit: '暂无消息',
-      notice: '暂无消息',
-      icon: 'infofill',
-      timer: '22:20',
-      badge: 0,
-    }]
+      name: '评论消息通知',
+      icon: 'message',
+    }
+    // , {
+    //   id: 2,
+    //   name: '面试邀请通知',
+    //   icon: 'message',
+    // }, {
+    //   id: 3,
+    //   name: '评论消息通知',
+    //   icon: 'message',
+    // }
+    ],
   }
 })

@@ -14,7 +14,7 @@
       </view>
       <view class="cu-form-group ">
         <view class="title">身份证</view>
-        <input name="idCard" type="number" maxlength="18" placeholder="请输入身份证号码"></input>
+        <input name="idCard" type="idcard" maxlength="18" placeholder="请输入身份证号码"></input>
       </view>
       <view class="cu-form-group ">
         <view class="title">手机号</view>

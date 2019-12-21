@@ -94,66 +94,61 @@
     </view>
 
 
-    <view class="cu-bar tabbar cur shop bgwhite" style="bottom:{{InputBottom}}px">
-      <button class="action margin-left bgwhite" bindtap="tapind" style="width:12vh">
+    <view class="cu-bar foot tabbar cur shop bgwhite " style="bottom:{{InputBottom}}px;color:white">
+      <button class="action bgwhite" bindtap="tapind" style="width:12vh;margin-left:0vh">
         <view class="cuIcon-home " style="color:#0081ff"></view>回首页
       </button>
-      <button class="action margin-left bgwhite" style="width:10vh">
-        <view class="cuIcon-forward text-blue" style="color:#0081ff">
-        </view> 分享
-      </button>
-      <button class="action margin-left bgwhite" bindtap="taptel" data-target="{{demanditem.mobile}}" style="width:10vh">
+      <button class="action bgwhite" bindtap="taptel" data-target="{{demanditem.mobile}}" style="width:10vh;margin-right:3vh">
         <view class="cuIcon-phone text-blue" style="color:#0081ff">
         </view> 电话
       </button>
-      <button class="action margin-left bgwhite" open-type="contact" style="width:5vh">
-        <view class="">
-        </view>
-      </button>
-      <button class="cu-btn indigo round shadow-blur" style="width:16vh;color:white" bindtap="tapjump">邀请面试</button>
+      <view class="round indigo shadow-blur flex justify-center align-center margin-right" style="width:10vh;height:4.5vh;color:white;font-size:2vh" bindtap="delcard">不合适</view>
+      <view class="round indigo shadow-blur flex justify-center align-center margin-right" style="width:12vh;height:4.5vh;color:white;font-size:2vh" bindtap="tapjump">邀请面试</view>
     </view>
 
-    <view class="cu-modal {{modalName=='showModal'?'show':''}}">
-      <view class="cu-dialog">
-        <view class="cu-bar bgwhite justify-end">
-          <view class="content">设置邀请面试时间</view>
-          <view class="action" bindtap="hideModal">
-            <text class="cuIcon-close text-red"></text>
-          </view>
+
+  </scroll-view>
+
+
+  <view class="cu-modal {{modalName=='showModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bgwhite justify-end">
+        <view class="content">设置邀请面试时间</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
         </view>
-        <view class="padding-xl">
-          <view>
-            <view class="margin-bottom-sm">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view>
-            <picker-view indicator-style="height: 5vh;" style="width: 100%; height: 30vh;" value="{{timerval}}" bindchange="bindChange">
-              <picker-view-column>
-                <view wx:for="{{years}}" wx:key="item" style="line-height: 8vh;">{{item}}年</view>
-              </picker-view-column>
-              <picker-view-column>
-                <view wx:for="{{months}}" wx:key="item" style="line-height: 8vh;">{{item}}月</view>
-              </picker-view-column>
-              <picker-view-column>
-                <view wx:for="{{days}}" wx:key="item" style="line-height: 8vh;">{{item}}日</view>
-              </picker-view-column>
-              <picker-view-column>
-                <view wx:for="{{hours}}" wx:key="item" style="line-height: 8vh;">{{item}}时</view>
-              </picker-view-column>
-              <picker-view-column>
-                <view wx:for="{{minutes}}" wx:key="item" style="line-height: 8vh;">{{item}}分</view>
-              </picker-view-column>
-            </picker-view>
-          </view>
+      </view>
+      <view class="padding-xl">
+        <view>
+          <view class="margin-bottom-sm">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view>
+          <picker-view indicator-style="height: 5vh;" style="width: 100%; height: 30vh;" value="{{timerval}}" bindchange="bindChange">
+            <picker-view-column>
+              <view wx:for="{{years}}" wx:key="item" style="line-height: 8vh;">{{item}}年</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{months}}" wx:key="item" style="line-height: 8vh;">{{item}}月</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{days}}" wx:key="item" style="line-height: 8vh;">{{item}}日</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{hours}}" wx:key="item" style="line-height: 8vh;">{{item}}时</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{minutes}}" wx:key="item" style="line-height: 8vh;">{{item}}分</view>
+            </picker-view-column>
+          </picker-view>
         </view>
-        <view class="cu-bar bgwhite justify-around">
-          <view class="action">
-            <checkbox class="round blue" checked="{{check}}" data-target="{{check}}" bindtap="checkbox"></checkbox>发送邮件
-          </view>
-          <view class="action">
-            <button class="cu-btn indigo" bindtap="interjump" style="width:16vh;color:white" data-id="{{id}}" data-demandid="{{demandId}}">确认邀请</button>
-          </view>
+      </view>
+      <view class="cu-bar bgwhite justify-around">
+        <view class="action">
+          <checkbox class="round blue" checked="{{check}}" data-target="{{check}}" bindtap="checkbox"></checkbox>发送邮件
+        </view>
+        <view class="action">
+          <button class="cu-btn indigo" bindtap="interjump" style="width:16vh;color:white" data-id="{{id}}" data-demandid="{{demandId}}">确认邀请</button>
         </view>
       </view>
     </view>
-
-  </scroll-view>
+  </view>
 
 </block>

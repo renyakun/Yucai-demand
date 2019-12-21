@@ -1,6 +1,4 @@
 {
   "usingComponents": {
-    "i-divider": "../../../colorui/dist/divider/index",
-    "i-notice-bar": "../../../colorui/dist/notice-bar/index"
   }
 }

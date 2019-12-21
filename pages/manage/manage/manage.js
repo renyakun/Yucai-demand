@@ -22,7 +22,7 @@ Page({
     //invitaflag: true,
     sendflag: true,
     cancelflag: true,
-    plflag: true,
+    plflag: false,
     timerval: [0],
     demandlist: []
   },
@@ -39,6 +39,7 @@ Page({
   //详情跳转
   cardel(e) {
     let id = e.currentTarget.dataset.id;
+    console.log(id)
     navigateTo('/pages/manage/carddetails/carddetails?id=' + id)
   },
 

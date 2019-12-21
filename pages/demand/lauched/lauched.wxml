@@ -18,32 +18,45 @@
 
   <block wx:else>
     <view class="cu-list menu-avatar" wx:if="{{loadflag}}">
-      <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-xs margin-left-xs margin-right-xs padding-top-xl padding-bottom-xl bgwhite" style="height:25vh;border-left:0.3vh solid #0081ff;border-top-left-radius: 0.5vh;border-bottom-left-radius: 0.5vh;"
+
+      <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-sm margin-left-xs margin-right-xs padding-top-xl padding-bottom-xl bgwhite" style="height:17vh;border-left:0.3vh solid #0081ff;border-top-left-radius: 0.5vh;border-bottom-left-radius: 0.5vh;"
         wx:for="{{cardlist}}" wx:key="demandId" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+
         <view class="content" style="margin-left:-8vh;width:35vh;" data-id="{{item.demandId}}" bindtap="demandIdjump">
-          <view class="text-bold text-df" style="color:#000">
+        
+          <view class="text-bold text-df margin-top" style="color:#000">
             <text class="text-cut" style="width:90%">{{item.jobName}}</text>
           </view>
-          <view class="text-bold" style="color:#0081ff;">{{item.jobType}} | {{item.releaseType}}认证</view>
-          <view class="" style="color:#000">发布时间：
+          
+          <!-- 发布时间： -->
+          <view class="" style="color:#000">
             <!-- <text class="cuIcon-timefill text-blue text-df margin-right-xs" style="color:#0081ff"></text> -->
-            <text style="color:#0081ff">{{item.createTime}}</text>
+             发布时间：<text style="color:#0081ff">{{item.createTime}}</text>
           </view>
-          <view class="" style="color:#000">今日浏览数：
-            <text style="color:#0081ff">{{item.todayBrowseNum}}</text>
+
+          <view class="cu-bar tabbar margin-top-xs" style="width:40vh">
+            <view class="action bgwhite" style="width:12vh;height:7vh">
+              <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.todayBrowseNum}}</view>
+              <text style="font-weight: normal;">今日浏览数</text>
+            </view>
+            <view class="action bgwhite" style="width:12vh;height:7vh">
+              <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.sendCardNum}}</view>
+              <text style="font-weight: normal;">当前投递数</text>
+            </view>
+            <view class="action bgwhite" style="width:12vh;height:7vh">
+              <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.waitCooperationNum}}</view>
+              <text style="font-weight: normal;">待合作数</text>
+            </view>
+            <view class="action bgwhite" style="width:12vh;height:7vh">
+              <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.cancelInvitationNum}}</view>
+              <text style="font-weight: normal;">取消邀约数</text>
+            </view>
           </view>
-          <view class="" style="color:#000">当前投递数：
-            <text style="color:#0081ff">{{item.sendCardNum}}</text>
-          </view>
-          <view class="" style="color:#000">待合作数：
-            <text style="color:#0081ff">{{item.waitCooperationNum}}</text>
-          </view>
-          <view class="" style="color:#000">取消邀约数：
-            <text style="color:#0081ff">{{item.cancelInvitationNum}}</text>
-          </view>
+
         </view>
-        <view class="action" style="color:#000">
-          <text class="cuIcon-pullleft" style="color:#000;font-size:5vh"></text>
+
+        <view class="action" style="color:#000" bindtap="listouch" data-target="move-box-{{index}}">
+          <text class="cuIcon-back" style="color:#000;font-size:3vh"></text>
         </view>
 
         <view class="move bgwhite">
@@ -59,8 +72,12 @@
           </view>
 
         </view>
+
       </view>
+
+
     </view>
+
 
     <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
       <image src="/images/nodata.jpg" mode="aspectFit"></image>

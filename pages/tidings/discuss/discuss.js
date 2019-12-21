@@ -50,10 +50,12 @@ Page({
   tapcal(e) {
     let id = e.currentTarget.dataset.target.id;
     let name = e.currentTarget.dataset.target.evaluationName;
-    console.log(e);
+    console.log(e.currentTarget.dataset.target);
+    //navigateTo('/pages/tidings/reply/reply?id=' + id + '&name=' + name)
     wx.navigateTo({
       url: '/pages/tidings/reply/reply?id=' + id + '&name=' + name,
     })
+    //navigateTo('/pages/tidings/reply/reply')
     // let modalName = e.currentTarget.dataset.target;
     // this.setData({
     //   modalName: modalName
@@ -107,7 +109,7 @@ Page({
       this.setData({
         demandflag: false,
       })
-    }, 1000)
+    }, 500)
     let token = wx.getStorageSync('accessToken') || [];
     wx.request({
       url: url + '/invitation/myAcceptEvaluation',
@@ -120,7 +122,7 @@ Page({
           let data = res.data.data;
           if (data.length != 0) {
             let stars = Math.round(selstar(data) / data.length);
-            console.log(stars)
+            //console.log(stars)
             this.setData({
               cusslist: data,
               loadflag: true,

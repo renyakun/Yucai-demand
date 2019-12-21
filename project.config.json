@@ -23,7 +23,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.4",
-	"appid": "wxb4a016efe2b335d6",
+	"appid": "wxef80070bd7008e35",
 	"projectname": "Yucai-demand",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -109,6 +109,27 @@
 					"name": "职位标签",
 					"pathName": "pages/demand/jobtag/jobtag",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "名片详情",
+					"pathName": "pages/manage/carddetails/carddetails",
+					"query": "id=80",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "设置主页",
+					"pathName": "pages/company/details/details",
+					"query": "cur=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "企业信息",
+					"pathName": "pages/company/details/details",
+					"query": "cur=2",
 					"scene": null
 				}
 			]

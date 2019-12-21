@@ -131,11 +131,13 @@ Page({
     let timer = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
     this.tapbtn(id, timer)
     console.log(id, timer)
+    setTimeout(() => {
+      navigateTo('/pages/manage/manage/manage')
+    }, 800)
   },
 
   //邀请面试(url)
   tapbtn(id, timer) {
-    this.hideModal();
     let token = wx.getStorageSync('accessToken') || [];
     let check = this.data.check;
     let sendStatus = 0;
@@ -152,6 +154,29 @@ Page({
         id: id,
         invitationTime: timer,
         sendStatus: sendStatus
+      },
+      success: res => {
+        console.log(res.data)
+        if (res.data.success) {
+          showToast(res.data.data, 'success', 500)
+        } else {
+          showToast(res.data.msg, 'none', 1000)
+        }
+      }
+    })
+    this.hideModal();
+  },
+
+  delcard(){
+    let token = wx.getStorageSync('accessToken') || [];
+    let ids=[];
+    ids.push(this.data.id);
+    wx.request({
+      url: url + '/technology/delBusinessCard',
+      method: 'post',
+      data: {
+        accessToken: token,
+        ids: ids,
       },
       success: res => {
         if (res.data.success) {
@@ -221,6 +246,9 @@ Page({
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
     this.accept(options.id, token)
+    this.setData({
+      id: options.id,
+    })
   },
 
   onReady: function() {

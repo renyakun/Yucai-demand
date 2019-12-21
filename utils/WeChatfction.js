@@ -213,6 +213,26 @@ function seluser(item) {
 };
 
 
+//数组图片去重
+function imgunique(ary) {
+  let newAry = [];
+  for (var i = 0; i < ary.length; i++) {
+    var flag = true;
+    for (var j = 0; j < newAry.length; j++) {
+      if (ary[i] == newAry[j]) {
+        flag = false;
+      };
+    };
+    if (flag) {
+      if (ary[i] != '') {
+        newAry.push(ary[i]);
+      }
+    };
+  };
+  return newAry;
+};
+
+
 export {
   showToast,
   pagesurl,
@@ -233,7 +253,8 @@ export {
   selstar,
   seluser,
   randomColor,
-  tagunique
+  tagunique,
+  imgunique
 };
 
 

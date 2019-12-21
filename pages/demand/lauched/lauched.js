@@ -111,6 +111,12 @@ Page({
     }, 500)
   },
 
+  listouch(e){
+    this.ListTouchStart(e);
+    this.ListTouchMove(e);
+    this.ListTouchEnd(e);
+  },
+
   // ListTouch触摸开始
   ListTouchStart(e) {
     this.setData({
