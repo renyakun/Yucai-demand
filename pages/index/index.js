@@ -19,11 +19,6 @@ import {
 Page({
   data: {
     CustomBar: app.globalData.CustomBar,
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    proList: null,
     TabCur: 1,
     tablist: [{
       id: 1,

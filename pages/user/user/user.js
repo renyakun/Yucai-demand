@@ -44,12 +44,10 @@ Page({
     } else if (tokenflag && name == "authentication" && msg == "您还未进行实名认证，请先实名认证再企业认证") {
       showModal(tokenmsg.data.msg, 'RealName', '实名认证')
     } else if (name == "authentication" && msg == "成功") {
-      showToast('您已企业认证！正在为您跳转认证信息', 'none', 2000)
+      showToast('您已企业认证！正在为您跳转认证信息', 'none', 800)
       setTimeout(() => {
         pagesurl('certification', '认证信息', 2)
-      }, 2500)
-    } else if (name == "whole") {
-      navigateTo('/pages/classify / home / home');
+      }, 1000)
     } else {
       pagesurl(name, title)
     }
@@ -57,43 +55,43 @@ Page({
 
   //公司主页
   companyjump() {
-    //showToast('即将上线，敬请期待!', 'none', 3000);
+    //showToast('即将上线，敬请期待!', 'none', 1000);
     let token = wx.getStorageSync('accessToken') || [];
     this.homepage(token)
   },
 
   //官方客服
   serjump() {
-    showToast('即将上线，敬请期待!', 'none', 3000)
+    showToast('即将上线，敬请期待!', 'none', 1000)
   },
 
   //建议留言
   editjump() {
-    showToast('即将上线，敬请期待!', 'none', 3000)
+    showToast('即将上线，敬请期待!', 'none', 1000)
   },
 
   //关于我们
   aboutjump() {
     //navigateTo('/pages/classify/about/about')
-    showToast('即将上线，敬请期待!', 'none', 3000)
+    showToast('即将上线，敬请期待!', 'none', 1000)
   },
 
   //需求方跳转
   paegswitch() {
-    pageScrollTo(0, 500)
-    showToast('即将上线，敬请期待!', 'none', 3000)
-    // wx.navigateToMiniProgram({
-    //   appId: 'wx884ebfcbccc0468b',
-    //   path: 'pages/user/user/user',
-    //   envVersion: 'trial',
-    //   success(res) {
-    //     // 打开成功
-    //     console.log(res, '打开成功')
-    //   },
-    //   fail(res) {
-    //     console.log(res, '打开失败')
-    //   }
-    // })
+    pageScrollTo(0, 1000);
+    //showToast('即将上线，敬请期待!', 'none', 1000)
+    wx.navigateToMiniProgram({
+      appId: 'wxbe95cfd0acd54a9d',
+      path: 'pages/user/user/user',
+      envVersion: 'trial',
+      success(res) {
+        // 打开成功
+        console.log(res, '打开成功')
+      },
+      fail(res) {
+        console.log(res, '打开失败')
+      }
+    })
   },
 
   demandjump(e) {
@@ -102,6 +100,22 @@ Page({
 
   cordjump() {
     navigateTo('/pages/record/record/record');
+  },
+
+
+  //招聘进度跳转
+  mangsjump(e) {
+    let id = e.currentTarget.dataset.id;
+    navigateTo('/pages/manage/manage/manage?id=' + id);
+  },
+
+  managejump() {
+    navigateTo('/pages/manage/manage/manage');
+  },
+
+  //用工管理
+  recruitjump() {
+    showToast('即将上线，敬请期待!', 'none', 1000)
   },
 
 
@@ -141,16 +155,6 @@ Page({
         }
       }
     })
-  },
-
-  //招聘进度跳转
-  mangsjump(e) {
-    let id = e.currentTarget.dataset.id;
-    navigateTo('/pages/manage/manage/manage?id=' + id);
-  },
-
-  managejump(){
-    navigateTo('/pages/manage/manage/manage');
   },
 
   onLoad: function() {

@@ -21,7 +21,7 @@ Page({
       nav: '晒图',
       num: 0
     }],
-    star: 5,
+    star: 0,
     badge: 9,
     txtput: 0,
     isCard: true,
@@ -33,9 +33,13 @@ Page({
   //tab切换
   tabSelect(e) {
     let TabCurs = e.currentTarget.dataset.id;
-    this.setData({
-      TabCur: TabCurs,
-    })
+    if (TabCurs == 2) {
+      showToast('即将上线，敬请期待!', 'none', 3000)
+    } else {
+      this.setData({
+        TabCur: TabCurs,
+      })
+    }
   },
 
   //图片切换

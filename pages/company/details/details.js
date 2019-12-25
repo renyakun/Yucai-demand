@@ -16,11 +16,6 @@ Page({
   data: {
     InputBottom: 0,
     cur: 1,
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    proList: null,
     companyNick: '',
     address: '',
     introduction: '',
@@ -209,13 +204,16 @@ Page({
     let address = e.detail.value.address;
     let introduction = e.detail.value.introduction;
     let culture = e.detail.value.culture;
+
     let oneImage = this.data.oneImage;
     let twoImage = this.data.twoImage;
     let threeImage = this.data.threeImage;
     let fourImage = this.data.fourImage;
     let fiveImage = this.data.fiveImage;
-    console.log(companyNick, address, introduction, culture);
+    
     console.log(oneImage, twoImage, threeImage, fourImage, fiveImage);
+    console.log(companyNick, address, introduction, culture);
+
     if (companyNick == "" || address == "" || introduction == "" || culture == "") {
       showToast('请输入完整信息！', 'none', 1000)
     } else {
@@ -248,7 +246,7 @@ Page({
               pageScrollTo(0, 1000)
             }, 1000)
           } else {
-            showToast(res.data.msg, 'none', 3000)
+            showToast(res.data.msg, 'none', 1000)
           }
         }
       })
@@ -268,23 +266,22 @@ Page({
         let details = res.data.data;
         let detailslen = res.data.data.length;
         let listimg = this.data.listimg;
-        // let oneImage = details.oneImage;
-        // let twoImage = details.twoImage;
-        // let threeImage = details.threeImage;
-        // let fourImage = details.fourImage;
-        // let fiveImage = details.fiveImage;
-        let oneImage = wx.getStorageSync('oneImage') || '';
-        let twoImage = wx.getStorageSync('twoImage') || '';
-        let threeImage = wx.getStorageSync('threeImage') || '';
-        let fourImage = wx.getStorageSync('fourImage') || '';
-        let fiveImage = wx.getStorageSync('fiveImage') || '';
-        //console.log(oneImage, twoImage, threeImage, fourImage, fiveImage)
+
+        let oneImage = details.oneImage;
+        let twoImage = details.twoImage;
+        let threeImage = details.threeImage;
+        let fourImage = details.fourImage;
+        let fiveImage = details.fiveImage;
+
+        // let oneImage = wx.getStorageSync('oneImage') || '';
+        // let twoImage = wx.getStorageSync('twoImage') || '';
+        // let threeImage = wx.getStorageSync('threeImage') || '';
+        // let fourImage = wx.getStorageSync('fourImage') || '';
+        // let fiveImage = wx.getStorageSync('fiveImage') || '';
+
         listimg.push(oneImage, twoImage, threeImage, fourImage, fiveImage);
         let listimgs = imgunique(listimg);
         console.log(listimgs);
-
-
-
         if (res.data.success) {
           if (detailslen != 0) {
 

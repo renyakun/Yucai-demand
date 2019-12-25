@@ -82,7 +82,7 @@
           <input value="" name="salary" value="{{demandlist.salary}}"></input>
         </view>
 
-        <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
+        <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)" bindtap="agejudge">
           <view class="title  margin-left-xs">年龄要求</view>
           <input disabled></input>
           <view>

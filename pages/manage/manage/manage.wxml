@@ -4,7 +4,7 @@
   <view slot="content" class="margin-top-xs">招聘进度</view>
 </cu-custom>
 <!-- position: absolute; -->
-<button class="cu-btn indigo round shadow-blur" style="width:5.5vh;height:5vh;z-index:999; position: fixed;top:80%;left:80%" bindtap="btnspin">
+<button class="cu-btn indigo round shadow-blur" style="width:5.65vh;height:5vh;z-index:9; position: fixed;top:92.5%;left:85%" bindtap="btnspin">
   <text class="cuIcon-loading1 {{spin?'iconfont-spin':''}}" style="color:white"></text>
 </button>
 
@@ -23,14 +23,14 @@
 
   <view class="cu-bar  bgwhite margin-top-xl margin-left-xs margin-right-xs" style="height:7vh;margin-top:8.5vh">
     <scroll-view scroll-x class="nav text-center" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="cu-item " style="border-bottom:{{item.id==TabCur?'5rpx solid #000':''}};" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key="id">
+      <view class="cu-item " style="border-bottom:{{item.id==TabCur?'5rpx solid #000':''}};" bindtap="tabSelect" data-id="{{item.id}}" wx:for="{{tablist}}" wx:key="id" wx:if="{{item.id<=3}}">
         <text class="text-center" style="color:black">{{item.flag}}({{item.len}})</text>
       </view>
     </scroll-view>
   </view>
 
   <view class="bgwhite margin-left-xs margin-right-xs" style="" wx:if="{{demandflag}}" style="height:100vh">
-    <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
+    <image src="http://www.yucai-sz.com:8079/imgs/front/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
   </view>
 
   <block wx:else>
@@ -43,7 +43,7 @@
           <block wx:if="{{item.id== 1}}">
 
             <view class="margin-top " wx:if="{{accepflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{acceptlist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{acceptlist}}" wx:key="id" data-id="{{item.id}}" data-cur="{{tablist[0].id}}"  bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap align-end">
                     <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
@@ -63,51 +63,43 @@
             </view>
 
             <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="/images/nodata.jpg" mode="aspectFit"></image>
+              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
             </view>
 
           </block>
 
           <block wx:elif="{{item.id== 2}}">
 
-            <view class="bgwhite radius shadow-blur margin-top-sm margin-sm" wx:if="{{sendflag}}">
-              <view class="cu-timeline " wx:for="{{sendlist}}" wx:key="id">
-                <view class="cu-time" style="width:20vh;">
-                  <text style="padding-bottom:0.5vh;border-bottom:0.203vh solid #0081ff;color:#000;border-bottom-right-radius: 0.5vh;border-bottom-left-radius: 0.5vh;">{{item.invitationTime}}</text>
-                </view>
-                <view class="cu-item text-blue" style="color:#0081ff">
-                  <view class="content">
-                    <view class="flex flex-wrap align-end">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}
-                      </view>
-                    </view>
-                    <view class="flex flex-wrap align-end">
-                      <view class="text-cut">
-                        <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
-                      </view>
+            <view class="margin-top " wx:if="{{sendflag}}">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left margin-right flex justify-center" wx:for="{{sendlist}}" wx:key="id" data-id="{{item.id}}" data-userid="{{item.technology.userId}}" data-cur="{{tablist[1].id}}"  bindtap="cardel">
+                <view class="bg-white radius padding-top padding-bottom" style="width:99.5%;">
+                  <view class="flex flex-wrap align-end margin-left">
+                    <view class="text-cut">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}
                     </view>
                   </view>
+                  <view class="flex flex-wrap align-end margin-left  margin-top-sm">
+                    <view class="text-cut">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
+                    </view>
+                  </view>
+                  <view class="flex flex-wrap align-end margin-left  margin-top-sm">
+                    <view class="text-cut">
+                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}
+                    </view>
+                  </view>
+                  
                 </view>
               </view>
             </view>
 
             <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="/images/nodata.jpg" mode="aspectFit"></image>
+              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
             </view>
 
           </block>
 
           <block wx:elif="{{item.id== 3}}">
-
-            <view wx:if="{{plflag}}"></view>
-
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
-          </block>
-
-          <block wx:else>      
 
             <view class="margin-top " wx:if="{{cancelflag}}">
               <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
@@ -135,7 +127,7 @@
             </view>
 
             <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="/images/nodata.jpg" mode="aspectFit"></image>
+              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
             </view>
 
           </block>

@@ -12,11 +12,6 @@ import {
 Page({
   data: {
     InputBottom: 0,
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    proList: null,
     jobName: '',
     jobType: '',
     jobNumber: '',
@@ -134,7 +129,6 @@ Page({
     let token = wx.getStorageSync('accessToken') || [];
     let demandlist = this.data.demandlist;
     let cur = this.data.cur;
-    console.log(cur);
     let jobName = demandlist.jobName;
     let jobType = demandlist.jobType;
     let jobNumber = demandlist.jobNumber;
@@ -148,31 +142,72 @@ Page({
     let id = demandlist.id;
     if (cur == 1) {
       let jobName = e.detail.value.jobName;
-      let jobType = this.data.jobpicker[e.detail.value.jobType];
+
       let jobNumber = e.detail.value.jobNumber;
       let jobRequire = e.detail.value.jobRequire;
       let label = relstradd(this.data.jobtag);
-      console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
-      console.log('薪资设置:', salary, ageRequire, deadline, city);
-      console.log('必需字段:', mobile, id);
-      if (jobName == "" || jobType == undefined || jobNumber == "" || label == undefined) {
-        showToast('请输入完整信息！', 'none', 1000)
+      let jobind = this.data.jobind;
+      if (jobind != null) {
+        let jobType = this.data.jobpicker[e.detail.value.jobType];
+        console.log('1', jobType);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        //console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
       } else {
+        let jobType = demandlist.jobType;
+        console.log('2', jobType);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        //console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
         this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
       }
+      
     } else if (cur == 2) {
+
       let salary = e.detail.value.salary;
-      let ageRequire = this.data.agepicker[e.detail.value.ageRequire];
-      let deadline = e.detail.value.deadline;
       let city = e.detail.value.city;
-      console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
-      console.log('薪资设置:', salary, ageRequire, deadline, city);
-      console.log('必需字段:', mobile, id);
-      if (salary == "" || ageRequire == undefined || deadline == undefined || city == "") {
-        showToast('请输入完整信息！', 'none', 1000)
-      } else {
+      let ageind = this.data.ageind;
+      let deadind = this.data.deadind;
+
+      if (ageind != null && deadind != null) {
+        let ageRequire = this.data.agepicker[ageind];
+        let deadline = e.detail.value.deadline;
+        // console.log('1', ageRequire);
+        // console.log('1', deadline);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        // console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
+      } else if (ageind == null && deadind != null) {
+        let ageRequire = demandlist.ageRequire;
+        let deadline = e.detail.value.deadline;
+        // console.log('2', ageRequire);
+        // console.log('1', deadline);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        // console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
+      } else if (ageind != null && deadind == null) {
+        let ageRequire = this.data.agepicker[ageind];
+        let deadline = demandlist.deadline;
+        // console.log('1', ageRequire);
+        // console.log('2', deadline);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        // console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
+        this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
+      } else if (ageind == null && deadind == null) {
+        let ageRequire = demandlist.ageRequire;
+        let deadline = demandlist.deadline;
+        // console.log('2', ageRequire);
+        // console.log('2', deadline);
+        // console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
+        // console.log('薪资设置:', salary, ageRequire, deadline, city);
+        // console.log('必需字段:', mobile, id);
         this.request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token)
       }
+
     }
   },
 
@@ -228,6 +263,7 @@ Page({
           wx.hideLoading();
           this.setData({
             demandlist: res.data.data,
+            ageRequire: res.data.data.ageRequire,
             txtput: len,
             id: id,
           })

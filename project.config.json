@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -91,10 +91,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "名片管理",
 					"pathName": "pages/manage/manage/manage",
-					"query": "",
+					"query": "demandId=51",
 					"scene": null
 				},
 				{
@@ -130,6 +130,27 @@
 					"name": "企业信息",
 					"pathName": "pages/company/details/details",
 					"query": "cur=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "实名认证",
+					"pathName": "pages/classify/RealName/RealName",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "企业认证",
+					"pathName": "pages/classify/authentication/authentication",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "职位详情",
+					"pathName": "pages/demand/details/details",
+					"query": "demandId=56",
 					"scene": null
 				}
 			]

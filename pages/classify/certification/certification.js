@@ -8,6 +8,7 @@ import {
   showModal,
   navigateTo,
   pageScrollTo,
+  imgunique
 } from '../../../utils/WeChatfction';
 
 Page({
@@ -16,23 +17,31 @@ Page({
     TabCur: 1,
     tokendata: {},
     enterprise: {},
-    demandflag: true
+    demandflag: true,
+    listimg:[],
+    newobj:{}
   },
 
-  onLoad: function(options) {
-    this.setData({
-      title: options.title,
-      TabCur: options.cur,
-    })
-    let tokendata = this.data.tokendata;
-    if (tokendata=={}){
-      showModal('您还未进行实名认证,请先实名认证', 'RealName', '实名认证')
+  ViewImage(e) {
+    let type = e.currentTarget.dataset.target;
+    let url = e.currentTarget.dataset.url;
+    console.log(e)
+    if (type == 'imgList') {
+      wx.previewImage({
+        urls: this.data.imgList,
+        current: url
+      });
+    } else if (type == 'listimg') {
+      wx.previewImage({
+        urls: this.data.listimg,
+        current: url
+      });
     }
+
   },
 
-  onReady: function() {
+  request(token) {
     setTimeout(() => {
-      let token = wx.getStorageSync('accessToken') || [];
       wx.request({
         url: url + '/user/UserCertification',
         data: {
@@ -64,6 +73,65 @@ Page({
         }
       })
     }, 500)
+  },
+
+  //获取公司主页
+  homepage(token) {
+    wx.request({
+      url: url + '/company/getCompanyHomepage',
+      data: {
+        accessToken: token,
+      },
+      success: res => {
+        console.log(typeof(res.data.data))
+        let details = res.data.data;
+        let detailslen = res.data.data.length;
+        let listimg = this.data.listimg;
+        let oneImage = wx.getStorageSync('oneImage') || '';
+        let twoImage = wx.getStorageSync('twoImage') || '';
+        let threeImage = wx.getStorageSync('threeImage') || '';
+        let fourImage = wx.getStorageSync('fourImage') || '';
+        let fiveImage = wx.getStorageSync('fiveImage') || '';
+        //console.log(oneImage, twoImage, threeImage, fourImage, fiveImage)
+        listimg.push(oneImage, twoImage, threeImage, fourImage, fiveImage);
+        let listimgs = imgunique(listimg);
+        //console.log(listimgs);
+        if (res.data.success) {
+          if (detailslen != 0) {
+            this.setData({
+              details: details,
+              detailsflag: false,
+              listimg: listimgs
+            })
+          }
+        } else {
+          let details = {};
+          this.setData({
+            details: details,
+            detailsflag: true
+          })
+        }
+      }
+    })
+  },
+
+  onLoad: function(options) {
+    this.setData({
+      title: options.title,
+      TabCur: options.cur,
+    })
+    let tokendata = this.data.tokendata;
+    if (tokendata=={}){
+      showModal('您还未进行实名认证,请先实名认证', 'RealName', '实名认证')
+    }
+  },
+
+
+
+  onReady: function() {
+    let token = wx.getStorageSync('accessToken') || [];
+    this.request(token);
+    this.homepage(token);
   },
 
   /**

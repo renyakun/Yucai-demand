@@ -19,7 +19,7 @@ Page({
     if (id == 1) {
       navigateTo('/pages/tidings/discuss/discuss')
     } else {
-      showToast('即将上线，敬请期待!', 'none', 3000)
+      showToast('即将上线，敬请期待!', 'none', 1000)
     }
   },
 

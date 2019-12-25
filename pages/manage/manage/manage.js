@@ -5,7 +5,8 @@ const {
 import {
   showToast,
   navigateTo,
-  pageScrollTo
+  pageScrollTo,
+  switchTab
 } from '../../../utils/WeChatfction';
 
 const app = getApp();
@@ -38,9 +39,19 @@ Page({
 
   //详情跳转
   cardel(e) {
+    let cur = e.currentTarget.dataset.cur;
     let id = e.currentTarget.dataset.id;
-    console.log(id)
-    navigateTo('/pages/manage/carddetails/carddetails?id=' + id)
+    if (cur == 2) {
+      let userid = e.currentTarget.dataset.userid;
+      let demandId = this.data.demandId;
+      console.log(id, cur, userid, demandId)
+      navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&userid=' + userid + '&demandId=' + demandId)
+    } else if (cur == 1) {
+      console.log(id, cur)
+      navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur)
+    }
+
+
   },
 
   //获取已报名列表
@@ -67,36 +78,6 @@ Page({
             this.setData({
               accepflag: false,
               [acceptlen]: 0
-            })
-          }
-        } else {
-          showToast(res.data.msg, 'none', 1000)
-        }
-      }
-    })
-  },
-
-  //获取我邀请的列表
-  invitalist(token, demandId) {
-    wx.request({
-      url: url + '/technology/invitationBusinessCards',
-      data: {
-        accessToken: token,
-        demandId: demandId
-      },
-      success: res => {
-        let invitalist = res.data.data;
-        console.log('我邀请的', invitalist)
-        if (res.data.success) {
-          if (invitalist.length != 0) {
-            this.setData({
-              invitalist: invitalist,
-              invitaflag: true,
-              demandflag: false
-            })
-          } else {
-            this.setData({
-              invitaflag: false,
             })
           }
         } else {
@@ -149,7 +130,7 @@ Page({
       },
       success: res => {
         let cancellist = res.data.data;
-        let cancellen = 'tablist[3].len'
+        let cancellen = 'tablist[2].len'
         console.log('已取消cancellist:', cancellist, cancellist.length)
         if (res.data.success) {
           if (cancellist.length != 0) {
@@ -202,7 +183,6 @@ Page({
     })
   },
 
-
   //获取列表
   request(token, demandId) {
     //this.invitalist(token, demandId);
@@ -224,17 +204,35 @@ Page({
   confirm(e) {
     this.hideModal();
     console.log(e.currentTarget.dataset.demandid);
-    let token = wx.getStorageSync('accessToken') || [];
     let demandId = e.currentTarget.dataset.demandid;
-    this.request(token, demandId);
+    if (demandId!=undefined){
+      let token = wx.getStorageSync('accessToken') || [];
+      this.request(token, demandId);
+      this.setData({
+        demandId: demandId,
+      })
+    }else{
+      showToast('您还没有发布过职位需求!', 'none', 1000)
+    }
+    
   },
 
   //取消选择
   cancel() {
     this.hideModal();
-    let demandId = this.data.demand.demandId;
     let token = wx.getStorageSync('accessToken') || [];
-    this.request(token, demandId);
+    let demand = this.data.demand;
+    console.log(demand)
+    if (demand != undefined) {
+      let demandId = demand.demandId;
+      this.request(token, demandId);
+      this.setData({
+        demandId: demandId,
+      })
+    }else{
+      console.log(demand)
+      showToast('您还没有发布过职位需求!', 'none', 1000)
+    }
   },
 
   //关闭模拟框
@@ -266,30 +264,73 @@ Page({
     })
     let token = wx.getStorageSync('accessToken') || [];
     setTimeout(() => {
-      let demandId = this.data.demand.demandId;
-      this.request(token, demandId);
+      let demand = this.data.demand;
+      if (demand != undefined) {
+        let demandId = demand.demandId;
+        this.request(token, demandId);
+        this.setData({
+          demandId: demandId,
+        })
+        setTimeout(() => {
+          this.setData({
+            spin: false
+          })
+        }, 3900)
+
+      }else{
+        this.setData({
+          spin: false,
+          demandflag: false,
+        })
+        showToast('您还没有发布过职位需求!', 'none', 1000)
+      }
+
     }, 1000)
+
+  },
+
+  ready() {
+    let acceptlen = 'tablist[0].len';
+    let sendlen = 'tablist[1].len';
+    let cancellen = 'tablist[2].len';
     setTimeout(() => {
       this.setData({
-        spin: false
+        accepflag: false,
+        [acceptlen]: 0,
+        sendflag: false,
+        [sendlen]: 0,
+        cancelflag: false,
+        [cancellen]: 0,
       })
-    }, 3900)
+    }, 1000)
+  },
 
+  load(){
+    setTimeout(() => {
+      this.setData({
+        demandflag: false,
+      })
+      let loadflag = this.data.loadflag;
+      console.log(loadflag)
+      if (!loadflag) {
+        console.log(loadflag)
+        this.ready()
+      } else {
+        console.log(loadflag)
+        this.onReady()
+      }
+    }, 500)
   },
 
   onLoad(options) {
     let token = wx.getStorageSync('accessToken') || [];
     this.demandlist(token);
-    setTimeout(() => {
-      this.setData({
-        demandflag: false
-      })
-    }, 500)
     if (options.id != undefined) {
       console.log(options.id)
       this.setData({
         TabCur: options.id,
       })
+      this.load()
     } else if (options.demandId != undefined) {
       console.log(options.demandId)
       setTimeout(() => {
@@ -304,18 +345,28 @@ Page({
         })
       }, 800)
     } else if (options.demandId == undefined && options.id == undefined) {
-      this.onReady()
+      this.load()
     }
+
   },
 
   onReady: function() {
-    let token = wx.getStorageSync('accessToken') || [];
+
     setTimeout(() => {
-      let demandId = this.data.demand.demandId;
-      this.request(token, demandId);
+      let token = wx.getStorageSync('accessToken') || [];
+      let demand = this.data.demand;
+      if (demand != undefined) {
+        let demandId = demand.demandId;
+        this.request(token, demandId);
+        this.setData({
+          demandId: demandId,
+        })
+      }
+
     }, 1000)
 
   },
+
 
   onShow: function() {},
 

@@ -49,6 +49,17 @@
     </view>
   </view>
 
+
+  <view class="bgwhite margin-top margin-left-xs margin-right-xs">
+    <view class="cu-list menu border card-menu">
+      <view class="cu-item arrow" bindtap="recruitjump">
+        <view class="content">
+          <text style="color:#000">用工管理</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <view class="bgwhite margin-top margin-left-xs margin-right-xs">
     <view class="cu-list menu sm-border card-menu">
 

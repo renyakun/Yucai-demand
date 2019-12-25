@@ -4,13 +4,13 @@
   <view slot="content" class="margin-top-xs">公司主页</view>
 </cu-custom>
 
-<scroll-view scroll-y class="scrollPage padding-bottom " style="">
+<scroll-view scroll-y class="scrollPage " style="">
 
   <block wx:if="{{cur== 1}}">
 
     <form bindsubmit='formSubmit'>
 
-      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:10vh">
+      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:8vh">
 
         <view class="cu-bar justify-start bgwhite">
           <view class="action">
@@ -83,7 +83,7 @@
 
     <form bindsubmit='formSubmit'>
 
-      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:10vh">
+      <view class="bgwhite margin-xs  cu-card no-card  shadow" style="margin-bottom:8vh">
 
         <view class="cu-bar justify-start bgwhite">
           <view class="action">
@@ -144,7 +144,6 @@
 
       </view>
 
-      <!--  -->
       <view class="cu-bar foot tabbar cur shop  flex justify-center align-center indigo" style="bottom:{{InputBottom}}px;color:white">
         <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
       </view>
@@ -152,7 +151,5 @@
     </form>
 
   </block>
-
-
 
 </scroll-view>

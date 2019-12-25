@@ -102,7 +102,7 @@ Page({
               })
             }
           } else {
-            showToast(res.data.msg, 'none', 3000)
+            showToast(res.data.msg, 'none', 1000)
 
           }
 

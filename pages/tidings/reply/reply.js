@@ -8,6 +8,7 @@ import {
 } from '../../../utils/WeChatfction';
 Page({
   data: {
+    InputBottom: 0,
     txtput: 0,
   },
 
@@ -33,7 +34,7 @@ Page({
         success: res => {
           console.log(res)
           if (res.data.success) {
-            showToast(res.data.data, 'success', 1000);
+            showToast(res.data.data, 'success', 800);
             setTimeout(() => {
               navigateTo('/pages/tidings/discuss/discuss?flag=true');
             }, 1000)

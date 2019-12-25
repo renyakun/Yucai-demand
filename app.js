@@ -119,12 +119,6 @@ App({
       len: 0
     }, {
       id: 3,
-      icon: 'squarecheck',
-      color: '#0081ff',
-      flag: '已录取',
-      len: 0
-    }, {
-      id: 4,
       icon: 'backdelete',
       color: '#0081ff',
       flag: '已取消',
@@ -189,19 +183,26 @@ App({
       title: '周末双休'
     }],
     newslist: [{
-      id: 1,
-      name: '评论消息通知',
-      icon: 'message',
-    }
-    // , {
-    //   id: 2,
-    //   name: '面试邀请通知',
-    //   icon: 'message',
-    // }, {
-    //   id: 3,
-    //   name: '评论消息通知',
-    //   icon: 'message',
-    // }
+        id: 1,
+        name: '评论消息通知',
+        icon: 'message',
+      }
+      // , {
+      //   id: 2,
+      //   name: '面试邀请通知',
+      //   icon: 'message',
+      // }, {
+      //   id: 3,
+      //   name: '评论消息通知',
+      //   icon: 'message',
+      // }
+      //  {
+      //   id: 3,
+      //   icon: 'squarecheck',
+      //   color: '#0081ff',
+      //   flag: '已录取',
+      //   len: 0
+      // },
     ],
   }
 })

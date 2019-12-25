@@ -9,11 +9,7 @@ import {
 } from '../../../utils/WeChatfction';
 Page({
   data: {
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    proList: null,
+    InputBottom: 0,
     realName: '',
     mobile: '',
     idCard: '',
@@ -28,7 +24,7 @@ Page({
     let idCard = e.detail.value.idCard;
     let code = e.detail.value.code;
     if (realName == "" || mobile == "" || idCard == "") {
-      showToast('请输入完整信息！', 'loading', 3000)
+      showToast('请输入完整信息！', 'loading', 1000)
     } else {
       //console.log(e.detail.value);
       //let tokendata = e.detail.value;
@@ -50,10 +46,10 @@ Page({
         success: res => {
           console.log(res)
           if (res.data.success) {
-            showToast(res.data.data, 'success', 3000);
+            showToast(res.data.data, 'success', 1000);
             navigateTo('/pages/classify/certification/certification?title=认证信息&&cur=1');
           } else {
-            showToast(res.data.msg, 'none', 3000)
+            showToast(res.data.msg, 'none', 1000)
           }
         }
       })
@@ -83,7 +79,7 @@ Page({
     if (str.test(datauser)) {
       return true
     } else {
-      showToast('请输入中文', 'none',3000)
+      showToast('请输入中文', 'none',1000)
       return false
     }
   },

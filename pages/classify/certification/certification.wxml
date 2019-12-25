@@ -21,7 +21,7 @@
   </view>
 
   <view class="bgwhite" style="" wx:if="{{demandflag}}">
-    <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
+    <image src="http://www.yucai-sz.com:8079/imgs/front/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
   </view>
 
   <block wx:else>
@@ -46,22 +46,49 @@
     </block>
 
     <block wx:if="{{TabCur==2}}" class="">
-      <view class="bgwhite margin-top-sm margin-xs cu-card no-card radius shadow-blur">
-        <form class="padding-lg ">
-          <view class="cu-form-group bg-gray margin-left-sm margin-right-sm margin-bottom-sm radius">
-            <view class="title">企业名称</view>
-            <input value="{{enterprise.companyNick}}" disabled></input>
+      <view class="bgwhite margin-top-sm margin-xs cu-card no-card padding-top padding-bottom">
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);">
+          <view class="title">企业名称</view>
+          <input value="{{enterprise.companyNick}}" disabled></input>
+        </view>
+        <view class="cu-form-group  margin-left-sm margin-right-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+          <view class="action">
+            企业图片
           </view>
-          <view class="cu-form-group bg-gray margin-left-sm margin-right-sm margin-bottom-sm radius">
-            <view class="title">法人姓名</view>
-            <input value="{{enterprise.legalName}}" disabled></input>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm padding-bottom-lg margin-bottom-sm" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+          <view class="grid col-5 grid-square flex-sub">
+            <view class="bg-img" wx:for="{{listimg}}" wx:key="index" data-target="listimg" bindtap="ViewImage" data-url="{{listimg[index]}}">
+              <image src='{{listimg[index]}}' mode='aspectFill'></image>
+            </view>
           </view>
-          <view class="cu-form-group bg-gray margin-left-sm margin-right-sm radius">
-            <view class="title">证件号码</view>
-            <input value="{{enterprise.idNumber}}" disabled></input>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);">
+          <view class="title">法人姓名</view>
+          <input value="{{enterprise.legalName}}" disabled></input>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);">
+          <view class="title">证件号码</view>
+          <input value="{{enterprise.idNumber}}" disabled></input>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+          <view class="title">企业地址</view>
+          <input value="{{details.address}}" disabled></input>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+          <view class="title">企业简介</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea auto-height maxlength="500" value="{{details.introduction}}"></textarea>
           </view>
-        </form>
+        </view>
+        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+          <view class="title">企业文化</view>
+          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+            <textarea auto-height maxlength="500" value="{{details.culture}}"></textarea>
+          </view>
+        </view>
       </view>
+
     </block>
 
   </block>

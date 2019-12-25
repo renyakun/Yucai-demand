@@ -25,8 +25,8 @@
         <input name="code" placeholder="输入验证码" type="number" maxlength="6"></input>
         <button class="cu-btn bg-gradual-blue radius shadow">获取验证码</button>
       </view> -->
-      <view class="padding flex flex-direction">
-        <button class="cu-btn indigo margin-tb-sm lg" formType="submit" style="color:white">点击提交</button>
+      <view class="cu-bar foot tabbar cur shop  flex justify-center align-center indigo" style="bottom:{{InputBottom}}px;color:white">
+        <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
       </view>
     </form>
   </view>

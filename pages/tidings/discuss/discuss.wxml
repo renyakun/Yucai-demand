@@ -5,7 +5,7 @@
 </cu-custom>
 
 <view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
-  <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
+  <image src="http://www.yucai-sz.com:8079/imgs/front/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
 </view>
 <block wx:else>
 
@@ -18,7 +18,7 @@
 
 
   <block wx:if="{{TabCur==1}}" class="">
-    <view class="bgwhite cu-card no-card  shadow" style="margin-top:8.5vh">
+    <view class="bgwhite cu-card no-card  shadow" style="margin-top:8.5vh; display: {{star!=0?'':'none'}}">
       <view class="cu-form-group align-center margin-xs cu-card no-card flex justify-between" style="position: relative">
         <view class="title " style="width:15vh">总体评价</view>
         <view class=" align-end  margin-bottom-xs flex justify-start" style="width:80%;">
@@ -64,8 +64,8 @@
       </view>
     </view>
 
-    <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-      <image src="/images/nodata.jpg" mode="aspectFit"></image>
+    <view class="padding-top-xl margin-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+      <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
     </view>
 
 

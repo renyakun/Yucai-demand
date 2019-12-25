@@ -9,7 +9,7 @@
   <view class=" margin-top-xs margin-bootom-lg">
 
     <view class="bgwhite" style="" wx:if="{{demandflag}}" style="height:100vh">
-      <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
+      <image src="http://www.yucai-sz.com:8079/imgs/front/images/rhomb-white.gif" mode="aspectFit" class="gif-white response"></image>
     </view>
 
     <block wx:else>

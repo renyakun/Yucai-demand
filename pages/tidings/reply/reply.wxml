@@ -1,15 +1,16 @@
 <!--pages/tidings/reply/reply.wxml-->
-<cu-custom  isCustom="{{true}}" isBack="{{false}}">
+<cu-custom isCustom="{{true}}" isBack="{{false}}">
   <view slot="backText">返回</view>
   <view slot="content" class="margin-top-xs">回复</view>
 </cu-custom>
 
-<view >
+<view>
 
   <form bindsubmit='formSubmit'>
-      <view class="cu-bar bgwhite">
+    <view class="cu-bar bgwhite">
       <view class="action">
-        <view class="title">回复:</view><text class="text-blue text-bold" style="color:#0081ff">{{name}}</text>
+        <view class="title">回复:</view>
+        <text class="text-blue text-bold" style="color:#0081ff">{{name}}</text>
       </view>
     </view>
     <view class="bg-white cu-card no-card  shadow">
@@ -22,9 +23,8 @@
       </view>
     </view>
 
-    <view class="padding margin-bottom flex justify-center">
-      <button class="cu-btn indigo shadow-blur margin-right" formType="submit" style="width:20vh;color:white">回复</button>
-      <button class="cu-btn indigo shadow-blur " formType="reset" style="width:20vh;color:white">重置</button>
+    <view class="cu-bar foot tabbar cur shop  flex justify-center align-center indigo" style="bottom:{{InputBottom}}px;color:white">
+      <button class="cu-btn bgwhite" formType="submit" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
     </view>
 
   </form>

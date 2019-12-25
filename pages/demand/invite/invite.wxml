@@ -15,7 +15,7 @@
   </view>
 
   <view class="bgwhite" style="" wx:if="{{demandflag}}">
-    <image src="/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
+    <image src="http://www.yucai-sz.com:8079/imgs/front/images/rhomb-white.gif" mode="aspectFit" class="gif-white response" style="height:100vh"></image>
   </view>
 
   <block wx:else>
@@ -44,7 +44,7 @@
     </view>
 
     <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-      <image src="/images/nodata.jpg" mode="aspectFit"></image>
+      <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
     </view>
 
   </block>
@@ -52,7 +52,7 @@
 </scroll-view>
 
 
-<view class="cu-modal bottom-modal {{modalName=='showModal'?'show':''}}">
+<view class="cu-modal bottom-modal {{modalName=='showModal'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog">
     <!--  wx:for="{{inviteitem}}" wx:key -->
     <view class="padding-top-xs padding-left-xs padding-right-xs" bindtap="hideModal">

@@ -3,7 +3,7 @@
   <view slot="content" class="margin-top-xs">发布职位</view>
 </cu-custom>
 
-<scroll-view scroll-y class="scrollPage">
+<scroll-view scroll-y class="scrollPage" style=" ">
   <scroll-view scroll-x class="bgwhite nav text-center shadow-blur padding-bottom-xs fixed" style="top:10vh;">
     <view class="cu-item {{item.id==TabCur?'text-balck cur':''}}" style="color:balck" wx:for="{{tablist}}" wx:key="id" bindtap="tabSelect" data-id="{{item.id}}">
       {{item.nav}}
@@ -173,17 +173,19 @@
           </view>
         </view>
 
-        <view class="padding margin-bottom flex justify-center">
+        <!-- <view class="padding margin-bottom flex justify-center">
           <button class="cu-btn indigo shadow-blur margin-right" formType="submit" style="width:20vh;color:white">点击发布</button>
           <button class="cu-btn indigo shadow-blur " formType="reset" bindtap="reset" style="width:20vh;color:white">重置</button>
-        </view>
+        </view> -->
+<!-- bottom:{{InputBottom}}px; -->
+        <view class="cu-bar  flex justify-center align-center indigo" style="color:white;">
+        <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">保存</button>
+      </view>
+
 
       </form>
 
     </view>
   </block>
 
-  <block wx:if="{{TabCur==2}}" class=" ">
-
-  </block>
 </scroll-view>

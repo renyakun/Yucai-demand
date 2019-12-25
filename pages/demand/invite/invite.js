@@ -32,7 +32,7 @@ Page({
       },
       success: res => {
         if (res.data.success) {
-          showToast(res.data.data, 'success', 1000)
+          showToast(res.data.data, 'success', 800)
           setTimeout(()=>{
             navigateTo('/pages/demand/lauched/lauched')
           },1000)

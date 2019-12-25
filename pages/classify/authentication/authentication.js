@@ -9,11 +9,7 @@ import {
 
 Page({
   data: {
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    proList: null,
+    InputBottom: 0,
     companyNick: '',
     idNumber: '',
     legalName: '',
@@ -30,16 +26,9 @@ Page({
     let code = e.detail.value.code;
     let mobile = e.detail.value.mobile;
     if (legalName == "" || idNumber == "" || companyNick == "" || mobile == "") {
-      showToast('请输入完整信息！', 'loading', 3000)
+      showToast('请输入完整信息！', 'loading', 1000)
     } else {
       //console.log(e.detail.value);
-      wx.showLoading({
-        title: '加载中',
-      })
-      setTimeout(() => {
-        wx.hideLoading()
-      }, 3000)
-      setTimeout(() => {
         wx.request({
           url: url + '/company/companyCertification/add',
           method: 'post',
@@ -56,16 +45,15 @@ Page({
           success: res => {
             console.log(res)
             if (res.data.success) {
-              showToast(res.data.data, 'success', 3000)
+              showToast(res.data.data, 'success', 800)
               setTimeout(() => {
                 pagesurl('certification', '认证信息', 2)
-              }, 3500)
+              }, 1000)
             } else {
-              showToast(res.data.msg, 'none', 3000)
+              showToast(res.data.msg, 'none', 1000)
             }
           }
         })
-      }, 3000)
     }
   },
 
