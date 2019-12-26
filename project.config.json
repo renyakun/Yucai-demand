@@ -94,7 +94,7 @@
 					"id": 5,
 					"name": "名片管理",
 					"pathName": "pages/manage/manage/manage",
-					"query": "demandId=51",
+					"query": "demandId=58",
 					"scene": null
 				},
 				{
@@ -112,10 +112,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "名片详情",
 					"pathName": "pages/manage/carddetails/carddetails",
-					"query": "id=80",
+					"query": "id=45&cur=2&userid=32&demandId=58",
 					"scene": null
 				},
 				{

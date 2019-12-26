@@ -148,7 +148,7 @@ Page({
 
   // 判定输入为非空字符
   formSubmit(e) {
-    let accessToken = wx.getStorageSync('accessToken') || [];
+    let token = wx.getStorageSync('accessToken') || [];
     let jobName = e.detail.value.jobName;
     let jobType = this.data.jobpicker[e.detail.value.jobType];
     let jobNumber = e.detail.value.jobNumber;
@@ -181,7 +181,7 @@ Page({
           deadline: deadline,
           releaseType: releaseType,
           mobile: mobile,
-          accessToken: accessToken,
+          accessToken: token,
         },
         header: {
           'content-type': 'application/json'

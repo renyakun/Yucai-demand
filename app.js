@@ -124,6 +124,25 @@ App({
       flag: '已取消',
       len: 0
     }],
+    recruitlist: [{
+      id: 1,
+      icon: 'backdelete',
+      color: '#0081ff',
+      flag: '已录取',
+      len: 0
+    }, {
+      id: 2,
+      icon: 'backdelete',
+      color: '#0081ff',
+      flag: '已入职',
+      len: 0
+    }, {
+      id: 3,
+      icon: 'backdelete',
+      color: '#0081ff',
+      flag: '已支付',
+      len: 0
+    }],
     navList: [{
         id: 1,
         icon: 'cartfill',

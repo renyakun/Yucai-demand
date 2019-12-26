@@ -106,16 +106,23 @@ Page({
   //招聘进度跳转
   mangsjump(e) {
     let id = e.currentTarget.dataset.id;
-    navigateTo('/pages/manage/manage/manage?id=' + id);
+    let manageflag=true;
+    let managetxt ='招聘进度';
+    navigateTo('/pages/manage/manage/manage?id=' + id +'&managetxt=' + managetxt);
   },
 
   managejump() {
-    navigateTo('/pages/manage/manage/manage');
+    let manageflag = true;
+    let managetxt = '招聘进度';
+    navigateTo('/pages/manage/manage/manage?managetxt=' + managetxt);
   },
 
   //用工管理
   recruitjump() {
-    showToast('即将上线，敬请期待!', 'none', 1000)
+    //showToast('即将上线，敬请期待!', 'none', 1000)
+    let manageflag = false;
+    let managetxt = '用工管理';
+    navigateTo('/pages/manage/manage/manage?managetxt=' + managetxt);
   },
 
 
