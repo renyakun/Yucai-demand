@@ -46,14 +46,14 @@
               <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{manageflag?acceptlist:sionlist}}" wx:key="id" data-id="{{item.id}}" data-cur="{{tablist[0].id}}" bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap align-end">
-                    <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
-                    <view class="padding-left">{{item.realName}}</view>
+                    <view class="cu-avatar round lg" style="background-image:url({{manageflag?item.avatar:item.technology.avatar}});"></view>
+                    <view class="padding-left">{{manageflag?item.realName:item.technology.realName}}</view>
                   </view>
                   <view class="flex flex-wrap margin-top">
-                    <view class="padding-left">{{item.sex}} | {{item.age}} | {{item.email}}</view>
+                    <view class="padding-left">{{manageflag?item.sex:item.technology.sex}} | {{manageflag?item.age:item.technology.age}} | {{manageflag?item.email:item.technology.email}}</view>
                     <view class="padding-left">
                       <text class="text-bold">期望职位：</text>
-                      <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
+                      <text class="text-blue" style="color:#0081ff">{{manageflag?item.dreamPosition:item.technology.dreamPosition}}</text>
                     </view>
                   </view>
 
@@ -137,108 +137,6 @@
 
     </view>
 
-
-    <!-- <view style="" class=" margin-left-xs margin-right-xs round" wx:else>
-
-      <block wx:if="{{TabCur==item.id}}" wx:for="{{sionlist}}" wx:key="id" class="">
-        <scroll-view scroll-y class="bgwhite shadow scrollPage" style=" ">
-
-          <block wx:if="{{item.id== 1}}">
-
-            <view class="margin-top " wx:if="{{sionlflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{sionlist}}" wx:key="id" data-id="{{item.id}}" data-cur="{{sionlist[0].id}}" bindtap="cardel">
-                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap align-end">
-                    <view class="cu-avatar round lg" style="background-image:url({{item.avatar}});"></view>
-                    <view class="padding-left">{{item.realName}}</view>
-                  </view>
-                  <view class="flex flex-wrap margin-top">
-                    <view class="padding-left">{{item.sex}} | {{item.age}} | {{item.email}}</view>
-                    <view class="padding-left">
-                      <text class="text-bold">期望职位：</text>
-                      <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
-                    </view>
-                  </view>
-
-                </view>
-
-              </view>
-            </view>
-
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%;height:100vh">
-              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
-
-          </block>
-
-          <block wx:elif="{{item.id== 2}}">
-
-            <view class="margin-top " wx:if="{{sendflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left margin-right flex justify-center" wx:for="{{sendlist}}" wx:key="id" data-id="{{item.id}}" data-userid="{{item.technology.userId}}" data-cur="{{tablist[1].id}}" bindtap="cardel">
-                <view class="bg-white radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap align-end margin-left">
-                    <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}
-                    </view>
-                  </view>
-                  <view class="flex flex-wrap align-end margin-left  margin-top-sm">
-                    <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
-                    </view>
-                  </view>
-                  <view class="flex flex-wrap align-end margin-left  margin-top-sm">
-                    <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}
-                    </view>
-                  </view>
-
-                </view>
-              </view>
-            </view>
-
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
-
-          </block>
-
-          <block wx:elif="{{item.id== 3}}">
-
-            <view class="margin-top " wx:if="{{cancelflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
-                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap">
-                    <view class="padding-left">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left text-cut" style="width:90%">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left ">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left">
-                      <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}</view>
-                  </view>
-
-                </view>
-
-              </view>
-            </view>
-
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
-
-          </block>
-
-        </scroll-view>
-      </block>
-
-    </view> -->
 
   </block>
 

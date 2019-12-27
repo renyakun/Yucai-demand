@@ -32,15 +32,12 @@ App({
         if (res.code) {
           //console.log('获取用户登录凭证：' + res.code);
           //发起网络请求
-          let appid = 'wxef80070bd7008e35';
-          let secret = '5798f7522788d663b49c7da765bcb371';
           wx.request({
             url: url + '/user/wx/login',
             method: 'POST',
             data: {
               code: res.code,
-              appid: appid,
-              secret: secret
+              flag: 2
             },
             header: {
               'content-type': 'application/json'

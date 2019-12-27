@@ -94,7 +94,7 @@
 					"id": 5,
 					"name": "名片管理",
 					"pathName": "pages/manage/manage/manage",
-					"query": "demandId=58",
+					"query": "demandId=52",
 					"scene": null
 				},
 				{
@@ -147,7 +147,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "职位详情",
 					"pathName": "pages/demand/details/details",
 					"query": "demandId=56",

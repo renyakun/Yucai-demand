@@ -10,7 +10,10 @@ import {
 Page({
   data: {
     demandflag: true,
-    loadflag: true
+    loadflag: true,
+    page: 2,
+    loadflag: true,
+    loadplay: false,
   },
 
   //关闭职位
@@ -54,7 +57,8 @@ Page({
   //招聘进度
   demandIdjump(e) {
     let demandId = e.currentTarget.dataset.id;
-    navigateTo('/pages/manage/manage/manage?demandId=' + demandId)
+    let managetxt = '招聘进度';
+    navigateTo('/pages/manage/manage/manage?demandId=' + demandId + '&managetxt=' + managetxt)
   },
 
   //邀约投递
@@ -77,41 +81,111 @@ Page({
     }, 1000)
   },
 
-  onLoad: function(options) {},
+  //获取已发布列表 page:1
+  getMyDemands1(token, page) {
+    wx.request({
+      url: url + '/demand/getMyDemands',
+      data: {
+        accessToken: token,
+        page: page
+      },
+      success: res => {
+        console.log('已发布列表:', res.data.data)
+        let demand = res.data.data;
+        if (res.data.success) {
+          if (res.data.data.length != 0) {
+            setTimeout(() => {
+              this.setData({
+                cardlist: demand,
+                cardflag: true,
+                demandflag: false,
+                loadflag: true,
+              })
+            }, 500)
+          } else {
+            this.setData({
+              cardflag: false,
+              demandflag: true,
+              loadflag: false,
+            })
+          }
+        } else {
+          showToast(res.data.msg, 'none', 1000)
 
-  onReady: function() {
-    let token = wx.getStorageSync('accessToken') || [];
-    setTimeout(() => {
-      wx.request({
-        url: url + '/demand/getMyDemands',
-        data: {
-          accessToken: token,
-        },
-        success: res => {
-          console.log(res.data.data)
+        }
+
+      }
+    })
+  },
+
+  //获取已发布列表 page++
+  getMyDemands2(token, page) {
+    wx.request({
+      url: url + '/demand/getMyDemands',
+      data: {
+        accessToken: token,
+        page: page
+      },
+      success: res => {
+        let demands = res.data.data;
+        console.log('已发布列表:,page++', demands, page)
+        let demand = this.data.cardlist;
+        console.log('已录取列表:,page:1', demand)
+        if (res.data.data.length != 0) {
           if (res.data.success) {
             if (res.data.data.length != 0) {
-              this.setData({
-                cardlist: res.data.data,
-                loadflag: true,
-                demandflag: false
-              })
+              showToast('加载数据中...', 'none', 800);
+              demand.push(...demands)
+              setTimeout(() => {
+                this.setData({
+                  cardlist: demand,
+                  cardflag: true,
+                  demandflag: false,
+                  loadflag: true,
+                  loadplay: false,
+                })
+              }, 1000)
             } else {
               this.setData({
-                loadflag: false
+                cardflag: false,
+                demandflag: true
               })
             }
           } else {
             showToast(res.data.msg, 'none', 1000)
-
           }
-
+        } else {
+          this.setData({
+            tiptxt: '我也是有底线的',
+            loadplay: true,
+          })
+          showToast('我也是有底线的', 'none', 1000)
         }
-      })
-    }, 500)
+      }
+    })
   },
 
-  listouch(e){
+  //获取已发布列表
+  request(page) {
+    let token = wx.getStorageSync('accessToken') || [];
+    if (page <= 1) {
+      this.getMyDemands1(token, page)
+    } else {
+      this.getMyDemands2(token, page)
+    }
+  },
+
+
+  onLoad: function(options) {
+    let page = this.data.page - 1;
+    this.request(page)
+  },
+
+  onReady: function() {
+
+  },
+
+  listouch(e) {
     this.ListTouchStart(e);
     this.ListTouchMove(e);
     this.ListTouchEnd(e);
@@ -173,16 +247,20 @@ Page({
    */
   onPullDownRefresh: function() {
     this.setData({
+      page: 2,
+      admission: [],
       demandflag: true,
     })
-    this.onReady()
+    let page = this.data.page - 1;
+    this.request(page)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    let page = this.data.page++;
+    this.request(page)
   },
 
   /**

@@ -8,8 +8,8 @@ import {
   pageScrollTo,
   switchTab
 } from '../../../utils/WeChatfction';
-
 const app = getApp();
+
 Page({
   data: {
     CustomBar: app.globalData.CustomBar,
@@ -45,7 +45,7 @@ Page({
     let cur = e.currentTarget.dataset.cur;
     let id = e.currentTarget.dataset.id;
     let demandId = this.data.demandId;
-    if(id!=undefined){
+    if (id != undefined) {
       if (cur == 2) {
         let userid = e.currentTarget.dataset.userid;
         console.log(id, cur, userid, demandId)
@@ -54,10 +54,10 @@ Page({
         console.log(id, cur, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&demandId=' + demandId)
       }
-    }else{
+    } else {
       showToast('即将上线，敬请期待!', 'none', 1000)
     }
-    
+
 
 
   },
@@ -177,18 +177,6 @@ Page({
         let sionlist = res.data.data;
         let sionlistlen = 'recruitlist[0].len'
         console.log('已录取admission:', sionlist, sionlist.length, '需求id:', demandId)
-
-        let sionlists = [{
-          age: 23,
-          avatar: "http://www.yucai-sz.com:8079/imgs/20191225_14_49_41_848.jpg",
-          dreamPosition: "普工",
-          email: "31545@qq.com",
-          id: 112,
-          mobile: "15574337884",
-          realName: "笑声",
-          sex: "男"
-        }]
-
         if (res.data.success) {
           if (sionlist.length != 0) {
             this.setData({
@@ -241,16 +229,77 @@ Page({
     })
   },
 
+  //获取招聘列表
+  demand1(token, demandId, website, list, len, dataflag, demandflag, txt) {
+    console.log(token, demandId, website, list, len, dataflag, demandflag, txt)
+    wx.request({
+      url: url + website,
+      data: {
+        accessToken: token,
+        demandId: demandId
+      },
+      success: res => {
+        console.log(txt, res.data.data, res.data.data.length, '需求id:', demandId)
+        if (res.data.success) {
+          if (res.data.data.length != 0) {
+            this.setData({
+              [list]: res.data.data,
+              [dataflag]: true,
+              [demandflag]: false,
+              [len]: res.data.data.length
+            })
+          } else {
+            this.setData({
+              [demandflag]: false,
+              [dataflag]: false,
+              [len]: 0
+            })
+          }
+        } else {
+          showToast(res.data.msg, 'none', 1000)
+        }
+      }
+    })
+  },
+
   //获取招聘进度列表
   post(token, demandId) {
-    this.acceptlist(token, demandId);
-    this.sendlist(token, demandId);
-    this.cancellist(token, demandId);
+    let demandflag = 'demandflag';
+
+    let acceptlist = 'acceptlist';
+    let acceptxt = '已报名acceptlist:';
+    let acceptlen = 'tablist[0].len';
+    let acceptwebsite = '/technology/acceptBusinessCards';
+    let dataflag1 = 'accepflag';
+
+    let sendlist = 'sendlist';
+    let sendtxt = '待面试sendlist:';
+    let sendlen = 'tablist[1].len';
+    let sendwebsite = '/invitation/mySendInvitation';
+    let dataflag2 = 'sendflag';
+
+    let cancellist = 'cancellist';
+    let canceltxt = '已取消cancellist:';
+    let cancellen = 'tablist[2].len';
+    let cancelwebsite = '/invitation/cancelInvitation';
+    let dataflag3 = 'cancelflag';
+
+    this.demand1(token, demandId, acceptwebsite, acceptlist, acceptlen, dataflag1, demandflag, acceptxt);
+    this.demand1(token, demandId, sendwebsite, sendlist, sendlen, dataflag2, demandflag, sendtxt);
+    this.demand1(token, demandId, cancelwebsite, cancellist, cancellen, dataflag3, demandflag, canceltxt);
   },
 
   //获取用工管理列表
   recruit(token, demandId) {
-    this.admission(token, demandId);
+    let demandflag = 'demandflag';
+
+    let sionlist = 'sionlist';
+    let siontxt = '已录取admission:';
+    let sionlen = 'recruitlist[0].len';
+    let sionwebsite = '/employment/alreadyAdmission';
+    let dataflag4 = 'accepflag';
+
+    this.demand1(token, demandId, sionwebsite, sionlist, sionlen, dataflag4, demandflag, siontxt);
   },
 
 
@@ -265,7 +314,7 @@ Page({
   //选择需求
   confirm(e) {
     this.hideModal();
-    console.log(e.currentTarget.dataset.demandid);
+    console.log('需求id:', e.currentTarget.dataset.demandid);
     let demandId = e.currentTarget.dataset.demandid;
     if (demandId != undefined) {
       let token = wx.getStorageSync('accessToken') || [];
@@ -289,7 +338,7 @@ Page({
     this.hideModal();
     let token = wx.getStorageSync('accessToken') || [];
     let demand = this.data.demand;
-    console.log(demand)
+    console.log('职位需求:', demand)
     if (demand != undefined) {
       let demandId = demand.demandId;
       let managetxt = this.data.managetxt;
@@ -302,7 +351,7 @@ Page({
         this.post(token, demandId);
       }
     } else {
-      console.log(demand)
+      console.log('您还没有发布过职位需求!', demand)
       showToast('您还没有发布过职位需求!', 'none', 1000)
     }
   },
@@ -391,6 +440,7 @@ Page({
     let acceptlen = 'tablist[0].len';
     let sendlen = 'tablist[1].len';
     let cancellen = 'tablist[2].len';
+    let sionlistlen = 'recruitlist[0].len';
     setTimeout(() => {
       this.setData({
         accepflag: false,
@@ -399,6 +449,8 @@ Page({
         [sendlen]: 0,
         cancelflag: false,
         [cancellen]: 0,
+        sionlflag: false,
+        [sionlistlen]: 0
       })
     }, 1000)
   },
@@ -431,7 +483,7 @@ Page({
         manageflag: false,
       })
 
-      this.ready()
+      this.load()
 
     } else if (options.managetxt == '招聘进度') {
 
@@ -498,12 +550,11 @@ Page({
   },
 
   onReady: function() {
-    setTimeout(() => {
-      console.log(this.data.sionlflag)
-    }, 3000)
+    // setTimeout(() => {
+    //   console.log(this.data.sionlflag)
+    // }, 3000)
 
   },
-
 
   onShow: function() {},
 

@@ -17,21 +17,22 @@
   </view>
 
   <block wx:else>
-    <view class="cu-list menu-avatar" wx:if="{{loadflag}}">
+    <view class="cu-list menu-avatar" wx:if="{{cardflag}}">
 
       <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} margin-top-sm margin-left-xs margin-right-xs padding-top-xl padding-bottom-xl bgwhite" style="height:17vh;border-left:0.3vh solid #0081ff;border-top-left-radius: 0.5vh;border-bottom-left-radius: 0.5vh;"
         wx:for="{{cardlist}}" wx:key="demandId" bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
 
         <view class="content" style="margin-left:-8vh;width:35vh;" data-id="{{item.demandId}}" bindtap="demandIdjump">
-        
+
           <view class="text-bold text-df margin-top" style="color:#000">
             <text class="text-cut" style="width:90%">{{item.jobName}}</text>
           </view>
-          
+
           <!-- 发布时间： -->
           <view class="" style="color:#000">
             <!-- <text class="cuIcon-timefill text-blue text-df margin-right-xs" style="color:#0081ff"></text> -->
-             发布时间：<text style="color:#0081ff">{{item.createTime}}</text>
+            发布时间：
+            <text style="color:#0081ff">{{item.createTime}}</text>
           </view>
 
           <view class="cu-bar tabbar margin-top-xs" style="width:40vh">
@@ -75,9 +76,11 @@
 
       </view>
 
+      <view class="margin-top-xl" wx:if="{{loadflag}}" style="display:{{loadplay?'':'none'}}">
+        <i-load-more tip="{{tiptxt}}" loading="{{ false }}" />
+      </view>
 
     </view>
-
 
     <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
       <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>

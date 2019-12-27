@@ -51,7 +51,7 @@
           <view class="title">企业名称</view>
           <input value="{{enterprise.companyNick}}" disabled></input>
         </view>
-        <view class="cu-form-group  margin-left-sm margin-right-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+        <!-- <view class="cu-form-group  margin-left-sm margin-right-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
           <view class="action">
             企业图片
           </view>
@@ -62,7 +62,7 @@
               <image src='{{listimg[index]}}' mode='aspectFill'></image>
             </view>
           </view>
-        </view>
+        </view> -->
         <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);">
           <view class="title">法人姓名</view>
           <input value="{{enterprise.legalName}}" disabled></input>
@@ -71,7 +71,7 @@
           <view class="title">证件号码</view>
           <input value="{{enterprise.idNumber}}" disabled></input>
         </view>
-        <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
+        <!-- <view class="cu-form-group margin-left-sm margin-right-sm margin-bottom-sm radius" style="background:rgba(0,0,0,.1);display:{{detailsflag?'none':''}}">
           <view class="title">企业地址</view>
           <input value="{{details.address}}" disabled></input>
         </view>
@@ -86,7 +86,7 @@
           <view class="flex align-end margin-bottom-xs " style="width:76%;">
             <textarea auto-height maxlength="500" value="{{details.culture}}"></textarea>
           </view>
-        </view>
+        </view> -->
       </view>
 
     </block>

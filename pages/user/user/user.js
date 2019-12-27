@@ -106,13 +106,11 @@ Page({
   //招聘进度跳转
   mangsjump(e) {
     let id = e.currentTarget.dataset.id;
-    let manageflag=true;
     let managetxt ='招聘进度';
     navigateTo('/pages/manage/manage/manage?id=' + id +'&managetxt=' + managetxt);
   },
 
   managejump() {
-    let manageflag = true;
     let managetxt = '招聘进度';
     navigateTo('/pages/manage/manage/manage?managetxt=' + managetxt);
   },

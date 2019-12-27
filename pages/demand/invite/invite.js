@@ -6,7 +6,8 @@ const {
 import {
   showToast,
   seluser,
-  navigateTo
+  navigateTo,
+  switchTab
 } from '../../../utils/WeChatfction';
 
 Page({
@@ -78,6 +79,11 @@ Page({
     let userIds =[] ;
     userIds.push(userId);
     this.invitation(userIds);
+  },
+
+  //回到首页
+  tapind() {
+    switchTab('/pages/index/index');
   },
 
   onLoad: function(options) {
