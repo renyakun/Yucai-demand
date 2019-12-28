@@ -159,7 +159,7 @@
   </view>
 </view>
 
-<view class="cu-modal {{modalName=='enterModal'?'show':''}}">
+<view class="cu-modal {{modalName=='enterModal'?'show':''}}"  catchtouchmove="touchmove">
   <view class="cu-dialog">
     <view class="cu-bar bgwhite justify-end">
       <view class="content">填写录取信息</view>

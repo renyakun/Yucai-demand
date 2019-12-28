@@ -76,10 +76,6 @@
 
       </view>
 
-      <view class="margin-top-xl" wx:if="{{loadflag}}" style="display:{{loadplay?'':'none'}}">
-        <i-load-more tip="{{tiptxt}}" loading="{{ false }}" />
-      </view>
-
     </view>
 
     <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">

@@ -12,8 +12,6 @@ Page({
     demandflag: true,
     loadflag: true,
     page: 2,
-    loadflag: true,
-    loadplay: false,
   },
 
   //关闭职位
@@ -81,86 +79,68 @@ Page({
     }, 1000)
   },
 
-  //获取已发布列表 page:1
-  getMyDemands1(token, page) {
+  //获取已发布列表
+  demand(token, website, list, dataflag, txt, page) {
+    console.log(token, website, list, dataflag, txt, page)
     wx.request({
-      url: url + '/demand/getMyDemands',
+      url: url + website,
       data: {
         accessToken: token,
-        page: page
+        page: page,
       },
       success: res => {
-        console.log('已发布列表:', res.data.data)
-        let demand = res.data.data;
-        if (res.data.success) {
-          if (res.data.data.length != 0) {
-            setTimeout(() => {
+        if (page <= 1) {
+          let demand = res.data.data;
+          console.log(txt, demand, demand.length, 'page:', page);
+          if (res.data.success) {
+            if (demand.length != 0) {
               this.setData({
-                cardlist: demand,
-                cardflag: true,
+                [list]: demand,
+                [dataflag]: true,
                 demandflag: false,
                 loadflag: true,
               })
-            }, 500)
-          } else {
-            this.setData({
-              cardflag: false,
-              demandflag: true,
-              loadflag: false,
-            })
-          }
-        } else {
-          showToast(res.data.msg, 'none', 1000)
-
-        }
-
-      }
-    })
-  },
-
-  //获取已发布列表 page++
-  getMyDemands2(token, page) {
-    wx.request({
-      url: url + '/demand/getMyDemands',
-      data: {
-        accessToken: token,
-        page: page
-      },
-      success: res => {
-        let demands = res.data.data;
-        console.log('已发布列表:,page++', demands, page)
-        let demand = this.data.cardlist;
-        console.log('已录取列表:,page:1', demand)
-        if (res.data.data.length != 0) {
-          if (res.data.success) {
-            if (res.data.data.length != 0) {
-              showToast('加载数据中...', 'none', 800);
-              demand.push(...demands)
-              setTimeout(() => {
-                this.setData({
-                  cardlist: demand,
-                  cardflag: true,
-                  demandflag: false,
-                  loadflag: true,
-                  loadplay: false,
-                })
-              }, 1000)
             } else {
               this.setData({
-                cardflag: false,
-                demandflag: true
+                demandflag: false,
+                [dataflag]: false,
+                loadflag: false,
               })
             }
           } else {
             showToast(res.data.msg, 'none', 1000)
           }
         } else {
-          this.setData({
-            tiptxt: '我也是有底线的',
-            loadplay: true,
-          })
-          showToast('我也是有底线的', 'none', 1000)
+          let demands = res.data.data;
+          console.log(txt, demands, demands.length, 'page:', page);
+          let demand = this.data.cardlist;
+          console.log('加载数据', txt, demand)
+          if (demands.length != 0) {
+            if (res.data.success) {
+              if (demands.length != 0) {
+                showToast('加载数据中...', 'none', 500);
+                demand.push(...demands)
+                this.setData({
+                  [list]: demand,
+                  [dataflag]: true,
+                  demandflag: false,
+                })
+              } else {
+                this.setData({
+                  demandflag: false,
+                  [dataflag]: false,
+                })
+              }
+            } else {
+              showToast(res.data.msg, 'none', 1000)
+            }
+          } else {
+            showToast('我也是有底线的', 'none', 1000)
+          }
+
+
         }
+
       }
     })
   },
@@ -168,11 +148,13 @@ Page({
   //获取已发布列表
   request(page) {
     let token = wx.getStorageSync('accessToken') || [];
-    if (page <= 1) {
-      this.getMyDemands1(token, page)
-    } else {
-      this.getMyDemands2(token, page)
-    }
+    let cardlist = 'cardlist';
+    let cardtxt = '已发布列表cardlist:';
+    let cardwebsite = '/demand/getMyDemands';
+    let dataflag = 'cardflag';
+    setTimeout(() => {
+      this.demand(token, cardwebsite, cardlist, dataflag, cardtxt, page);
+    }, 500)
   },
 
 

@@ -50,31 +50,31 @@ Page({
 
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
-    wx.request({
-      url: url + '/invitation/myAcceptEvaluation',
-      data: {
-        accessToken: token,
-      },
-      success: res => {
-        //console.log(res)
-        if (res.data.success) {
-          if (res.data.data.length != 0) {
-            let data = res.data.data;
-            let badge = 'newslist[0].badge';
-            let notice = 'newslist[0].notice';
-            let timer = 'newslist[0].timer';
-            this.setData({
-              [badge]: data.length,
-              [notice]: data[0].evaluationName + ' : ' + data[0].message,
-              [timer]: data[0].createTime
-            })
-          }
-          console.log(res.data.data)
-        } else {
-          showToast(res.data.msg, 'none', 1000)
-        }
-      }
-    })
+    // wx.request({
+    //   url: url + '/invitation/myAcceptEvaluation',
+    //   data: {
+    //     accessToken: token,
+    //   },
+    //   success: res => {
+    //     //console.log(res)
+    //     if (res.data.success) {
+    //       if (res.data.data.length != 0) {
+    //         let data = res.data.data;
+    //         let badge = 'newslist[0].badge';
+    //         let notice = 'newslist[0].notice';
+    //         let timer = 'newslist[0].timer';
+    //         this.setData({
+    //           [badge]: data.length,
+    //           [notice]: data[0].evaluationName + ' : ' + data[0].message,
+    //           [timer]: data[0].createTime
+    //         })
+    //       }
+    //       console.log(res.data.data)
+    //     } else {
+    //       showToast(res.data.msg, 'none', 1000)
+    //     }
+    //   }
+    // })
 
 
   },

@@ -26,7 +26,7 @@ Page({
     txtput: 0,
     isCard: true,
     animationData: {},
-    loadflag: true,
+    loadflag: false,
     demandflag: true,
   },
 
@@ -114,34 +114,34 @@ Page({
         demandflag: false,
       })
     }, 500)
-    let token = wx.getStorageSync('accessToken') || [];
-    wx.request({
-      url: url + '/invitation/myAcceptEvaluation',
-      data: {
-        accessToken: token,
-      },
-      success: res => {
-        if (res.data.success) {
-          console.log(res.data.data)
-          let data = res.data.data;
-          if (data.length != 0) {
-            let stars = Math.round(selstar(data) / data.length);
-            //console.log(stars)
-            this.setData({
-              cusslist: data,
-              loadflag: true,
-              star: stars
-            })
-          } else {
-            this.setData({
-              loadflag: false
-            })
-          }
-        } else {
-          showToast(res.data.msg, 'none', 1000)
-        }
-      }
-    })
+    // let token = wx.getStorageSync('accessToken') || [];
+    // wx.request({
+    //   url: url + '/invitation/myAcceptEvaluation',
+    //   data: {
+    //     accessToken: token,
+    //   },
+    //   success: res => {
+    //     if (res.data.success) {
+    //       console.log(res.data.data)
+    //       let data = res.data.data;
+    //       if (data.length != 0) {
+    //         let stars = Math.round(selstar(data) / data.length);
+    //         //console.log(stars)
+    //         this.setData({
+    //           cusslist: data,
+    //           loadflag: true,
+    //           star: stars
+    //         })
+    //       } else {
+    //         this.setData({
+    //           loadflag: false
+    //         })
+    //       }
+    //     } else {
+    //       showToast(res.data.msg, 'none', 1000)
+    //     }
+    //   }
+    // })
   },
 
   onShow: function() {

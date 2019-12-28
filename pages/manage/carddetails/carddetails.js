@@ -69,6 +69,10 @@ Page({
     })
   },
 
+  touchmove() {
+    return false;
+  },
+
   //选择邀请时间
   bindChange(e) {
     let val = e.detail.value;

@@ -94,7 +94,7 @@
 					"id": 5,
 					"name": "名片管理",
 					"pathName": "pages/manage/manage/manage",
-					"query": "demandId=52",
+					"query": "demandId=64&managetxt=招聘进度",
 					"scene": null
 				},
 				{

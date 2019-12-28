@@ -36,7 +36,7 @@
   <block wx:else>
 
     <view style="" class=" margin-left-xs margin-right-xs round">
-<!-- manageflag?tablist:recruitlist -->
+      <!-- manageflag?tablist:recruitlist -->
       <block wx:if="{{TabCur==item.id}}" wx:for="{{manageflag?tablist:recruitlist}}" wx:key="id" class="">
         <scroll-view scroll-y class="bgwhite shadow scrollPage" style=" ">
 
