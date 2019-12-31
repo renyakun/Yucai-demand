@@ -123,21 +123,21 @@ App({
     }],
     recruitlist: [{
       id: 1,
-      icon: 'backdelete',
+      icon: 'edit',
       color: '#0081ff',
       flag: '已录取',
       len: 0
     }, {
       id: 2,
-      icon: 'backdelete',
+      icon: 'edit',
       color: '#0081ff',
-      flag: '已入职',
+      flag: '已完成',
       len: 0
     }, {
       id: 3,
-      icon: 'backdelete',
+      icon: 'edit',
       color: '#0081ff',
-      flag: '已支付',
+      flag: '已评价',
       len: 0
     }],
     navList: [{

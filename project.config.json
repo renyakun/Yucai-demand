@@ -152,6 +152,13 @@
 					"pathName": "pages/demand/details/details",
 					"query": "demandId=56",
 					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "用工管理",
+					"pathName": "pages/manage/manage/manage",
+					"query": "demandId=64&managetxt=用工管理",
+					"scene": null
 				}
 			]
 		}

@@ -232,6 +232,7 @@ function imgunique(ary) {
   return newAry;
 };
 
+
 export {
   showToast,
   pagesurl,
@@ -253,7 +254,7 @@ export {
   seluser,
   randomColor,
   tagunique,
-  imgunique
+  imgunique,
 };
 
 

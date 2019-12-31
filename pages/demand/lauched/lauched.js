@@ -135,7 +135,7 @@ Page({
               showToast(res.data.msg, 'none', 1000)
             }
           } else {
-            showToast('我也是有底线的', 'none', 1000)
+            //showToast('我也是有底线的', 'none', 1000)
           }
 
 
@@ -235,6 +235,7 @@ Page({
     })
     let page = this.data.page - 1;
     this.request(page)
+    wx.stopPullDownRefresh();
   },
 
   /**

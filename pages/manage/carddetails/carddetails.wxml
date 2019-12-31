@@ -116,6 +116,10 @@
     <view class="radius indigo shadow-blur flex justify-center align-center margin-right" style="width:15vh;height:5vh;color:white;font-size:2vh" data-modal="enterModal" bindtap="tapjump">确认录取</view>
   </view>
   <!-- bindtap="admission" -->
+
+  <view wx:if="{{cur==3}}" class="flex justify-end align-center" style="width:30vh">
+    <view class="radius indigo shadow-blur flex justify-center align-center margin-right" style="width:15vh;height:5vh;color:white;font-size:2vh"  bindtap="complete">确认完成</view>
+  </view>
 </view>
 
 <view class="cu-modal {{modalName=='showModal'?'show':''}}">
@@ -159,7 +163,7 @@
   </view>
 </view>
 
-<view class="cu-modal {{modalName=='enterModal'?'show':''}}"  catchtouchmove="touchmove">
+<view class="cu-modal {{modalName=='enterModal'?'show':''}}" catchtouchmove="touchmove">
   <view class="cu-dialog">
     <view class="cu-bar bgwhite justify-end">
       <view class="content">填写录取信息</view>
@@ -173,7 +177,7 @@
         <view class="cu-form-group bggray cu-card no-card" style="background:rgba(0,0,0,.1);">
           <view class="title">录取信息</view>
           <view class="flex align-end margin-bottom-xs " style="width:76%;">
-            <textarea  auto-height name="message" value="{{modalName=='enterModal'?message1+realName+message2:''}}" style="color:#8799a3;text-align:justify;word-spacing:20rpx;line-height:2vh"></textarea>
+            <textarea auto-height name="message" value="{{modalName=='enterModal'?message1+realName+message2:''}}" style="color:#8799a3;text-align:justify;word-spacing:20rpx;line-height:2vh"></textarea>
           </view>
         </view>
 

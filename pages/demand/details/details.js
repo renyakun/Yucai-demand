@@ -85,6 +85,7 @@ Page({
       demandflag: true,
     })
     this.onReady()
+    wx.stopPullDownRefresh();
   },
 
   /**

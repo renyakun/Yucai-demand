@@ -57,6 +57,11 @@
           <text style="color:#000">用工管理</text>
         </view>
       </view>
+      <view class="cu-bar tabbar margin-top margin-bottom-sm">
+        <view class="action" data-id="{{item.id}}" wx:for="{{recruitlist}}" wx:key="id" bindtap="recruitsjump">
+          <view class="cuIcon-{{item.icon}}" ></view> {{item.flag}}
+        </view>
+      </view>
     </view>
   </view>
 

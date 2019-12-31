@@ -23,6 +23,7 @@ Page({
     notice: '暂无消息',
     atteslist: app.globalData.atteslist,
     tablist: app.globalData.tablist,
+    recruitlist: app.globalData.recruitlist,
   },
 
   //认证跳转
@@ -117,10 +118,14 @@ Page({
 
   //用工管理
   recruitjump() {
-    //showToast('即将上线，敬请期待!', 'none', 1000)
-    let manageflag = false;
     let managetxt = '用工管理';
     navigateTo('/pages/manage/manage/manage?managetxt=' + managetxt);
+  },
+
+  recruitsjump(e){
+    let id = e.currentTarget.dataset.id;
+    let managetxt = '用工管理';
+    navigateTo('/pages/manage/manage/manage?id=' + id + '&managetxt=' + managetxt);
   },
 
 
@@ -163,6 +168,9 @@ Page({
   },
 
   onLoad: function() {
+    let token = wx.getStorageSync('accessToken') || '';
+    this.token('/user/UserCertification', 'token', token);
+    this.token('/company/companyCertification', 'tokenmsg', token);
 
     wx.showLoading({
       title: '加载中',
@@ -199,9 +207,6 @@ Page({
     //获取名片状态值
     setTimeout(() => {
       wx.hideLoading();
-      let token = wx.getStorageSync('accessToken') || [];
-      this.token('/user/UserCertification', 'token', token);
-      this.token('/company/companyCertification', 'tokenmsg', token);
     }, 500);
 
   },
@@ -226,5 +231,6 @@ Page({
   //下拉刷新
   onPullDownRefresh: function() {
     this.onLoad()
+    wx.stopPullDownRefresh();
   },
 })

@@ -57,8 +57,8 @@ Page({
     timerval: [29, month, day - 1, hour - 1, minute - 1],
     check: true,
     managetxt: '招聘进度',
-    message:'',
-    message1:'尊敬的',
+    message: '',
+    message1: '尊敬的',
     message2: '先生/女士，您好！非常感谢您来我们公司应聘!经过慎重筛选，我公司已决定录用您到我公司任职。报到后，我们会为你做职前介绍。祝你在我公司工作愉快!如果你有疑问，请与我们联系。'
   },
 
@@ -112,7 +112,7 @@ Page({
   //打开模态框
   tapjump(e) {
     console.log(e.currentTarget.dataset.modal)
-    let modalName=e.currentTarget.dataset.modal
+    let modalName = e.currentTarget.dataset.modal
     this.setData({
       modalName: modalName,
     })
@@ -197,13 +197,6 @@ Page({
 
   //不录取
   enroll() {
-    // let demandId = this.data.demandId;
-    // let managetxt = this.data.managetxt;
-    // showToast('不录取', 'none', 800)
-    // setTimeout(() => {
-    //   navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt)
-    // }, 1000)
-
     let demandId = this.data.demandId;
     let token = wx.getStorageSync('accessToken') || [];
     let id = parseInt(this.data.id);
@@ -233,14 +226,14 @@ Page({
 
   // 判定输入为非空字符
   formSubmit(e) {
-    let token = wx.getStorageSync('accessToken') || [];
+    let token = wx.getStorageSync('accessToken') || '';
     let message = e.detail.value.message;
     console.log(message)
     this.admission(token, message)
   },
 
   //录取
-  admission(token,message) {
+  admission(token, message) {
     let id = parseInt(this.data.id);
     let demandId = this.data.demandId;
     let managetxt = '用工管理';
@@ -269,6 +262,38 @@ Page({
         }
       }
     })
+  },
+
+  //确认完成
+  complete(){
+    let id = parseInt(this.data.id);
+    let demandId = this.data.demandId;
+    let managetxt = '用工管理';
+    let ids = [];
+    ids.push(id);
+    console.log(demandId, ids)
+    let token = wx.getStorageSync('accessToken') || '';
+    wx.request({
+      url: url + '/employment/confirmFinish',
+      method: 'post',
+      data: {
+        accessToken: token,
+        ids: ids,
+      },
+      success: res => {
+        console.log(res.data)
+        if (res.data.success) {
+          showToast(res.data.data, 'success', 800)
+          console.log(demandId)
+          setTimeout(() => {
+            navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt);
+          }, 1000)
+        } else {
+          showToast(res.data.msg, 'none', 800)
+        }
+      }
+    })
+
   },
 
   //名片详情
@@ -382,8 +407,16 @@ Page({
         userid: options.userid,
         demandId: options.demandId
       })
+    } else if (options.cur == 3) {
+      console.log(options.id, options.cur, options.userid, options.demandId)
+      this.getcard(options.userid, token)
+      this.setData({
+        cur: options.cur,
+        id: options.id,
+        userid: options.userid,
+        demandId: options.demandId
+      })
     }
-
   },
 
   onReady: function() {
@@ -413,11 +446,12 @@ Page({
       if (cur == 1) {
         let id = this.data.id;
         this.accept(id, token)
-      } else if (cur == 2) {
+      } else if (cur == 2 || cur == 3) {
         let userid = this.data.userid;
         this.getcard(userid, token)
       }
     }, 800)
+    wx.stopPullDownRefresh();
   },
 
   onReachBottom: function() {
