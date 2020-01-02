@@ -24,7 +24,7 @@
             <view class="padding-top-xs margin-left">{{realName}}</view>
           </view>
 
-          <view class="padding-top-xs padding-bottom-xs flex justify-center">{{sex}} | {{age}} | {{email}}
+          <view class="padding-top-xs padding-bottom-xs flex justify-center">{{sex}} | {{age}}
             <text class="margin-left">期望职位：{{dreamPosition}}</text>
           </view>
         </view>
@@ -122,7 +122,7 @@
   </view>
 </view>
 
-<view class="cu-modal {{modalName=='showModal'?'show':''}}">
+<view class="cu-modal {{modalName=='showModal'?'show':''}}" catchtouchmove="touchmove">
   <view class="cu-dialog">
     <view class="cu-bar bgwhite justify-end">
       <view class="content">设置邀请面试时间</view>
@@ -176,7 +176,7 @@
       <view class=" ">
         <view class="cu-form-group bggray cu-card no-card" style="background:rgba(0,0,0,.1);">
           <view class="title">录取信息</view>
-          <view class="flex align-end margin-bottom-xs " style="width:76%;">
+          <view class="flex align-end margin-bottom-xs " style="width:75%;">
             <textarea auto-height name="message" value="{{modalName=='enterModal'?message1+realName+message2:''}}" style="color:#8799a3;text-align:justify;word-spacing:20rpx;line-height:2vh"></textarea>
           </view>
         </view>

@@ -224,7 +224,7 @@ function imgunique(ary) {
       };
     };
     if (flag) {
-      if (ary[i] != '') {
+      if (ary[i] != null) {
         newAry.push(ary[i]);
       }
     };

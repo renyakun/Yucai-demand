@@ -46,7 +46,7 @@
             </view>
             <view class="action bgwhite" style="width:12vh;height:7vh">
               <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.waitCooperationNum}}</view>
-              <text style="font-weight: normal;">待合作数</text>
+              <text style="font-weight: normal;">待面试数</text>
             </view>
             <view class="action bgwhite" style="width:12vh;height:7vh">
               <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.cancelInvitationNum}}</view>

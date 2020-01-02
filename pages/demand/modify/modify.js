@@ -81,9 +81,6 @@ Page({
 
   //修改
   request(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city, id, mobile, token) {
-    wx.showLoading({
-      title: '加载中',
-    })
     setTimeout(() => {
       wx.hideLoading()
       console.log('岗位描述:', jobName, jobType, jobNumber, jobRequire, label);
@@ -118,7 +115,7 @@ Page({
               navigateTo('/pages/demand/details/details?demandId=' + demandId);
             }, 800)
           } else {
-            showToast(res.data.msg, 'none', 1000)
+            showToast('请输入完整信息', 'none', 1000)
           }
         }
       })

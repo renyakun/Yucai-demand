@@ -50,7 +50,7 @@
   </view>
 
 
-  <view class="bgwhite margin-top margin-left-xs margin-right-xs">
+  <!-- <view class="bgwhite margin-top margin-left-xs margin-right-xs">
     <view class="cu-list menu border card-menu">
       <view class="cu-item arrow" bindtap="recruitjump">
         <view class="content">
@@ -63,7 +63,7 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class="bgwhite margin-top margin-left-xs margin-right-xs">
     <view class="cu-list menu sm-border card-menu">

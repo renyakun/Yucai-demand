@@ -205,14 +205,42 @@ Page({
     let introduction = e.detail.value.introduction;
     let culture = e.detail.value.culture;
 
+    let listimg = this.data.listimg;
+
     let oneImage = this.data.oneImage;
     let twoImage = this.data.twoImage;
     let threeImage = this.data.threeImage;
     let fourImage = this.data.fourImage;
     let fiveImage = this.data.fiveImage;
-    
     console.log(oneImage, twoImage, threeImage, fourImage, fiveImage);
-    console.log(companyNick, address, introduction, culture);
+    
+    if (oneImage!=undefined){
+      oneImage = this.data.oneImage;
+    }else{
+      oneImage = listimg[0]
+    }
+    if (twoImage != undefined) {
+      twoImage = this.data.twoImage;
+    } else {
+      twoImage = listimg[1]
+    }
+    if (threeImage != undefined) {
+      threeImage = this.data.threeImage;
+    } else {
+      threeImage = listimg[2]
+    }
+    if (fourImage!= undefined) {
+      fourImage = this.data.fourImage;
+    } else {
+      fourImage = listimg[3]
+    }
+    if (fiveImage != undefined) {
+      fiveImage = this.data.fiveImage;
+    } else {
+      fiveImage = listimg[4]
+    }
+    console.log(oneImage, twoImage, threeImage, fourImage, fiveImage);
+
 
     if (companyNick == "" || address == "" || introduction == "" || culture == "") {
       showToast('请输入完整信息！', 'none', 1000)
@@ -272,16 +300,10 @@ Page({
         let threeImage = details.threeImage;
         let fourImage = details.fourImage;
         let fiveImage = details.fiveImage;
-
-        // let oneImage = wx.getStorageSync('oneImage') || '';
-        // let twoImage = wx.getStorageSync('twoImage') || '';
-        // let threeImage = wx.getStorageSync('threeImage') || '';
-        // let fourImage = wx.getStorageSync('fourImage') || '';
-        // let fiveImage = wx.getStorageSync('fiveImage') || '';
-
+        //console.log(oneImage, twoImage, threeImage, fourImage, fiveImage);
         listimg.push(oneImage, twoImage, threeImage, fourImage, fiveImage);
         let listimgs = imgunique(listimg);
-        console.log(listimgs);
+        //console.log(listimgs);
         if (res.data.success) {
           if (detailslen != 0) {
 

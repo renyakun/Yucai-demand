@@ -152,13 +152,13 @@ Page({
         accessToken: token,
       },
       success: res => {
-        //console.log(res)
+        console.log(res)
         if (res.data.success) {
           if (res.data.data.length != 0) {
             navigateTo('/pages/company/details/details?cur=2');
           }
         } else {
-          showToast(res.data.msg, 'none', 800);
+          showToast('您还没有设置公司主页!', 'none', 800);
           setTimeout(() => {
             navigateTo('/pages/company/details/details?cur=1');
           }, 1000)
@@ -225,7 +225,7 @@ Page({
   },
 
   onShow: function() {
-    //this.onLoad()
+    this.onLoad()
   },
 
   //下拉刷新

@@ -53,18 +53,18 @@ Page({
     let id = e.currentTarget.dataset.id;
     let demandId = this.data.demandId;
     let manageflag = this.data.manageflag;
+    let userid = e.currentTarget.dataset.userid;
     if (manageflag) {
       if (cur == 1) {
-        console.log(id, cur, demandId)
-        navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&demandId=' + demandId)
+        console.log(id, cur,userid, demandId)
+        navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&userid=' + userid + '&demandId=' + demandId)
       } else if (cur == 2) {
-        let userid = e.currentTarget.dataset.userid;
+        
         console.log(id, cur, userid, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&userid=' + userid + '&demandId=' + demandId)
       }
     } else {
       if (cur == 1) {
-        let userid = e.currentTarget.dataset.userid;
         console.log(id, userid, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=3&demandId=' + demandId)
       }
@@ -409,7 +409,7 @@ Page({
     }, 500)
   },
 
-  switching(options, page) {
+  switching(options, page, token) {
     if (options.demandId != undefined && options.id != undefined) {
 
       console.log(options.demandId, options.id)
@@ -463,7 +463,7 @@ Page({
     }
   },
 
-  changeing(options, page){
+  changeing(options, page, token){
     if (options.demandId != undefined && options.id != undefined) {
       console.log(options.demandId, options.id)
       setTimeout(() => {
@@ -502,13 +502,13 @@ Page({
       this.setData({
         manageflag: false,
       })
-      this.changeing(options, page)
+      this.changeing(options, page, token)
       
     } else if (options.managetxt == '招聘进度') {
       this.setData({
         manageflag: true,
       })
-      this.switching(options, page)
+      this.switching(options, page, token)
     }
 
 

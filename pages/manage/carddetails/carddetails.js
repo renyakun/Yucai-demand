@@ -54,7 +54,7 @@ Page({
     hour: hour,
     minutes: minutes,
     minute: minute,
-    timerval: [29, month, day - 1, hour - 1, minute - 1],
+    timerval: [30, month, day - 1, hour - 1, minute - 1],
     check: true,
     managetxt: '招聘进度',
     message: '',
@@ -197,31 +197,32 @@ Page({
 
   //不录取
   enroll() {
+    showToast('即将上线，敬请期待!', 'none', 1000);
     let demandId = this.data.demandId;
     let token = wx.getStorageSync('accessToken') || [];
     let id = parseInt(this.data.id);
     let managetxt = this.data.managetxt;
     let ids = [];
     ids.push(id);
-    wx.request({
-      url: url + '/employment/noAdmission',
-      method: 'post',
-      data: {
-        accessToken: token,
-        ids: ids
-      },
-      success: res => {
-        console.log(res.data.data)
-        if (res.data.success) {
-          showToast(res.data.data, 'success', 800)
-          setTimeout(() => {
-            navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt)
-          }, 1000)
-        } else {
-          showToast(res.data.msg, 'none', 800)
-        }
-      }
-    })
+    // wx.request({
+    //   url: url + '/employment/noAdmission',
+    //   method: 'post',
+    //   data: {
+    //     accessToken: token,
+    //     ids: ids
+    //   },
+    //   success: res => {
+    //     console.log(res.data.data)
+    //     if (res.data.success) {
+    //       showToast(res.data.data, 'success', 800)
+    //       setTimeout(() => {
+    //         navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt)
+    //       }, 1000)
+    //     } else {
+    //       showToast(res.data.msg, 'none', 800)
+    //     }
+    //   }
+    // })
   },
 
   // 判定输入为非空字符
@@ -229,7 +230,8 @@ Page({
     let token = wx.getStorageSync('accessToken') || '';
     let message = e.detail.value.message;
     console.log(message)
-    this.admission(token, message)
+    //this.admission(token, message)
+    showToast('即将上线，敬请期待!', 'none', 1000);
   },
 
   //录取
@@ -273,26 +275,27 @@ Page({
     ids.push(id);
     console.log(demandId, ids)
     let token = wx.getStorageSync('accessToken') || '';
-    wx.request({
-      url: url + '/employment/confirmFinish',
-      method: 'post',
-      data: {
-        accessToken: token,
-        ids: ids,
-      },
-      success: res => {
-        console.log(res.data)
-        if (res.data.success) {
-          showToast(res.data.data, 'success', 800)
-          console.log(demandId)
-          setTimeout(() => {
-            navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt);
-          }, 1000)
-        } else {
-          showToast(res.data.msg, 'none', 800)
-        }
-      }
-    })
+    showToast('即将上线，敬请期待!', 'none', 1000);
+    // wx.request({
+    //   url: url + '/employment/confirmFinish',
+    //   method: 'post',
+    //   data: {
+    //     accessToken: token,
+    //     ids: ids,
+    //   },
+    //   success: res => {
+    //     console.log(res.data)
+    //     if (res.data.success) {
+    //       showToast(res.data.data, 'success', 800)
+    //       console.log(demandId)
+    //       setTimeout(() => {
+    //         navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt);
+    //       }, 1000)
+    //     } else {
+    //       showToast(res.data.msg, 'none', 800)
+    //     }
+    //   }
+    // })
 
   },
 
@@ -358,21 +361,6 @@ Page({
     }
   },
 
-  //获取已报名的名片详情
-  accept(id, token) {
-    wx.request({
-      url: url + '/technology/acceptBusinessCardDetail',
-      data: {
-        accessToken: token,
-        id: id
-      },
-      success: res => {
-        console.log(res.data.data)
-        this.demail(res)
-      }
-    })
-  },
-
   //获取待面试的名片详情
   getcard(userId, token) {
     wx.request({
@@ -390,33 +378,15 @@ Page({
 
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
-    if (options.cur == 1) {
-      console.log(options.id, options.cur, options.demandId)
-      this.accept(options.id, token)
-      this.setData({
-        cur: options.cur,
-        id: options.id,
-        demandId: options.demandId
-      })
-    } else if (options.cur == 2) {
-      console.log(options.id, options.cur, options.userid, options.demandId)
-      this.getcard(options.userid, token)
-      this.setData({
-        cur: options.cur,
-        id: options.id,
-        userid: options.userid,
-        demandId: options.demandId
-      })
-    } else if (options.cur == 3) {
-      console.log(options.id, options.cur, options.userid, options.demandId)
-      this.getcard(options.userid, token)
-      this.setData({
-        cur: options.cur,
-        id: options.id,
-        userid: options.userid,
-        demandId: options.demandId
-      })
-    }
+    console.log(options.id, options.cur, options.userid, options.demandId)
+    this.getcard(options.userid, token)
+    this.setData({
+      cur: options.cur,
+      id: options.id,
+      userid: options.userid,
+      demandId: options.demandId
+    })
+    
   },
 
   onReady: function() {

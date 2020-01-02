@@ -109,9 +109,10 @@
           <view class="grid col-5 grid-square flex-sub">
             <view class="bg-img" wx:for="{{listimg}}" wx:key="index" data-target="listimg" bindtap="ViewImage" data-url="{{listimg[index]}}">
               <image src='{{listimg[index]}}' mode='aspectFill'></image>
-              <view class="cu-tag bg-red" data-target="listimg" catchtap="DelImg" data-index="{{index}}">
-                <text class="cuIcon-close"></text>
+              <view class="cu-tag bg-red" data-target="listimg"  data-index="{{index}}">
+                
               </view>
+              <!-- catchtap="DelImg" <text class="cuIcon-close"></text> -->
             </view>
             <view class="solids" data-target="listimg" bindtap="ChooseImage" wx:if="{{listimg.length<5}}">
               <text class="cuIcon-cameraadd"></text>
