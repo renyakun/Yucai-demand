@@ -47,7 +47,7 @@
           <view class="cu-form-group  margin-xs cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
             <view class="title margin-left-xs">本次招聘</view>
-            <input value="" name="jobNumber" placeholder="请填写招聘人数" placeholder-style="color:#8799a3"></input>
+            <input value="" type="number" name="jobNumber" placeholder="请填写招聘人数" placeholder-style="color:#8799a3"></input>
           </view>
 
           <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
@@ -89,7 +89,7 @@
           <view class="cu-form-group  margin-xs bggray cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
             <view class="title margin-left-xs">薪资</view>
-            <input value="" name="salary" placeholder="请输入薪资" placeholder-style="color:#8799a3"></input>
+            <input value="" type="number" name="salary" placeholder="请输入薪资" placeholder-style="color:#8799a3"></input>
           </view>
 
           <view class="cu-form-group  margin-xs bggray cu-card no-card" style="background:rgba(0,0,0,.1);">

@@ -27,6 +27,17 @@
           <view class="padding-top-xs padding-bottom-xs flex justify-center">{{sex}} | {{age}}
             <text class="margin-left">期望职位：{{dreamPosition}}</text>
           </view>
+
+          <view class="padding-top-xs padding-bottom-xs flex justify-center">
+            <view class="margin-top-xs">评分:</view>
+            <view wx:if="{{praiseRate!='暂无评分'}}">
+              <i-rate disabled="{{true}}" value="{{praiseRate}}" size="19">
+              </i-rate>
+            </view>
+            <view wx:else class="margin-top-xs">
+              {{praiseRate}}
+            </view>
+          </view>
         </view>
 
         <view class="margin-top " style="display: {{profession==''&&education==''&&graduationTime==''&&school==''?'none':''}}">
@@ -118,7 +129,10 @@
   <!-- bindtap="admission" -->
 
   <view wx:if="{{cur==3}}" class="flex justify-end align-center" style="width:30vh">
-    <view class="radius indigo shadow-blur flex justify-center align-center margin-right" style="width:15vh;height:5vh;color:white;font-size:2vh"  bindtap="complete">确认完成</view>
+    <view class="radius indigo shadow-blur flex justify-center align-center margin-right" style="width:15vh;height:5vh;color:white;font-size:2vh" bindtap="complete">确认完成</view>
+  </view>
+  <view wx:if="{{cur==4}}" class="flex justify-end align-center" style="width:30vh">
+    <view class="radius indigo shadow-blur flex justify-center align-center margin-right" style="width:15vh;height:5vh;color:white;font-size:2vh" bindtap="cardel">评价</view>
   </view>
 </view>
 

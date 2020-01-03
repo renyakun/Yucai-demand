@@ -4,7 +4,6 @@
     "pages/index/index",
     "pages/tidings/tidings/tidings",
     "pages/tidings/discuss/discuss",
-    "pages/tidings/reply/reply",
     "pages/demand/lauched/lauched",
     "pages/demand/details/details",
     "pages/demand/invite/invite",
@@ -15,8 +14,10 @@
     "pages/classify/RealName/RealName",
     "pages/manage/manage/manage",
     "pages/manage/carddetails/carddetails",
+    "pages/manage/evaluate/evaluate",
     "pages/company/details/details",
     "pages/logs/logs"
+    
   ],
   "permission": {
     "scope.userLocation": {

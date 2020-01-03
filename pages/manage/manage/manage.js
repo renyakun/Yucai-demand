@@ -38,13 +38,22 @@ Page({
     evallist: [],
   },
 
+  touchmove() {
+    return false;
+  },
+
   //tab切换
   tabSelect(e) {
     pageScrollTo(0, 500);
+    let id = e.currentTarget.dataset.id;
     this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id - 1) * 60,
+      TabCur: id,
+      scrollLeft: (id - 1) * 60,
     })
+    setTimeout(() => {
+      this.setData({ demandflag: true })
+    }, 100)
+    this.readys(1, id)
   },
 
   //详情跳转
@@ -54,12 +63,12 @@ Page({
     let demandId = this.data.demandId;
     let manageflag = this.data.manageflag;
     let userid = e.currentTarget.dataset.userid;
+    let realName = e.currentTarget.dataset.realname;
     if (manageflag) {
       if (cur == 1) {
-        console.log(id, cur,userid, demandId)
+        console.log(id, cur, userid, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&userid=' + userid + '&demandId=' + demandId)
       } else if (cur == 2) {
-        
         console.log(id, cur, userid, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&cur=' + cur + '&userid=' + userid + '&demandId=' + demandId)
       }
@@ -67,6 +76,9 @@ Page({
       if (cur == 1) {
         console.log(id, userid, demandId)
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=3&demandId=' + demandId)
+      } else if (cur == 2) {
+        console.log(id, userid, demandId)
+        navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=4&demandId=' + demandId )
       }
     }
 
@@ -81,6 +93,7 @@ Page({
         accessToken: token,
       },
       success: res => {
+        console.log('需求列表:', res)
         console.log('需求列表:', res.data.data)
         let demandlist = res.data.data;
         if (res.data.success) {
@@ -191,7 +204,7 @@ Page({
   },
 
   //获取招聘进度列表
-  post(token, demandId, page) {
+  post(token, demandId, page, id) {
     let acceptlist = 'acceptlist';
     let acceptxt = '已报名acceptlist:';
     let acceptlen = 'tablist[0].len';
@@ -210,14 +223,17 @@ Page({
     let cancelwebsite = '/invitation/cancelInvitation';
     let dataflag3 = 'cancelflag';
 
-    this.demand(token, demandId, acceptwebsite, acceptlist, acceptlen, dataflag1, acceptxt, page);
-    this.demand(token, demandId, sendwebsite, sendlist, sendlen, dataflag2, sendtxt, page);
-    this.demand(token, demandId, cancelwebsite, cancellist, cancellen, dataflag3, canceltxt, page);
-
+    if (id == 1) {
+      this.demand(token, demandId, acceptwebsite, acceptlist, acceptlen, dataflag1, acceptxt, page);
+    } else if (id == 2) {
+      this.demand(token, demandId, sendwebsite, sendlist, sendlen, dataflag2, sendtxt, page);
+    } else if (id == 3) {
+      this.demand(token, demandId, cancelwebsite, cancellist, cancellen, dataflag3, canceltxt, page);
+    }
   },
 
   //获取用工管理列表
-  recruit(token, demandId, page) {
+  recruit(token, demandId, page, id) {
     let sionlist = 'sionlist';
     let siontxt = '已录取admission:';
     let sionlen = 'recruitlist[0].len';
@@ -230,8 +246,19 @@ Page({
     let alreadywebsite = '/employment/alreadyFinish';
     let dataflag5 = 'alreadyflag';
 
-    this.demand(token, demandId, sionwebsite, sionlist, sionlen, dataflag4, siontxt, page);
-    this.demand(token, demandId, alreadywebsite, alreadylist, alreadylen, dataflag5, alreadytxt, page);
+    let evallist = 'evallist';
+    let evaltxt = '已评价evallist:';
+    let evallen = 'recruitlist[2].len';
+    let evalwebsite = '/evaluation/alreadyEvaluationUser';
+    let dataflag6 = 'evalflag';
+
+    if (id == 1) {
+      this.demand(token, demandId, sionwebsite, sionlist, sionlen, dataflag4, siontxt, page);
+    } else if (id == 2) {
+      this.demand(token, demandId, alreadywebsite, alreadylist, alreadylen, dataflag5, alreadytxt, page);
+    } else if (id == 3) {
+      this.demand(token, demandId, evalwebsite, evallist, evallen, dataflag6, evaltxt, page);
+    }
   },
 
   //打开选择需求
@@ -248,6 +275,7 @@ Page({
     console.log('需求id:', e.currentTarget.dataset.demandid);
     let demandId = e.currentTarget.dataset.demandid;
     let page = 1;
+    let id = this.data.TabCur;
     if (demandId != undefined) {
       let token = wx.getStorageSync('accessToken') || [];
       let managetxt = this.data.managetxt;
@@ -255,9 +283,9 @@ Page({
         demandId: demandId,
       })
       if (managetxt == '用工管理') {
-        this.recruit(token, demandId, page);
+        this.recruit(token, demandId, page, id);
       } else if (managetxt == '招聘进度') {
-        this.post(token, demandId, page);
+        this.post(token, demandId, page, id);
       }
     } else {
       showToast('您还没有发布过职位需求!', 'none', 1000)
@@ -271,6 +299,7 @@ Page({
     let token = wx.getStorageSync('accessToken') || [];
     let demand = this.data.demand;
     let page = 1;
+    let id = this.data.TabCur;
     console.log('职位需求:', demand)
     console.log('page為:', page)
     if (demand != undefined) {
@@ -280,9 +309,9 @@ Page({
         demandId: demandId,
       })
       if (managetxt == '用工管理') {
-        this.recruit(token, demandId, page);
+        this.recruit(token, demandId, page, id);
       } else if (managetxt == '招聘进度') {
-        this.post(token, demandId, page);
+        this.post(token, demandId, page, id);
       }
     } else {
       console.log('您还没有发布过职位需求!', demand)
@@ -315,6 +344,7 @@ Page({
     pageScrollTo(0, 500);
     let spin = this.data.spin;
     let page = 1;
+    let id = this.data.TabCur;
     this.setData({
       spin: true,
       demandflag: true,
@@ -330,9 +360,9 @@ Page({
           demandId: demandId,
         })
         if (managetxt == '用工管理') {
-          this.recruit(token, demandId, page);
+          this.recruit(token, demandId, page, id);
         } else if (managetxt == '招聘进度') {
-          this.post(token, demandId, page);
+          this.post(token, demandId, page, id);
         }
         setTimeout(() => {
           this.setData({
@@ -352,7 +382,7 @@ Page({
 
   },
 
-  ready(page) {
+  readys(page, id) {
     setTimeout(() => {
       let token = wx.getStorageSync('accessToken') || '';
       let demand = this.data.demand;
@@ -363,9 +393,9 @@ Page({
           demandId: demandId,
         })
         if (managetxt == '用工管理') {
-          this.recruit(token, demandId, page);
+          this.recruit(token, demandId, page, id);
         } else if (managetxt == '招聘进度') {
-          this.post(token, demandId, page);
+          this.post(token, demandId, page, id);
         }
       }
     }, 1000)
@@ -377,6 +407,7 @@ Page({
     let cancellen = 'tablist[2].len';
     let sionlistlen = 'recruitlist[0].len';
     let alreadylen = 'recruitlist[1].len';
+    let evallen = 'recruitlist[2].len';
     setTimeout(() => {
       this.setData({
         accepflag: false,
@@ -388,12 +419,14 @@ Page({
         sionlflag: false,
         [sionlistlen]: 0,
         alreadyflag: false,
-        [alreadylen]: 0
+        [alreadylen]: 0,
+        evalflag: false,
+        [evallen]: 0
       })
     }, 1000)
   },
 
-  load(page) {
+  load(page, id) {
     setTimeout(() => {
       this.setData({
         demandflag: false,
@@ -404,7 +437,7 @@ Page({
         this.nodata()
       } else {
         console.log('有数据', loadflag)
-        this.ready(page)
+        this.readys(page, id)
       }
     }, 500)
   },
@@ -421,7 +454,7 @@ Page({
         let demand = demands[0];
         console.log(demand)
         let demandId = demand.demandId;
-        this.post(token, demandId, page);
+        this.post(token, demandId, page, options.id);
         this.setData({
           demand: demand,
           demandId: demandId,
@@ -440,7 +473,7 @@ Page({
       this.setData({
         TabCur: options.id,
       })
-      this.load(page)
+      this.load(page, options.id)
 
     } else if (options.id == undefined && options.demandId != undefined) {
 
@@ -453,7 +486,7 @@ Page({
         let demand = demands[0];
         console.log(demand)
         let demandId = demand.demandId;
-        this.post(token, demandId, page);
+        this.post(token, demandId, page, options.id);
         this.setData({
           demand: demand,
           demandId: demandId,
@@ -463,18 +496,18 @@ Page({
     }
   },
 
-  changeing(options, page, token){
-    if (options.demandId != undefined && options.id != undefined) {
+  changeing(options, page, token) {
+    if (options.id != undefined && options.demandId != undefined) {
       console.log(options.demandId, options.id)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
-        let demands = demandlist.filter(function (elem, index, arr) {
+        let demands = demandlist.filter(function(elem, index, arr) {
           return elem.demandId == options.demandId
         });
         let demand = demands[0];
         console.log(demand)
         let demandId = demand.demandId;
-        this.recruit(token, demandId, page);
+        this.recruit(token, demandId, page, options.id);
         this.setData({
           demand: demand,
           demandId: demandId,
@@ -487,11 +520,12 @@ Page({
       this.setData({
         TabCur: options.id,
       })
-      this.load(page)
+      this.load(page, options.id)
     }
   },
 
   onLoad(options) {
+    console.log(options)
     let token = wx.getStorageSync('accessToken') || '';
     let page = this.data.page - 1;
     this.demandlist(token);
@@ -503,7 +537,7 @@ Page({
         manageflag: false,
       })
       this.changeing(options, page, token)
-      
+
     } else if (options.managetxt == '招聘进度') {
       this.setData({
         manageflag: true,
@@ -531,7 +565,8 @@ Page({
 
   onReachBottom: function() {
     let page = this.data.page++;
-    this.ready(page)
+    let id = this.data.TabCur;
+    this.readys(page,id)
   },
 
   onShareAppMessage: function() {

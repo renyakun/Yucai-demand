@@ -43,7 +43,8 @@
           <block wx:if="{{item.id== 1}}">
 
             <view class="margin-top " wx:if="{{manageflag?accepflag:sionflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{manageflag?acceptlist:sionlist}}" wx:key="id" data-id="{{item.id}}" data-userid="{{manageflag?item.userId:item.technology.userId}}" data-cur="{{manageflag?tablist[0].id:recruitlist[0].id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs  flex justify-center" wx:for="{{manageflag?acceptlist:sionlist}}" wx:key="id" data-id="{{item.id}}" data-userid="{{manageflag?item.userId:item.technology.userId}}"
+                data-cur="{{manageflag?tablist[0].id:recruitlist[0].id}}" bindtap="cardel">
                 <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
                   <view class="flex flex-wrap align-end">
                     <view class="cu-avatar round lg" style="background-image:url({{manageflag?item.avatar:item.technology.avatar}});"></view>
@@ -71,7 +72,8 @@
           <block wx:elif="{{item.id== 2}}">
 
             <view class="margin-top " wx:if="{{manageflag?sendflag:alreadyflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left margin-right flex justify-center" wx:for="{{manageflag?sendlist:alreadylist}}" wx:key="id" data-id="{{item.id}}" data-userid="{{item.technology.userId}}" data-cur="{{manageflag?tablist[1].id:recruitlist[1].id}}" bindtap="cardel">
+              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-xs margin-left margin-right flex justify-center" wx:for="{{manageflag?sendlist:alreadylist}}" wx:key="id" data-id="{{item.id}}" data-realName="{{item.technology.realName}}" data-userid="{{item.technology.userId}}"
+                data-cur="{{manageflag?tablist[1].id:recruitlist[1].id}}" bindtap="cardel">
                 <view class="bg-white radius padding-top padding-bottom" style="width:99.5%;" wx:if="{{manageflag}}">
                   <view class="flex flex-wrap align-end margin-left">
                     <view class="text-cut">
@@ -116,34 +118,86 @@
 
           <block wx:elif="{{item.id== 3}}">
 
-            <view class="margin-top " wx:if="{{manageflag?cancelflag:evalflag}}">
-              <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs flex justify-center" wx:for="{{manageflag?cancellist:evallist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
-                <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
-                  <view class="flex flex-wrap">
-                    <view class="padding-left">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left text-cut" style="width:90%">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left ">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}</view>
-                  </view>
-                  <view class="flex flex-wrap  margin-top-xs">
-                    <view class="padding-left">
-                      <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}</view>
+            <block wx:if="{{manageflag}}">
+
+              <view class="margin-top " wx:if="{{cancelflag}}">
+
+                <view class="cu-bar cu-card no-card bgblue radius shadow margin-top-sm margin-left-xs margin-right-xs flex justify-center" wx:for="{{cancellist}}" wx:key="id" data-id="{{item.id}}" bindtap="cardel">
+                  <view class="bgwhite radius padding-top padding-bottom" style="width:99.5%;">
+                    <view class="flex flex-wrap">
+                      <view class="padding-left">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.invitationName}}</view>
+                    </view>
+                    <view class="flex flex-wrap  margin-top-xs">
+                      <view class="padding-left text-cut" style="width:90%">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}</view>
+                    </view>
+                    <view class="flex flex-wrap  margin-top-xs">
+                      <view class="padding-left ">
+                        <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}</view>
+                    </view>
+                    <view class="flex flex-wrap  margin-top-xs">
+                      <view class="padding-left">
+                        <text class="text-bold text-blue" style="color:#0081ff">取消原因：</text>{{item.reason}}</view>
+                    </view>
+
                   </view>
 
                 </view>
-
               </view>
-            </view>
 
-            <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
-              <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
-            </view>
+              <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+                <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
+              </view>
+
+            </block>
+
+            <block wx:if="{{!manageflag}}">
+
+              <view class="margin-top " wx:if="{{evalflag}}">
+                <view class="cu-list menu-avatar comment solids-bottom" wx:for="{{evallist}}" wx:key="id">
+                  <view class="cu-item">
+                    <view class="cu-avatar round" style="background-image:url({{item.avatar}});top:30rpx"></view>
+                    <view class="content">
+                      <view class="text-blue" style="font-weight:700">{{item.technology.realName}}</view>
+                      <view class="flex justify-start align-start">
+                        <view class="margin-top-xs">评分:</view>
+                        <view>
+                          <i-rate disabled="{{true}}" value="{{item.star}}" size="19">
+                          </i-rate>
+                        </view>
+                      </view>
+                      <view class="text-black text-content text-df" >{{item.message}}</view>
+                      <view class="bggrey padding-sm radius margin-top-sm  text-sm" wx:if="{{item.replyMessage}}" >
+                        <view class="flex" style="color:white">
+                          <view>{{item.evaluationName}}：</view>
+                          <view class="flex-sub">{{item.replyMessage}}</view>
+                        </view>
+                      </view>
+                      <view class="bggrey padding-sm radius margin-top-sm  text-sm" wx:else>
+                        <view class="flex" style="color:white">
+                          <view>暂时没有回复</view>
+                        </view>
+                      </view>
+                      <view class="margin-top-sm flex justify-between">
+                        <view class="text-gray text-df">{{item.createTime}}</view>
+                        <view>
+                          <text class="cuIcon-appreciatefill text-gray"></text>
+                          <text class="cuIcon-messagefill text-gray margin-left-sm" ></text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+
+              <view class="padding-top-xl bgwhite flex justify-center" wx:else style="width:100%">
+                <image src="http://www.yucai-sz.com:8079/imgs/front/images/nodata.jpg" mode="aspectFit"></image>
+              </view>
+
+            </block>
+
+
 
           </block>
 
@@ -181,3 +235,4 @@
     </view>
   </view>
 </view>
+

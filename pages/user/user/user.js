@@ -207,7 +207,7 @@ Page({
     //获取名片状态值
     setTimeout(() => {
       wx.hideLoading();
-    }, 500);
+    }, 100);
 
   },
 
@@ -225,7 +225,7 @@ Page({
   },
 
   onShow: function() {
-    this.onLoad()
+    //this.onLoad()
   },
 
   //下拉刷新

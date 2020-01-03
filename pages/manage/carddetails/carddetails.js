@@ -197,32 +197,32 @@ Page({
 
   //不录取
   enroll() {
-    showToast('即将上线，敬请期待!', 'none', 1000);
+    //showToast('即将上线，敬请期待!', 'none', 1000);
     let demandId = this.data.demandId;
     let token = wx.getStorageSync('accessToken') || [];
     let id = parseInt(this.data.id);
     let managetxt = this.data.managetxt;
     let ids = [];
     ids.push(id);
-    // wx.request({
-    //   url: url + '/employment/noAdmission',
-    //   method: 'post',
-    //   data: {
-    //     accessToken: token,
-    //     ids: ids
-    //   },
-    //   success: res => {
-    //     console.log(res.data.data)
-    //     if (res.data.success) {
-    //       showToast(res.data.data, 'success', 800)
-    //       setTimeout(() => {
-    //         navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt)
-    //       }, 1000)
-    //     } else {
-    //       showToast(res.data.msg, 'none', 800)
-    //     }
-    //   }
-    // })
+    wx.request({
+      url: url + '/employment/noAdmission',
+      method: 'post',
+      data: {
+        accessToken: token,
+        ids: ids
+      },
+      success: res => {
+        console.log(res.data.data)
+        if (res.data.success) {
+          showToast(res.data.data, 'success', 800)
+          setTimeout(() => {
+            navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt)
+          }, 1000)
+        } else {
+          showToast(res.data.msg, 'none', 800)
+        }
+      }
+    })
   },
 
   // 判定输入为非空字符
@@ -230,8 +230,8 @@ Page({
     let token = wx.getStorageSync('accessToken') || '';
     let message = e.detail.value.message;
     console.log(message)
-    //this.admission(token, message)
-    showToast('即将上线，敬请期待!', 'none', 1000);
+    this.admission(token, message)
+    //showToast('即将上线，敬请期待!', 'none', 1000);
   },
 
   //录取
@@ -267,7 +267,7 @@ Page({
   },
 
   //确认完成
-  complete(){
+  complete() {
     let id = parseInt(this.data.id);
     let demandId = this.data.demandId;
     let managetxt = '用工管理';
@@ -276,31 +276,41 @@ Page({
     console.log(demandId, ids)
     let token = wx.getStorageSync('accessToken') || '';
     showToast('即将上线，敬请期待!', 'none', 1000);
-    // wx.request({
-    //   url: url + '/employment/confirmFinish',
-    //   method: 'post',
-    //   data: {
-    //     accessToken: token,
-    //     ids: ids,
-    //   },
-    //   success: res => {
-    //     console.log(res.data)
-    //     if (res.data.success) {
-    //       showToast(res.data.data, 'success', 800)
-    //       console.log(demandId)
-    //       setTimeout(() => {
-    //         navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt);
-    //       }, 1000)
-    //     } else {
-    //       showToast(res.data.msg, 'none', 800)
-    //     }
-    //   }
-    // })
+    wx.request({
+      url: url + '/employment/confirmFinish',
+      method: 'post',
+      data: {
+        accessToken: token,
+        ids: ids,
+      },
+      success: res => {
+        console.log(res.data)
+        if (res.data.success) {
+          showToast(res.data.data, 'success', 800)
+          console.log(demandId)
+          setTimeout(() => {
+            navigateTo('/pages/manage/manage/manage?id=2&demandId=' + demandId + '&managetxt=' + managetxt);
+          }, 1000)
+        } else {
+          showToast(res.data.msg, 'none', 800)
+        }
+      }
+    })
 
+  },
+
+  //评价
+  cardel(e) {
+    let id = this.data.id;
+    let realName = this.data.realName;
+    let demandId = this.data.demandId;
+    console.log(id, realName, demandId)
+    navigateTo('/pages/manage/evaluate/evaluate?id=' + id + '&realName=' + realName + '&demandId=' + demandId)
   },
 
   //名片详情
   demail(res) {
+    console.log(res.data.data.praiseRate)
     let avatar = res.data.data.avatar;
     let realName = res.data.data.realName;
     let dreamPosition = res.data.data.dreamPosition;
@@ -315,47 +325,29 @@ Page({
     let label = res.data.data.label;
     let description = res.data.data.description;
     let mobile = res.data.data.mobile;
-    let id = res.data.data.id;
+    let praiseRate = Math.round(res.data.data.praiseRate);
+    //let praiseRate = '暂无评分';
+    console.log(praiseRate)
     if (res.data.success) {
-      //console.log(res.data)
-      if (id != null) {
-        this.setData({
-          avatar: avatar,
-          realName: realName,
-          dreamPosition: dreamPosition,
-          email: email,
-          sex: sex,
-          age: age,
-          profession: profession,
-          education: education,
-          graduationTime: graduationTime,
-          school: school,
-          experience: experience,
-          label: label,
-          description: description,
-          mobile: mobile,
-          id: id,
-          demandflag: false,
-        })
-      } else {
-        this.setData({
-          avatar: avatar,
-          realName: realName,
-          dreamPosition: dreamPosition,
-          email: email,
-          sex: sex,
-          age: age,
-          profession: profession,
-          education: education,
-          graduationTime: graduationTime,
-          school: school,
-          experience: experience,
-          label: label,
-          description: description,
-          mobile: mobile,
-          demandflag: false,
-        })
-      }
+      console.log(res.data.data)
+      this.setData({
+        avatar: avatar,
+        realName: realName,
+        dreamPosition: dreamPosition,
+        email: email,
+        sex: sex,
+        age: age,
+        profession: profession,
+        education: education,
+        graduationTime: graduationTime,
+        school: school,
+        experience: experience,
+        label: label,
+        description: description,
+        mobile: mobile,
+        praiseRate: praiseRate,
+        demandflag: false,
+      })
     } else {
       showToast(res.data.msg, 'none', 1000);
     }
@@ -370,7 +362,7 @@ Page({
         userId: userId
       },
       success: res => {
-        console.log(res.data.data)
+        console.log('名片详情', res.data.data)
         this.demail(res)
       }
     })
@@ -379,14 +371,17 @@ Page({
   onLoad: function(options) {
     let token = wx.getStorageSync('accessToken') || [];
     console.log(options.id, options.cur, options.userid, options.demandId)
-    this.getcard(options.userid, token)
+    setTimeout(() => {
+      this.getcard(options.userid, token)
+    }, 500)
+
     this.setData({
       cur: options.cur,
       id: options.id,
       userid: options.userid,
       demandId: options.demandId
     })
-    
+
   },
 
   onReady: function() {
@@ -411,16 +406,11 @@ Page({
       demandflag: true,
     })
     let cur = this.data.cur;
+    let userid = this.data.userid;
     let token = wx.getStorageSync('accessToken') || [];
     setTimeout(() => {
-      if (cur == 1) {
-        let id = this.data.id;
-        this.accept(id, token)
-      } else if (cur == 2 || cur == 3) {
-        let userid = this.data.userid;
-        this.getcard(userid, token)
-      }
-    }, 800)
+      this.getcard(userid, token)
+    }, 500)
     wx.stopPullDownRefresh();
   },
 

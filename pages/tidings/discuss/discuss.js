@@ -28,6 +28,7 @@ Page({
     animationData: {},
     loadflag: false,
     demandflag: true,
+    page: 2,
   },
 
   //tab切换
@@ -50,22 +51,6 @@ Page({
     })
   },
 
-  //跳转回复
-  tapcal(e) {
-    let id = e.currentTarget.dataset.target.id;
-    let name = e.currentTarget.dataset.target.evaluationName;
-    console.log(e.currentTarget.dataset.target);
-    //navigateTo('/pages/tidings/reply/reply?id=' + id + '&name=' + name)
-    wx.navigateTo({
-      url: '/pages/tidings/reply/reply?id=' + id + '&name=' + name,
-    })
-    //navigateTo('/pages/tidings/reply/reply')
-    // let modalName = e.currentTarget.dataset.target;
-    // this.setData({
-    //   modalName: modalName
-    // })
-  },
-
   //动画
   scale() {
     var animation = wx.createAnimation({
@@ -83,6 +68,50 @@ Page({
         animationData: animation.export()
       })
     }, 1000)
+  },
+
+  //打开回复
+  replyModal(e) {
+    console.log(e.currentTarget.dataset.modal, e.currentTarget.dataset.replyid);
+    let modalName = e.currentTarget.dataset.modal;
+    let replyid = e.currentTarget.dataset.replyid;
+    this.setData({
+      modalName: modalName,
+      replyid: replyid
+    })
+  },
+
+  formSubmit(e) {
+    let token = wx.getStorageSync('accessToken') || [];
+    let id = this.data.replyid;
+    let replyMessage = e.detail.value.replyMessage;
+    if (replyMessage == "") {
+      showToast('请输入完整信息！', 'none', 1000)
+    } else {
+      console.log(id, replyMessage);
+      wx.request({
+        url: url + '/evaluation/replyEvaluation',
+        method: 'post',
+        data: {
+          accessToken: token,
+          id: id,
+          replyMessage: replyMessage
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: res => {
+          console.log(res)
+          this.hideModal();
+          if (res.data.success) {
+            showToast(res.data.data, 'success', 800);
+            this.onLoad()
+          } else {
+            showToast(res.data.msg, 'none', 800);
+          }
+        }
+      })
+    }
   },
 
 
@@ -106,42 +135,100 @@ Page({
     }
   },
 
-  onLoad: function(options) {},
+  //获取消息列表
+  demand(token, website, list, txt, page) {
+    console.log(token, website, list, txt, page)
+    wx.request({
+      url: url + website,
+      data: {
+        accessToken: token,
+        page: page,
+      },
+      success: res => {
+        console.log(res)
+        if (page <= 1) {
+          let demand = res.data.data;
+          console.log(txt, demand, demand.length, 'page:', page);
+          if (res.data.success) {
+            if (demand.length != 0) {
+              let stars = Math.round(selstar(demand) / demand.length);
+              console.log(selstar(demand), demand.length, stars);
+              this.setData({
+                [list]: demand,
+                evalflag: true,
+                demandflag: false,
+                star: stars
+              })
+            } else {
+              this.setData({
+                demandflag: false,
+                evalflag: false,
+              })
+            }
+          } else {
+            showToast(res.data.msg, 'none', 1000)
+          }
+        } else {
+          let demands = res.data.data;
+          console.log(txt, demands, demands.length, 'page:', page);
+          let demand = this.data.evaldemand;
+          console.log('加载数据', txt, demand)
+          if (demands.length != 0) {
+            if (res.data.success) {
+              if (demands.length != 0) {
+                showToast('加载数据中...', 'none', 500);
+                demand.push(...demands)
+                let stars = Math.round(selstar(demand) / demand.length);
+                console.log(selstar(demand), demand.length, stars);
+                console.log(stars)
+                this.setData({
+                  [list]: demand,
+                  evalflag: true,
+                  demandflag: false,
+                  loadplay: false,
+                  star: stars
+                })
+              } else {
+                this.setData({
+                  demandflag: false,
+                  evalflag: false,
+                })
+              }
+            } else {
+              showToast(res.data.msg, 'none', 1000)
+            }
+          } else {
+            this.setData({
+              tiptxt: '我也是有底线的',
+              loadplay: true,
+            })
+          }
+
+
+        }
+
+      }
+    })
+  },
+
+  //获取已录取列表
+  request(page) {
+    let token = wx.getStorageSync('accessToken') || [];
+    let evaldemand = 'evaldemand';
+    let evaltxt = '评价消息evaldemand:';
+    let evalwebsite = '/evaluation/myAcceptEvaluation';
+    setTimeout(() => {
+      this.demand(token, evalwebsite, evaldemand, evaltxt, page);
+    }, 500)
+  },
+
+  onLoad: function(options) {
+    let page = this.data.page - 1;
+    this.request(page)
+  },
 
   onReady: function() {
-    setTimeout(() => {
-      this.setData({
-        demandflag: false,
-      })
-    }, 500)
-    // let token = wx.getStorageSync('accessToken') || [];
-    // wx.request({
-    //   url: url + '/invitation/myAcceptEvaluation',
-    //   data: {
-    //     accessToken: token,
-    //   },
-    //   success: res => {
-    //     if (res.data.success) {
-    //       console.log(res.data.data)
-    //       let data = res.data.data;
-    //       if (data.length != 0) {
-    //         let stars = Math.round(selstar(data) / data.length);
-    //         //console.log(stars)
-    //         this.setData({
-    //           cusslist: data,
-    //           loadflag: true,
-    //           star: stars
-    //         })
-    //       } else {
-    //         this.setData({
-    //           loadflag: false
-    //         })
-    //       }
-    //     } else {
-    //       showToast(res.data.msg, 'none', 1000)
-    //     }
-    //   }
-    // })
+
   },
 
   onShow: function() {
@@ -157,12 +244,13 @@ Page({
   },
 
   onPullDownRefresh: function() {
-    this.onReady()
+    this.onLoad()
     wx.stopPullDownRefresh();
   },
 
   onReachBottom: function() {
-
+    let page = this.data.page++;
+    this.request(page)
   },
 
   onShareAppMessage: function() {
