@@ -51,7 +51,9 @@ Page({
       scrollLeft: (id - 1) * 60,
     })
     setTimeout(() => {
-      this.setData({ demandflag: true })
+      this.setData({
+        demandflag: true
+      })
     }, 100)
     this.readys(1, id)
   },
@@ -78,11 +80,9 @@ Page({
         navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=3&demandId=' + demandId)
       } else if (cur == 2) {
         console.log(id, userid, demandId)
-        navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=4&demandId=' + demandId )
+        navigateTo('/pages/manage/carddetails/carddetails?id=' + id + '&userid=' + userid + '&cur=4&demandId=' + demandId)
       }
     }
-
-
   },
 
   //获取需求列表
@@ -93,7 +93,6 @@ Page({
         accessToken: token,
       },
       success: res => {
-        console.log('需求列表:', res)
         console.log('需求列表:', res.data.data)
         let demandlist = res.data.data;
         if (res.data.success) {
@@ -166,6 +165,9 @@ Page({
               break;
             case 'alreadylist':
               demand = this.data.alreadylist;
+              break;
+            case 'evallist':
+              demand = this.data.evallist;
               break;
             default:
               demand = [];
@@ -442,10 +444,11 @@ Page({
     }, 500)
   },
 
+  //获取招聘进度列表
   switching(options, page, token) {
     if (options.demandId != undefined && options.id != undefined) {
 
-      console.log(options.demandId, options.id)
+      console.log(options.demandId, options.id, page)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
         let demands = demandlist.filter(function(elem, index, arr) {
@@ -464,12 +467,13 @@ Page({
 
     } else if (options.demandId == undefined && options.id == undefined) {
 
-      console.log(options.demandId, options.id)
-      this.load(page)
+      console.log(options.demandId, options.id, page)
+      let id=1;
+      this.load(page, id)
 
     } else if (options.id != undefined && options.demandId == undefined) {
 
-      console.log(options.id)
+      console.log(options.id, page)
       this.setData({
         TabCur: options.id,
       })
@@ -477,7 +481,7 @@ Page({
 
     } else if (options.id == undefined && options.demandId != undefined) {
 
-      console.log(options.demandId)
+      console.log(options.demandId, page, options.id)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
         let demands = demandlist.filter(function(elem, index, arr) {
@@ -496,9 +500,10 @@ Page({
     }
   },
 
+  //获取用工管理列表
   changeing(options, page, token) {
     if (options.id != undefined && options.demandId != undefined) {
-      console.log(options.demandId, options.id)
+      console.log(options.demandId, options.id, page)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
         let demands = demandlist.filter(function(elem, index, arr) {
@@ -516,19 +521,25 @@ Page({
       }, 800)
 
     } else if (options.id != undefined && options.demandId == undefined) {
-      console.log(options.id)
+      console.log(options.id, options.demandId,page)
       this.setData({
         TabCur: options.id,
       })
       this.load(page, options.id)
+    } else if (options.demandId == undefined && options.id == undefined) {
+
+      console.log(options.demandId, options.id, page)
+      let id = 1;
+      this.load(page, id)
+
     }
   },
 
   onLoad(options) {
-    console.log(options)
     let token = wx.getStorageSync('accessToken') || '';
     let page = this.data.page - 1;
     this.demandlist(token);
+    console.log(options)
     this.setData({
       managetxt: options.managetxt
     })
@@ -566,7 +577,7 @@ Page({
   onReachBottom: function() {
     let page = this.data.page++;
     let id = this.data.TabCur;
-    this.readys(page,id)
+    this.readys(page, id)
   },
 
   onShareAppMessage: function() {
