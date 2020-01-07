@@ -56,7 +56,7 @@ Page({
     minute: minute,
     timerval: [30, month, day - 1, hour - 1, minute - 1],
     check: true,
-    managetxt: '招聘进度',
+    managetxt: '合作进度',
     message: '',
     message1: '尊敬的',
     message2: '先生/女士，您好！非常感谢您来我们公司应聘!经过慎重筛选，我公司已决定录用您到我公司任职。报到后，我们会为你做职前介绍。祝你在我公司工作愉快!如果你有疑问，请与我们联系。'

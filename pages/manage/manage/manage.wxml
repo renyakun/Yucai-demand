@@ -53,7 +53,7 @@
                   <view class="flex flex-wrap margin-top">
                     <view class="padding-left">{{manageflag?item.sex:item.technology.sex}} | {{manageflag?item.age:item.technology.age}} | {{manageflag?item.email:item.technology.email}}</view>
                     <view class="padding-left">
-                      <text class="text-bold">期望职位：</text>
+                      <text class="text-bold">期望合作：</text>
                       <text class="text-blue" style="color:#0081ff">{{manageflag?item.dreamPosition:item.technology.dreamPosition}}</text>
                     </view>
                   </view>
@@ -77,17 +77,17 @@
                 <view class="bg-white radius padding-top padding-bottom" style="width:99.5%;" wx:if="{{manageflag}}">
                   <view class="flex flex-wrap align-end margin-left">
                     <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试人：</text>{{item.technology.realName}}
+                      <text class="text-bold text-blue" style="color:#0081ff">待合作人：</text>{{item.technology.realName}}
                     </view>
                   </view>
                   <view class="flex flex-wrap align-end margin-left  margin-top-sm">
                     <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试地点：</text>{{item.address}}
+                      <text class="text-bold text-blue" style="color:#0081ff">邀约地点：</text>{{item.address}}
                     </view>
                   </view>
                   <view class="flex flex-wrap align-end margin-left  margin-top-sm">
                     <view class="text-cut">
-                      <text class="text-bold text-blue" style="color:#0081ff">面试时间：</text>{{item.invitationTime}}
+                      <text class="text-bold text-blue" style="color:#0081ff">邀约时间：</text>{{item.invitationTime}}
                     </view>
                   </view>
 
@@ -101,7 +101,7 @@
                   <view class="flex flex-wrap margin-top">
                     <view class="padding-left">{{manageflag?item.sex:item.technology.sex}} | {{manageflag?item.age:item.technology.age}} | {{manageflag?item.email:item.technology.email}}</view>
                     <view class="padding-left">
-                      <text class="text-bold">期望职位：</text>
+                      <text class="text-bold">期望合作：</text>
                       <text class="text-blue" style="color:#0081ff">{{manageflag?item.dreamPosition:item.technology.dreamPosition}}</text>
                     </view>
                   </view>

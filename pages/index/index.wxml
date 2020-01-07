@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <cu-custom isBack="{{false}}">
-  <view slot="content" class="margin-top-xs">发布职位</view>
+  <view slot="content" class="margin-top-xs">发布需求</view>
 </cu-custom>
 
 <scroll-view scroll-y class="scrollPage" style=" ">
@@ -21,40 +21,40 @@
           <view class="cu-bar justify-start bgwhite">
             <view class="action">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">岗位描述</text>
+              <text class="text-xl text-bold">描述</text>
             </view>
           </view>
 
           <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
-            <view class="title margin-left-xs">岗位名称</view>
+            <view class="title margin-left-xs">名称</view>
             <input value="" name="jobName" placeholder="如菜鸟电商物流" placeholder-style="color:#8799a3"></input>
           </view>
 
-          <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
+          <!-- <view class="cu-form-group  margin-xs  cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
-            <view class="title margin-left-xs">岗位类型</view>
+            <view class="title margin-left-xs">类型</view>
             <input value="" disabled></input>
             <view>
               <picker bindchange="jobPicker" name="jobType" value="{{jobind}}" range="{{jobpicker}}" data-target="jobind">
                 <view class="picker" style="color:#8799a3">
-                  {{jobind?jobpicker[jobind]:'请选择岗位类型'}}
+                  {{jobind?jobpicker[jobind]:'请选择类型'}}
                 </view>
               </picker>
             </view>
-          </view>
+          </view> -->
 
           <view class="cu-form-group  margin-xs cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
-            <view class="title margin-left-xs">本次招聘</view>
-            <input value="" type="number" name="jobNumber" placeholder="请填写招聘人数" placeholder-style="color:#8799a3"></input>
+            <view class="title margin-left-xs">人数</view>
+            <input value="" type="number" name="jobNumber" placeholder="请填写人数" placeholder-style="color:#8799a3"></input>
           </view>
 
           <view class="cu-form-group align-start margin-xs cu-card no-card" style="position: relative;background:rgba(0,0,0,.1);">
-            <view class="title">岗位要求</view>
+            <view class="title">本次要求</view>
             <!-- auto-height bg-white-->
             <view class="flex align-end margin-bottom-xs " style="width:76%;">
-              <textarea class="" auto-height maxlength="500" name="jobRequire" bindinput="textareaBInput" placeholder="请输入岗位要求" placeholder-style="color:#8799a3"></textarea>
+              <textarea class="" auto-height maxlength="500" name="jobRequire" bindinput="textareaBInput" placeholder="请输入用人要求" placeholder-style="color:#8799a3"></textarea>
               <view class=" margin-bottom-xs" style="position: absolute;right:25rpx">
                 <text class="">{{txtput}}</text>/500</view>
             </view>
@@ -62,7 +62,7 @@
           <view class="cu-form-group margin-top-xs {{tagflag?'':'margin-bottom-sm'}}  margin-left-xs  cu-card no-card padding-sm flex flex-wrap  justify-between" style="background:rgba(0,0,0,.1);width:97.5%;">
             <view class="title">添加标签</view>
             <view class="" bindtap="tagjump">
-              <text class="margin-right" style="color:#8799a3">请选择适合的职位标签</text>
+              <text class="margin-right" style="color:#8799a3">请选择适合的标签</text>
               <text class="cuIcon-right" style="color:#8799a3"></text>
             </view>
           </view>
@@ -82,14 +82,14 @@
           <view class="cu-bar justify-start bgwhite">
             <view class="action">
               <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-              <text class="text-xl text-bold">薪资设置</text>
+              <text class="text-xl text-bold">报酬设置</text>
             </view>
           </view>
 
           <view class="cu-form-group  margin-xs bggray cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
-            <view class="title margin-left-xs">薪资</view>
-            <input value="" type="number" name="salary" placeholder="请输入薪资" placeholder-style="color:#8799a3"></input>
+            <view class="title margin-left-xs">报酬</view>
+            <input value="" type="number" name="salary" placeholder="请输入报酬" placeholder-style="color:#8799a3"></input>
           </view>
 
           <view class="cu-form-group  margin-xs bggray cu-card no-card" style="background:rgba(0,0,0,.1);">
@@ -112,7 +112,7 @@
             <view>
               <picker mode="date" value="{{deadind}}" name="deadline" start="2015-09-01" end="2020-09-01" bindchange="deadPicker">
                 <view class="picker" style="color:#8799a3">
-                  {{deadind?deadind:'请选择招人截止日期'}}
+                  {{deadind?deadind:'请选择截止日期'}}
                 </view>
               </picker>
             </view>
@@ -120,7 +120,7 @@
 
           <view class="cu-form-group  margin-xs cu-card no-card" style="background:rgba(0,0,0,.1);">
             <text class="bgorange padding-left-xs padding-right-xs radius shadow text-xs" style="color:white">必填</text>
-            <view class="title margin-left-xs">工作地点</view>
+            <view class="title margin-left-xs">用工地点</view>
             <input disabled></input>
             <view>
               <picker mode="region" name="city" bindchange="cityPicker" value="{{citypicker}}" custom-item="{{customItem}}">
@@ -174,8 +174,8 @@
         </view>
 
         <view class="cu-bar  flex justify-center align-center indigo" style="color:white;">
-        <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">发布</button>
-      </view>
+          <button class="cu-btn bgwhite" formType="submit" data-target="/company/updateHomepage" style="background:none;font-weight:normal;color:white;width:100%;height:100%;">发布</button>
+        </view>
 
 
       </form>

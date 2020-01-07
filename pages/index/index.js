@@ -22,7 +22,7 @@ Page({
     TabCur: 1,
     tablist: [{
       id: 1,
-      nav: '招聘'
+      nav: '用工'
     }, {
       id: 2,
       nav: '房产'
@@ -150,7 +150,7 @@ Page({
   formSubmit(e) {
     let token = wx.getStorageSync('accessToken') || [];
     let jobName = e.detail.value.jobName;
-    let jobType = this.data.jobpicker[e.detail.value.jobType];
+    //let jobType = this.data.jobpicker[e.detail.value.jobType];
     let jobNumber = e.detail.value.jobNumber;
     let jobRequire = e.detail.value.jobRequire;
     let salary = e.detail.value.salary;
@@ -162,16 +162,17 @@ Page({
     let mobile = e.detail.value.mobile;
     let jobtag = this.data.jobtag;
     let label = relstradd(jobtag);
-    if (jobName == "" || jobType == undefined || jobNumber == "" || salary == "" || ageRequire == undefined || city == undefined || deadline == undefined || mobile == "" || address == "") {
+    // || jobType == undefined , jobType
+    if (jobName == "" || jobNumber == "" || salary == "" || ageRequire == undefined || city == undefined || deadline == undefined || mobile == "" || address == "") {
       showToast('请输入完整信息！', 'none', 1000)
     } else {
-      console.log(jobName, jobType, jobNumber, jobRequire, label, salary, ageRequire, deadline, city + address, mobile, releaseType);
+      console.log(jobName, jobNumber, jobRequire, label, salary, ageRequire, deadline, city + address, mobile, releaseType);
       wx.request({
         url: url + '/demand/add',
         method: 'post',
         data: {
           jobName: jobName,
-          jobType: jobType,
+          //jobType: jobType,
           jobNumber: jobNumber,
           jobRequire: jobRequire,
           label: label,
@@ -187,7 +188,7 @@ Page({
           'content-type': 'application/json'
         },
         success: res => {
-          console.log(res.data.data)
+          console.log(res)
           if (res.data.success) {
             showToast('发布成功', 'success', 1000);
             setTimeout(() => {

@@ -55,7 +55,7 @@ Page({
   //招聘进度
   demandIdjump(e) {
     let demandId = e.currentTarget.dataset.id;
-    let managetxt = '招聘进度';
+    let managetxt = '合作进度';
     navigateTo('/pages/manage/manage/manage?demandId=' + demandId + '&managetxt=' + managetxt)
   },
 

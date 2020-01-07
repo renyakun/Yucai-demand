@@ -52,7 +52,7 @@ Component({
     },
     toHome(){
       wx.reLaunch({
-        url: '/pages/user/user/user',
+        url: '/pages/user/user',
       })
     }
   }

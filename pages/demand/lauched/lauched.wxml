@@ -1,13 +1,13 @@
 <!--pages/user/lauched/lauched.wxml-->
 <cu-custom isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content" class="margin-top-xs">已发布职位</view>
+  <view slot="content" class="margin-top-xs">已发布需求</view>
 </cu-custom>
 
 <scroll-view scroll-y class="scrollPage padding-bottom">
   <view class="cu-bar bgwhite justify-start ">
     <view class="action sub-title">
-      <text class="text-xl text-bold text-blue" style="color:#0081ff">职位列表</text>
+      <text class="text-xl text-bold text-blue" style="color:#0081ff">需求列表</text>
       <text class="text-Abc text-blue" style="color:#0081ff">describe</text>
     </view>
   </view>
@@ -44,10 +44,10 @@
               <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.sendCardNum}}</view>
               <text style="font-weight: normal;">当前投递数</text>
             </view>
-            <view class="action bgwhite" style="width:12vh;height:7vh">
+            <!-- <view class="action bgwhite" style="width:12vh;height:7vh">
               <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.waitCooperationNum}}</view>
               <text style="font-weight: normal;">待面试数</text>
-            </view>
+            </view> -->
             <view class="action bgwhite" style="width:12vh;height:7vh">
               <view class="margin-top-xs margin-bottom-sm text-df" style="color:#0081ff">{{item.cancelInvitationNum}}</view>
               <text style="font-weight: normal;">取消邀约数</text>

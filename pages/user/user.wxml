@@ -37,7 +37,7 @@
     <view class="cu-list menu border card-menu">
       <view class="cu-item arrow" bindtap="managejump">
         <view class="content">
-          <text style="color:#000">招聘进度</text>
+          <text style="color:#000">合作进度</text>
         </view>
       </view>
       <view class="cu-bar tabbar margin-top margin-bottom-sm">
@@ -101,9 +101,9 @@
     </view>
   </view>
 
-  <view class="margin-xs margin-top flex bgwhite padding justify-center" bindtap="paegswitch">
+  <!-- <view class="margin-xs margin-top flex bgwhite padding justify-center" bindtap="paegswitch">
     <text class="text-black">切换至工作需求方</text>
-  </view>
+  </view> -->
 
   <view class="padding-xs flex align-center">
     <view class="flex-sub text-center">

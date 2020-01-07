@@ -30,7 +30,7 @@
           </view>
           <view class="flex flex-wrap margin-top">
             <view class="padding-left">
-              <text class="text-bold">期望职位：</text>
+              <text class="text-bold">期望合作：</text>
               <text class="text-blue" style="color:#0081ff">{{item.dreamPosition}}</text>
             </view>
             <view class="padding-left text-cut" style="width:90%;display:{{item.label!=''?'':'none'}}">
@@ -70,7 +70,7 @@
 
             <view class="padding-top-xs padding-bottom-xs flex justify-center">
               <view class="margin-left">
-                <text class="text-bold text-blue" style="color:#0081ff">期望职位：</text>{{inviteitem.dreamPosition}}</view>
+                <text class="text-bold text-blue" style="color:#0081ff">期望合作：</text>{{inviteitem.dreamPosition}}</view>
             </view>
 
             <view class="padding-top-xs padding-bottom-xs flex justify-center text-cut" style="display:{{inviteitem.label!=''?'':'none'}}">

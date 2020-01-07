@@ -3,7 +3,7 @@
 const app = getApp()
 const {
   url
-} = require('../../../utils/url.js');
+} = require('../../utils/url.js');
 import {
   showToast,
   pagesurl,
@@ -11,7 +11,7 @@ import {
   navigateTo,
   showLoading,
   pageScrollTo
-} from '../../../utils/WeChatfction';
+} from '../../utils/WeChatfction';
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -24,6 +24,7 @@ Page({
     atteslist: app.globalData.atteslist,
     tablist: app.globalData.tablist,
     recruitlist: app.globalData.recruitlist,
+    managetxt :'合作进度',
   },
 
   //认证跳转
@@ -107,12 +108,12 @@ Page({
   //招聘进度跳转
   mangsjump(e) {
     let id = e.currentTarget.dataset.id;
-    let managetxt ='招聘进度';
+    let managetxt =this.data.managetxt;
     navigateTo('/pages/manage/manage/manage?id=' + id +'&managetxt=' + managetxt);
   },
 
   managejump() {
-    let managetxt = '招聘进度';
+    let managetxt = this.data.managetxt;
     navigateTo('/pages/manage/manage/manage?managetxt=' + managetxt);
   },
 

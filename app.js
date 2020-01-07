@@ -106,13 +106,13 @@ App({
       id: 1,
       icon: 'edit',
       color: '#0081ff',
-      flag: '已报名',
+      flag: '已接收',
       len: 0
     }, {
       id: 2,
       icon: 'form',
       color: '#0081ff',
-      flag: '待面试',
+      flag: '待合作',
       len: 0
     }, {
       id: 3,
@@ -181,22 +181,13 @@ App({
     }],
     taglist: [{
       color: '#e54d42',
-      title: '五险一金'
+      title: '待遇从优'
     }, {
       color: '#1cbbb4',
       title: '包底'
     }, {
-      color: '#fbbd08',
-      title: '包吃'
-    }, {
-      color: '#39b54a',
-      title: '年底双薪'
-    }, {
-      color: '#9c26b0',
-      title: '加班补助'
-    }, {
       color: '#0081ff',
-      title: '周末双休'
+      title: '弹性时间'
     }],
     newslist: [{
         id: 1,

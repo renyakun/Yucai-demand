@@ -1,7 +1,7 @@
 <!--pages/demand/jobtag/jobtag.wxml-->
 <cu-custom isCustom="{{true}}" isBack="{{false}}">
   <view slot="backText">返回</view>
-  <view slot="content" class="margin-top-xs">职位标签</view>
+  <view slot="content" class="margin-top-xs">标签</view>
 </cu-custom>
 
 <scroll-view scroll-y class="scrollPage">
@@ -11,11 +11,11 @@
     <view class="padding-top cu-bar justify-start bgwhite">
       <view class="padding-left">
         <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-        <text class="text-xl text-bold">职位标签(<text style="color:#0081ff">{{tagnum}}</text>/5)</text>
+        <text class="text-xl text-bold">标签(<text style="color:#0081ff">{{tagnum}}</text>/5)</text>
       </view>
     </view>
     <view class="bgwhite padding-left-lg padding-right" style="color:#8799a3">
-      选择符合职位的相关标签，提升自身亮点，吸引更多人才关注~~~
+      选择符合的相关标签，提升自身亮点，吸引更多人才关注~~~
     </view>
 
     <view class="bgwhite padding flex flex-wrap justify-start align-center">
@@ -57,7 +57,7 @@
         </view>
         <view class="" style="height:45vh">
           <view class="cu-form-group margin-left margin-right" style="border-bottom:0.3vh solid #0081ff;">
-            <input class="" value="{{val}}" style="height:6vh;" maxlength="20" placeholder="请输入职位标签" bindinput="textareaBInput"></input>
+            <input class="" value="{{val}}" style="height:6vh;text-align:justify;word-spacing:20rpx;" maxlength="20" placeholder="请输入标签" bindinput="textareaBInput"></input>
           </view>
           <view class="margin-top-xs" style="margin-left:47vh">
             {{txtput}}/20

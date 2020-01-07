@@ -55,7 +55,8 @@ Page({
         demandflag: true
       })
     }, 100)
-    this.readys(1, id)
+    //this.readys(1, id)
+    this.load(1, id)
   },
 
   //详情跳转
@@ -286,7 +287,7 @@ Page({
       })
       if (managetxt == '用工管理') {
         this.recruit(token, demandId, page, id);
-      } else if (managetxt == '招聘进度') {
+      } else if (managetxt == '合作进度') {
         this.post(token, demandId, page, id);
       }
     } else {
@@ -312,7 +313,7 @@ Page({
       })
       if (managetxt == '用工管理') {
         this.recruit(token, demandId, page, id);
-      } else if (managetxt == '招聘进度') {
+      } else if (managetxt == '合作进度') {
         this.post(token, demandId, page, id);
       }
     } else {
@@ -363,7 +364,7 @@ Page({
         })
         if (managetxt == '用工管理') {
           this.recruit(token, demandId, page, id);
-        } else if (managetxt == '招聘进度') {
+        } else if (managetxt == '合作进度') {
           this.post(token, demandId, page, id);
         }
         setTimeout(() => {
@@ -396,7 +397,7 @@ Page({
         })
         if (managetxt == '用工管理') {
           this.recruit(token, demandId, page, id);
-        } else if (managetxt == '招聘进度') {
+        } else if (managetxt == '合作进度') {
           this.post(token, demandId, page, id);
         }
       }
@@ -481,7 +482,7 @@ Page({
 
     } else if (options.id == undefined && options.demandId != undefined) {
 
-      console.log(options.demandId, page, options.id)
+      console.log(options.demandId, page)
       setTimeout(() => {
         let demandlist = this.data.demandlist;
         let demands = demandlist.filter(function(elem, index, arr) {
@@ -490,7 +491,8 @@ Page({
         let demand = demands[0];
         console.log(demand)
         let demandId = demand.demandId;
-        this.post(token, demandId, page, options.id);
+        let id = 1;
+        this.post(token, demandId, page,id);
         this.setData({
           demand: demand,
           demandId: demandId,
@@ -549,7 +551,7 @@ Page({
       })
       this.changeing(options, page, token)
 
-    } else if (options.managetxt == '招聘进度') {
+    } else if (options.managetxt == '合作进度') {
       this.setData({
         manageflag: true,
       })

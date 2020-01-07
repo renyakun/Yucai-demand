@@ -14,16 +14,16 @@
         <view class="padding-top cu-bar justify-start bgwhite">
           <view class="action border-title">
             <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-            <text class="text-xl text-bold">岗位描述</text>
+            <text class="text-xl text-bold">描述</text>
           </view>
         </view>
 
         <view class="cu-form-group margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-          <view class="title margin-left-xs">岗位名称</view>
+          <view class="title margin-left-xs">名称</view>
           <input value="{{demandlist.jobName}}" name="jobName"></input>
         </view>
 
-        <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
+        <!-- <view class="cu-form-group  margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1)">
           <view class="title margin-left-xs">岗位类型</view>
           <input value="" disabled></input>
           <view>
@@ -33,17 +33,17 @@
               </view>
             </picker>
           </view>
-        </view>
+        </view> -->
 
         <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-          <view class="title margin-left-xs">本次招聘</view>
+          <view class="title margin-left-xs">人数</view>
           <input value="{{demandlist.jobNumber}}" name="jobNumber"></input>
         </view>
 
         <view class="cu-form-group align-start margin-xs  cu-card no-card " style="background:rgba(0,0,0,.1);position: relative">
-          <view class="title">岗位要求</view>
+          <view class="title">要求</view>
           <view class="flex align-end  margin-bottom-xs " style="width:76%;">
-            <textarea auto-height maxlength="500" name="jobRequire" value="{{demandlist.jobRequire}}" bindinput="textareaBInput" placeholder="请输入岗位要求"></textarea>
+            <textarea auto-height maxlength="500" name="jobRequire" value="{{demandlist.jobRequire}}" bindinput="textareaBInput" placeholder="请输入要求"></textarea>
             <view class="margin-top-xs" style="position: absolute;right:25rpx">
               <text>{{txtput}}</text>/500</view>
           </view>
@@ -53,7 +53,7 @@
         <view class="cu-form-group margin-top-xs  margin-left-xs bg-gray cu-card no-card padding-sm flex flex-wrap  justify-between" style="background:rgba(0,0,0,.1);width:97.5%;">
           <view class="title">添加标签</view>
           <view class="" bindtap="tagjump">
-            <text class="margin-right" style="color:#8799a3">请选择适合的职位标签</text>
+            <text class="margin-right" style="color:#8799a3">请选择适合的标签</text>
             <text class="cuIcon-right" style="color:#8799a3"></text>
           </view>
         </view>
@@ -73,12 +73,12 @@
         <view class="padding-top cu-bar justify-start bgwhite">
           <view class="action border-title">
             <text class="cuIcon-titles text-blue" style="color:#0081ff"></text>
-            <text class="text-xl text-bold">薪资设置</text>
+            <text class="text-xl text-bold">报酬设置</text>
           </view>
         </view>
 
         <view class="cu-form-group  margin-xs cu-card no-card " style="background:rgba(0,0,0,.1)">
-          <view class="title margin-left-xs">薪资</view>
+          <view class="title margin-left-xs">报酬</view>
           <input value="" name="salary" value="{{demandlist.salary}}"></input>
         </view>
 
@@ -107,7 +107,7 @@
         </view>
 
         <view class="cu-form-group margin-bottom margin-xs cu-card no-card" style="background:rgba(0,0,0,.1)">
-          <view class="title margin-left-xs">工作地址</view>
+          <view class="title margin-left-xs">地址</view>
           <input value="" name="city" value="{{demandlist.city}}"></input>
         </view>
 

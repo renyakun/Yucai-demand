@@ -22,7 +22,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
+	"libVersion": "2.10.0",
 	"appid": "wxef80070bd7008e35",
 	"projectname": "Yucai-demand",
 	"debugOptions": {
